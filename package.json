@@ -1,0 +1,27 @@
+{
+  "name": "ts-markdown-parser",
+  "version": "1.0.0",
+  "description": "TypeScript library that converts markdown to HTML (with code support).",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript",
+    "markdown",
+    "javascript",
+    "code",
+    "blogs"
+  ],
+  "author": "Benji Asperheim",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "highlight.js": "^11.10.0",
+    "marked": "^14.0.0"
+  }
+}
