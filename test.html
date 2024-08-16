@@ -6,14 +6,214 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Markdown Test</title>
   <style>
-    /* Add any CSS styling you need here */
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
-    .keyword { color: blue; }
-    /* Add more styling rules as needed */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    h1, h2, h3, h4 {
+      color: #444;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.75em; }
+    h3 { font-size: 1.5em; }
+    h4 { font-size: 1.25em; }
+
+    p {
+      margin: 15px 0;
+    }
+
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 40px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .md-inline-code {
+      background: #eaeaea;
+      color: #d63384;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: #2d2d2d;
+      padding: 15px;
+      border-radius: 8px;
+      color: #f8f8f2;
+      overflow-x: auto;
+      font-size: 0.9em;
+    }
+
+    code {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 5px 8px;
+      border-radius: 4px;
+      display: block;
+      white-space: pre-wrap;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .code-container {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .code-container button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #5a5a5a;
+      color: #f8f8f2;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.85em;
+    }
+
+    .code-container button:hover {
+      background-color: #444;
+    }
+
+    /* Syntax highlighting */
+    .keyword { color: #66d9ef; font-weight: bold; }
+    .string { color: #a6e22e; }
+    .number { color: #ae81ff; }
+    .comment { color: #75715e; font-style: italic; }
   </style>
 </head>
 <body>
-  <p></p><h1>Sample Heading</h1><pre><code class="code-javascript">console.log("Hello, world!");<br/><span class="keyword">const</span> test = "&lt;span&gt;hello again&lt;/span&gt;";<br/>console.log(test);</code></pre><p></p><h2>Subheading</h2><p></p><p>Some text.</p><p></p>
+  <h1>JavaScript Basics: Understanding the Fundamentals</h1>
+<h2>Introduction</h2>
+<p>JavaScript is a versatile and widely-used programming language. In this blog post, we'll explore some fundamental concepts of JavaScript that every developer should know.</p>
+<h3>Variables and Data Types</h3>
+<p>JavaScript allows you to declare variables using <span class="md-inline-code">var</span>, <span class="md-inline-code">let</span>, and <span class="md-inline-code">const</span>. Here's a quick overview:</p>
+<ul>
+<li><span class="md-inline-code">var</span> is function-scoped and can be redeclared.</li><li><span class="md-inline-code">let</span> is block-scoped and cannot be redeclared within the same block.</li><li><span class="md-inline-code">const</span> is also block-scoped but cannot be reassigned.</li>
+</ul>
+<h3>Example Code</h3>
+
+          <div class="code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code>// Declaring variables
+let name = "John Doe";
+const age = 30;
+
+// Logging to the console
+console.log("Name:", name);
+console.log("Age:", age);</code></pre>
+          </div>
+          <script>
+            function copyToClipboard(button) {
+              const codeBlock = button.parentElement.querySelector('code');
+              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => button.innerText = 'Copy', 2000);
+              });
+            }
+          </script>
+        
+<h3>Functions</h3>
+<p>Functions are a core part of JavaScript. They can be defined in various ways:</p>
+<p>1. <b>Function Declarations</b>:</p>
+
+          <div class="code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code>   function greet(name) {
+     return `Hello, ${name}!`;
+   }</code></pre>
+          </div>
+          <script>
+            function copyToClipboard(button) {
+              const codeBlock = button.parentElement.querySelector('code');
+              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => button.innerText = 'Copy', 2000);
+              });
+            }
+          </script>
+        
+<p>2. <b>Function Expressions</b>:</p>
+
+          <div class="code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code>   const greet = function (name) {
+     return `Hello, ${name}!`;
+   };</code></pre>
+          </div>
+          <script>
+            function copyToClipboard(button) {
+              const codeBlock = button.parentElement.querySelector('code');
+              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => button.innerText = 'Copy', 2000);
+              });
+            }
+          </script>
+        
+<p>3. <b>Arrow Functions</b>:</p>
+
+          <div class="code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code>   const greet = (name) => `Hello, ${name}!`;</code></pre>
+          </div>
+          <script>
+            function copyToClipboard(button) {
+              const codeBlock = button.parentElement.querySelector('code');
+              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => button.innerText = 'Copy', 2000);
+              });
+            }
+          </script>
+        
+<h2>Working with Arrays</h2>
+<p>Arrays are used to store multiple values in a single variable. You can manipulate arrays with various methods.</p>
+<h3>Array Methods</h3>
+<ul>
+<li><b>push()</b> - Adds an item to the end of the array.</li><li><b>pop()</b> - Removes the last item from the array.</li><li><b>shift()</b> - Removes the first item from the array.</li><li><b>unshift()</b> - Adds an item to the beginning of the array.</li>
+</ul>
+<h3>Example Code</h3>
+
+          <div class="code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code>let fruits = ["Apple", "Banana", "Cherry"];
+
+// Adding a fruit
+fruits.push("Date");
+
+// Removing the last fruit
+fruits.pop();
+
+// Displaying the array
+console.log(fruits);</code></pre>
+          </div>
+          <script>
+            function copyToClipboard(button) {
+              const codeBlock = button.parentElement.querySelector('code');
+              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                button.innerText = 'Copied!';
+                setTimeout(() => button.innerText = 'Copy', 2000);
+              });
+            }
+          </script>
+        
+<h2>Conclusion</h2>
+<p>JavaScript is a powerful language with many features. Understanding variables, functions, and arrays is crucial for any developer. Keep practicing and exploring more advanced topics to become proficient.</p>
+
 </body>
 </html>
