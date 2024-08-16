@@ -1,3 +1,5 @@
+import { highlightCode, Language } from "./libs/index";
+
 type MarkdownElement = {
   type: string;
   content: string;
@@ -55,7 +57,15 @@ function elementToHtml(element: MarkdownElement): string {
     case "h3":
       return `<h3>${element.content}</h3>`;
     case "code":
-      return `<pre><code class="code-${element.language}">${escapeHtml(element.content)}</code></pre>`;
+      if (element.language && Object.values(Language).includes(element.language as Language)) {
+        const lines = element.content.split("\n");
+        const highlightedLines = lines.map((line) => highlightCode(element.language as Language, line));
+        const highlightedCode = highlightedLines.join("\n");
+        return `<pre><code class="code-${element.language}">${escapeHtml(highlightedCode)}</code></pre>`;
+      } else {
+        // Fallback if language is not specified or invalid
+        return `<pre><code>${escapeHtml(element.content)}</code></pre>`;
+      }
     case "p":
       return `<p>${escapeHtml(element.content as string)}</p>`;
     default:

@@ -4,6 +4,8 @@ const markdown = `
 # Sample Heading
 \`\`\`javascript
 console.log("Hello, world!");
+const test = "hello again";
+console.log(test);
 \`\`\`
 
 ## Subheading
