@@ -20,8 +20,5 @@
   "devDependencies": {
     "typescript": "^5.5.4"
   },
-  "dependencies": {
-    "highlight.js": "^11.10.0",
-    "marked": "^14.0.0"
-  }
+  "dependencies": {}
 }
