@@ -40,8 +40,27 @@ export const replaceSpecialQuotes = (text: string): string => {
   return text;
 };
 
-// Function to handle inline styles like bold, italic, and links
+// Function to handle inline styles like bold, italic, inline-HTML elements, and links
 const parseInlineStyles = (text: string): string => {
+  // Make sure to escape nested HTML elements within inline markdown ticks
+  if (text.includes("`<") && text.includes(">`")) {
+    text = text.replace(/`</g, "`&lt;");
+    text = text.replace(/>`/g, "&gt;`");
+  }
+
+  // Escape special Markdown characters inside inline code blocks
+  text = text.replace(/`([^`]*)`/g, (match, code) => {
+    const escapedCode = code
+      .replace(/\*/g, "&#42;")
+      .replace(/_/g, "&#95;")
+      .replace(/\</g, "&lt;")
+      .replace(/\>/g, "&gt;")
+      .replace(/\[|\]/g, (match: string) => `&#91;${match === "[" ? "&#93;" : "&#91;"}`)
+      .replace(/\(/g, "&#40;")
+      .replace(/\)/g, "&#41;");
+    return `<span class="md-inline-code">${escapedCode}</span>`;
+  });
+
   // Links
   text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
 

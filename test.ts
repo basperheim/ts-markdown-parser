@@ -3,7 +3,7 @@ import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
-const markdownFilePath = join(__dirname, "notes/example-py-blog.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 const htmlFilePath = join(__dirname, "test.html");
 
 // Read the Markdown file
