@@ -60,7 +60,7 @@ This Markdown content includes a variety of elements for testing. You can see ho
 - **Headers**: The Markdown file includes headers from `#` to `####` for various levels of headings.
 - **Ordered List**: An ordered list with three items.
 - **Links and Text Styles**: An [example link](https://example.com) (Just do `[example link](https://example.com)`), bold (`**bold text**`), and italic (`*italic text*`) text.
-- **Links and Text Styles Again!**: Another example bold (`__bold text__`), and italic (`_italic text_`) text.
+- **Links and Text Styles Again!**: Another example bold (`__bold text__`), and italic (`_italic text_`) text using `_` instead.
 - **Inline Span Examples**: Inline `<span>` elements in both Markdown text and code blocks.
 - **Code Blocks**: Includes HTML code blocks with `<span>` elements to test highlighting and parsing.
 
