@@ -1,5 +1,7 @@
 # Sample Markdown Article
 
+![Learn JavaScript Logo](https://i.pinimg.com/736x/13/40/7c/13407c12f50f08d328800c3caef43f61.jpg)
+
 ## Introduction
 
 This is an example of a sample Markdown article with various elements for testing purposes.
@@ -33,6 +35,8 @@ And another `<span>` inline example in a paragraph.
 
 #### Code Block with Inline Span
 
+Here's some example HTML code in an `&#x60;&#x60;&#x60;html` block:
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +49,7 @@ And another `<span>` inline example in a paragraph.
     <h1>Sample HTML Article</h1>
     <p>This is an example of a <span class="example">sample HTML</span> article.</p>
     <a href="https://example.com">Link</a>
-    <strong>Bold Text</strong> and <em>Italic Text</em>
+    <b>Bold Text</b>, <i>Italic Text</i>, <em>Text With Emphasis</em>, and <strong>Strong</strong>!
     <pre><code><span class="hello">Hello</span></code></pre>
   </body>
 </html>

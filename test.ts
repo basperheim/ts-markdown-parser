@@ -3,7 +3,8 @@ import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
-const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+// const markdownFilePath = join(__dirname, "notes/example-markdown-blog-post.md");
 const htmlFilePath = join(__dirname, "test.html");
 
 // Read the Markdown file
@@ -33,6 +34,10 @@ const htmlTemplate = `
     line-height: 1.6;
     color: #333;
     background-color: #f9f9f9;
+  }
+
+  img {
+    max-width: 3rem;
   }
 
   h1, h2, h3, h4 {
@@ -115,6 +120,7 @@ const htmlTemplate = `
   .md-string { color: #a6e22e; }
   .md-number { color: #ae81ff; }
   .md-comment { color: #75715e; font-style: italic; }
+  .md-special { color: yellow; font-style: bold; }
 </style>
 </head>
 <body>

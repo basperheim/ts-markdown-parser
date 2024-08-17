@@ -14,6 +14,10 @@
     background-color: #f9f9f9;
   }
 
+  img {
+    max-width: 3rem;
+  }
+
   h1, h2, h3, h4 {
     color: #444;
     margin-bottom: 15px;
@@ -94,57 +98,25 @@
   .md-string { color: #a6e22e; }
   .md-number { color: #ae81ff; }
   .md-comment { color: #75715e; font-style: italic; }
+  .md-special { color: yellow; font-style: bold; }
 </style>
 </head>
 <body>
-  <h1>Sample Markdown Article</h1>
-<h2>Introduction</h2>
-<p>This is an example of a sample Markdown article with various elements for testing purposes.</p>
-<p>Here is an <a href="https://example.com">example link</a> with some <b>bold text</b> and <i>italic text</i>.</p>
-<h2>Ordered List</h2>
-<p>1. First item</p>
-<p>2. Second item</p>
-<p>3. Third item</p>
-<h3>Another Ordered List</h3>
-<ul>
-<li>First item</li><li>Second item</li><li>Third item with inline <span class="md-inline-code">&lt;html&gt;</span> element</li>
-</ul>
-<h3>More Details</h3>
-<p>Here is a nested <span class="md-inline-code">&lt;span&gt;</span> inside a paragraph. Below is a code block:</p>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-html">&lt;div class=&quot;container&quot;&gt;
-  &lt;span&gt;This is a span element&lt;/span&gt;
-  &lt;span class=&quot;special&quot;&gt;This is a special span&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-          </div>
-        <p>And another <span class="md-inline-code">&lt;span&gt;</span> inline example in a paragraph.</p>
+  <h1>Test</h1>
+<p>Here's some example HTML code in an <span class="md-inline-code">&#x60;&#x60;&#x60;html</span> block:</p>
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
-    &lt;title&gt;Sample HTML Article&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Sample HTML Article&lt;/h1&gt;
-    &lt;p&gt;This is an example of a &lt;span class=&quot;example&quot;&gt;sample HTML&lt;/span&gt; article.&lt;/p&gt;
-    &lt;a href=&quot;https://example.com&quot;&gt;Link&lt;/a&gt;
-    &lt;strong&gt;Bold Text&lt;/strong&gt; and &lt;em&gt;Italic Text&lt;/em&gt;
-    &lt;pre&gt;&lt;code&gt;&lt;span class=&quot;hello&quot;&gt;Hello&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<span class="md-keyword">&lt;h1 </span><span class="md-special">class=&quot;my-heading&quot;</span> style=&quot;color:red&quot;&gt;Heading<span class="md-keyword">&lt;/h1&gt;</span>
+<span class="md-keyword">&lt;a </span>href=<span class="md-string">&quot;https:\\example.com&quot;</span>&gt;Link<span class="md-keyword">&lt;/a&gt;</span>
+<span class="md-keyword">&lt;span </span><span class="md-special">class=&quot;hello&quot;</span>&gt;Hello<span class="md-keyword">&lt;/span&gt;</span>
+<span class="md-keyword">&lt;p&gt;</span>Hello<span class="md-keyword">&lt;/p&gt;</span>
+&lt;!-- this is a comment
+ with multiple lines
+ --&gt;</code></pre>
           </div>
-        <p>This Markdown content includes a variety of elements for testing. You can see how different Markdown elements render and how code blocks handle HTML tags with <span class="md-inline-code">&lt;span&gt;</span> elements.</p>
-<h3>Explanation</h3>
-<ul>
-<li><b>Headers</b>: The Markdown file includes headers from <span class="md-inline-code">#</span> to <span class="md-inline-code">####</span> for various levels of headings.</li><li><b>Ordered List</b>: An ordered list with three items.</li><li><b>Links and Text Styles</b>: An <a href="https://example.com">example link</a> (Just do <span class="md-inline-code">&#91;example link&#93;&#40;https://example.com&#41;</span>), bold (<span class="md-inline-code">&#42;&#42;bold text&#42;&#42;</span>), and italic (<span class="md-inline-code">&#42;italic text&#42;</span>) text.</li><li><b>Links and Text Styles Again!</b>: Another example bold (<span class="md-inline-code">&#95;&#95;bold text&#95;&#95;</span>), and italic (<span class="md-inline-code">&#95;italic text&#95;</span>) text using <span class="md-inline-code">&#95;</span> instead.</li><li><b>Inline Span Examples</b>: Inline <span class="md-inline-code">&lt;span&gt;</span> elements in both Markdown text and code blocks.</li><li><b>Code Blocks</b>: Includes HTML code blocks with <span class="md-inline-code">&lt;span&gt;</span> elements to test highlighting and parsing.</li>
-</ul>
-<p>This Markdown example will help you check how your parser deals with different types of content and ensure it handles <span class="md-inline-code">&lt;span&gt;</span> elements appropriately.</p>
+        <p><span class="hello">Hello</span></p>
 
   <script>
     function copyToClipboard(button) {

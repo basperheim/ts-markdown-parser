@@ -1,44 +1,35 @@
-import { escapeHtml } from "../../utils/helpers";
-
-export const highlightHtml2 = (code: string): string => {
-  // Escape HTML content to prevent it from being rendered as actual HTML
-  let highlighted = escapeHtml(code);
-
-  // Regex to match strings (attribute values), ignoring double quotes inside class attributes
-  const stringRegex = /(["'])(.*?)(\1)/g;
-  highlighted = highlighted.replace(stringRegex, '<span class="md-string">$1$2$3</span>');
-
-  // Regex to match HTML comments
-  const commentRegex = /(&lt;!--[\s\S]*?--&gt;)/g;
-  highlighted = highlighted.replace(commentRegex, '<span class="md-comment">$&</span>');
-
-  // Function to highlight HTML tags and attributes
-  const replaceTagsAndAttributes = (text: string): string => {
-    return text.replace(/(&lt;\/?)(\w+)(.*?)(\/?&gt;)/g, (match, openingTag, tagName, attributes, closingTag) => {
-      // Highlight tag name
-      let result = `${openingTag}<span class="md-keyword">${tagName}</span>`;
-
-      // Highlight attributes
-      if (attributes) {
-        result += attributes.replace(/(\b\w+\b)(=)/g, '<span class="md-attribute">$1</span>$2');
-      }
-
-      return `${result}${closingTag}`;
-    });
-  };
-
-  // Apply tag and attribute highlighting
-  highlighted = replaceTagsAndAttributes(highlighted);
-
-  return highlighted;
-};
+import { reservedKeywords } from "./keywords";
 
 export const highlightHtml = (code: string): string => {
-  return code
+  // Step 1: Escape HTML entities
+  let escapedCode = code
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;")
     .replace(/`/g, "&#x60;"); // Escape backticks as &#x60;
+
+  // e.g. class="my-class" OR class=&quot;my-class&quot;
+  escapedCode = escapedCode.replace(/ ([a-zA-Z0-9-]+)=&quot;([a-zA-Z0-9-]+)&quot;/g, ` <span class="md-special">$1=&quot;$2&quot;</span>`);
+
+  // e.g. "https://example.com"
+  escapedCode = escapedCode.replace(/&quot;https:\/\/(.+)&quot;/g, `<span class="md-string">&quot;https:\\\\\$1&quot;</span>`);
+
+  // Highlight HTML comments
+  escapedCode = escapedCode.replace(/&lt;!--(.*?)--&gt;/g, `<span class="md-comment">&lt;!--$1--&gt;</span>`);
+
+  // Step 2: Highlight reserved keywords
+  reservedKeywords.forEach((keyword) => {
+    const regexClose = new RegExp(`&lt;/${keyword}&gt;`, "g");
+    escapedCode = escapedCode.replace(regexClose, `<span class="md-keyword">&lt;/${keyword}&gt;</span>`);
+
+    const regexOpen = new RegExp(`&lt;${keyword}&gt;`, "g");
+    escapedCode = escapedCode.replace(regexOpen, `<span class="md-keyword">&lt;${keyword}&gt;</span>`);
+
+    const regexSpecialOpen = new RegExp(`&lt;${keyword} `, "g");
+    escapedCode = escapedCode.replace(regexSpecialOpen, `<span class="md-keyword">&lt;${keyword} </span>`);
+  });
+
+  return escapedCode;
 };

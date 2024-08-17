@@ -40,21 +40,24 @@ export const replaceSpecialQuotes = (text: string): string => {
   return text;
 };
 
-// Function to handle inline styles like bold, italic, inline-HTML elements, and links
+// Function to handle inline styles like bold, italic, inline-HTML elements, links, images, and blockquotes
 const parseInlineStyles = (text: string): string => {
   // Escape special Markdown characters inside inline code blocks
   text = text.replace(/`([^`]*)`/g, (match, code) => {
     const escapedCode = code
       .replace(/\*/g, "&#42;")
       .replace(/_/g, "&#95;")
-      .replace(/\</g, "&lt;")
-      .replace(/\>/g, "&gt;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
       .replace(/\[/g, "&#91;")
       .replace(/\]/g, "&#93;")
       .replace(/\(/g, "&#40;")
       .replace(/\)/g, "&#41;");
     return `<span class="md-inline-code">${escapedCode}</span>`;
   });
+
+  // Images
+  text = text.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" />');
 
   // Links
   text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
@@ -66,6 +69,9 @@ const parseInlineStyles = (text: string): string => {
   // Italic
   text = text.replace(/\*(.*?)\*/g, "<i>$1</i>");
   text = text.replace(/_(.*?)_/g, "<i>$1</i>");
+
+  // Blockquotes (just wrap text in a blockquote tag)
+  text = text.replace(/^>\s*(.*)/gm, "<blockquote>$1</blockquote>");
 
   // Inline code
   text = text.replace(/`(.*?)`/g, `<span class="md-inline-code">$1</span>`);
