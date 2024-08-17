@@ -138,41 +138,19 @@ export const elementToHtml = (element: MarkdownElement): string => {
         const highlightedLines = lines.map((line) => highlightCode(element.language as LanguageType, line));
         const highlightedCode = highlightedLines.join("\n");
 
-        const copyButton = `
+        return `
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code-${element.language}">${escapeHtml(highlightedCode)}</code></pre>
           </div>
-          <script>
-            function copyToClipboard(button) {
-              const codeBlock = button.parentElement.querySelector('code');
-              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-                button.innerText = 'Copied!';
-                setTimeout(() => button.innerText = 'Copy', 2000);
-              });
-            }
-          </script>
         `;
-
-        return `${copyButton}\n`;
       } else {
-        const copyButton = `
+        return `
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code">${escapeHtml(element.content)}</code></pre>
           </div>
-          <script>
-            function copyToClipboard(button) {
-              const codeBlock = button.parentElement.querySelector('code');
-              navigator.clipboard.writeText(codeBlock.innerText).then(() => {
-                button.innerText = 'Copied!';
-                setTimeout(() => button.innerText = 'Copy', 2000);
-              });
-            }
-          </script>
         `;
-
-        return `${copyButton}\n`;
       }
     case "ul":
       return `<ul>\n${element.content}\n</ul>\n`;
@@ -186,3 +164,16 @@ export const elementToHtml = (element: MarkdownElement): string => {
       return "";
   }
 };
+
+// Add the global script for copy-to-clipboard functionality
+export const globalScript = (): string => `
+  <script>
+    function copyToClipboard(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = 'Copy', 2000);
+      });
+    }
+  </script>
+`;

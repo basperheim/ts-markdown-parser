@@ -1,6 +1,8 @@
-import { parseMarkdown, elementToHtml } from "./utils/helpers";
+import { parseMarkdown, elementToHtml, globalScript } from "./utils/helpers";
 
 export const markdownToHtml = (markdown: string): string => {
   const elements = parseMarkdown(markdown);
-  return elements.map(elementToHtml).join("");
+  let html = elements.map(elementToHtml).join("");
+  html += globalScript();
+  return html;
 };
