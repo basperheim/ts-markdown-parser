@@ -1,29 +1,12 @@
 import { MarkdownElement, Language, LanguageType } from "../models";
 import { highlightCode } from "../libs";
 
-// Function to get comment regex based on language
-const getCommentRegex = (language: LanguageType) => {
-  switch (language) {
-    case "javascript":
-    case "js":
-      return /(\/\/.*|\/\*[\s\S]*?\*\/)/g; // Single and multi-line comments
-    case "python":
-    case "py":
-      return /(#.*|""".*?""")/gs; // Single and multi-line comments
-    case "html":
-      return /(&lt;!--.*?--&gt;)/g; // HTML comments
-    default:
-      return null;
-  }
-};
-
 export const escapeHtml = (html: string): string => {
   // Regular expression to match single quotes, double quotes, and backticks
   const regex = /(['"`])(.*?)\1/g;
-  // const commentRegex = language ? getCommentRegex(language) : null;
 
   // Replace function to escape the content inside quotes or backticks
-  const escapedHtml = html.replace(regex, (match, p1, p2) => {
+  let escapedHtml = html.replace(regex, (match, p1, p2) => {
     const escapedContent = p2
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
@@ -33,6 +16,9 @@ export const escapeHtml = (html: string): string => {
       .replace(/`/g, "&#x60;"); // Escape backticks as &#x60;
     return `${p1}${escapedContent}${p1}`;
   });
+
+  // Handle links after escaping
+  // escapedHtml = escapedHtml.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
 
   return escapedHtml;
 };
@@ -54,8 +40,11 @@ export const replaceSpecialQuotes = (text: string): string => {
   return text;
 };
 
-// Function to handle inline styles like bold and italic
+// Function to handle inline styles like bold, italic, and links
 const parseInlineStyles = (text: string): string => {
+  // Links
+  text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+
   // Bold
   text = text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
   text = text.replace(/__(.*?)__/g, "<b>$1</b>");
@@ -72,11 +61,14 @@ const parseInlineStyles = (text: string): string => {
 
 export const parseMarkdown = (markdown: string): MarkdownElement[] => {
   const lines = markdown.split("\n");
+  const processedLines: number[] = [];
   const elements: MarkdownElement[] = [];
   let i = 0;
 
   while (i < lines.length) {
     const line = replaceSpecialQuotes(lines[i]).trim();
+
+    // console.log(`\ni BEFORE => ${i} - ${line}`);
 
     // Handle Headers
     if (line.startsWith("#### ")) {
@@ -106,19 +98,28 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
       // Handle Unordered Lists
     } else if (line.startsWith("- ") || line.startsWith("* ")) {
       const listItems: string[] = [];
-      while (i < lines.length && (lines[i].startsWith("- ") || lines[i].startsWith("* "))) {
-        listItems.push(`<li>${parseInlineStyles(lines[i].slice(2))}</li>`);
+
+      while (i < lines.length && (lines[i].trim().startsWith("- ") || lines[i].trim().startsWith("* "))) {
+        const parsedItem = parseInlineStyles(lines[i].trim().slice(2));
+        listItems.push(`<li>${parsedItem}</li>`);
         i++;
       }
       elements.push({ type: "ul", content: listItems.join("") });
-      i--; // Adjust because the while loop increments i
+      continue; // Skip to next iteration to avoid re-processing the same line
 
       // Handle Paragraphs
     } else if (line.trim().length > 0) {
       elements.push({ type: "p", content: parseInlineStyles(line) });
     }
 
+    if (processedLines.includes(i)) {
+      console.error(`\x1b[31mLine '${line}' (#${i}) has already been processed\x1b[37m`);
+      break;
+    }
+    processedLines.push(i);
+
     i++;
+    // console.log(`\ni AFTER => ${i} - ${line}`);
   }
 
   return elements;
