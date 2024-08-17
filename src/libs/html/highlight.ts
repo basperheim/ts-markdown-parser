@@ -7,7 +7,7 @@ export function highlightHtml(code: string): string {
   // Highlight reserved keywords
   reservedKeywords.forEach((keyword) => {
     const regex = new RegExp(`\\b${keyword}\\b`, "g");
-    highlighted = highlighted.replace(regex, `<span class="keyword">${keyword}</span>`);
+    highlighted = highlighted.replace(regex, `<span class="md-keyword">${keyword}</span>`);
   });
 
   // Other highlighting logic (e.g., functions, variables) would go here

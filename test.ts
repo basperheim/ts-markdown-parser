@@ -26,96 +26,96 @@ const htmlTemplate = `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Markdown Test</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f9f9f9;
-    }
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
 
-    h1, h2, h3, h4 {
-      color: #444;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-    }
+  h1, h2, h3, h4 {
+    color: #444;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+  }
 
-    h1 { font-size: 2em; }
-    h2 { font-size: 1.75em; }
-    h3 { font-size: 1.5em; }
-    h4 { font-size: 1.25em; }
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.75em; }
+  h3 { font-size: 1.5em; }
+  h4 { font-size: 1.25em; }
 
-    p {
-      margin: 15px 0;
-    }
+  p {
+    margin: 15px 0;
+  }
 
-    ul, ol {
-      margin: 15px 0;
-      padding-left: 40px;
-    }
+  ul, ol {
+    margin: 15px 0;
+    padding-left: 40px;
+  }
 
-    li {
-      margin-bottom: 10px;
-    }
+  li {
+    margin-bottom: 10px;
+  }
 
-    .md-inline-code {
-      background: #eaeaea;
-      color: #d63384;
-      padding: 2px 4px;
-      border-radius: 4px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
+  .md-inline-code {
+    background: #eaeaea;
+    color: #d63384;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+  }
 
-    pre {
-      background: #2d2d2d;
-      padding: 15px;
-      border-radius: 8px;
-      color: #f8f8f2;
-      overflow-x: auto;
-      font-size: 0.9em;
-    }
+  pre {
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 8px;
+    color: #f8f8f2;
+    overflow-x: auto;
+    font-size: 0.9em;
+  }
 
-    code {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 5px 8px;
-      border-radius: 4px;
-      display: block;
-      white-space: pre-wrap;
-      font-family: 'Courier New', Courier, monospace;
-    }
+  .md-code {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 5px 8px;
+    border-radius: 4px;
+    display: block;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+  }
 
-    .code-container {
-      margin-bottom: 20px;
-      position: relative;
-    }
+  .md-code-container {
+    margin-bottom: 20px;
+    position: relative;
+  }
 
-    .code-container button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #5a5a5a;
-      color: #f8f8f2;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.85em;
-    }
+  .md-code-container button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #5a5a5a;
+    color: #f8f8f2;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+  }
 
-    .code-container button:hover {
-      background-color: #444;
-    }
+  .md-code-container button:hover {
+    background-color: #444;
+  }
 
-    /* Syntax highlighting */
-    .keyword { color: #66d9ef; font-weight: bold; }
-    .string { color: #a6e22e; }
-    .number { color: #ae81ff; }
-    .comment { color: #75715e; font-style: italic; }
-  </style>
+  /* Syntax highlighting */
+  .md-keyword { color: #66d9ef; font-weight: bold; }
+  .md-string { color: #a6e22e; }
+  .md-number { color: #ae81ff; }
+  .md-comment { color: #75715e; font-style: italic; }
+</style>
 </head>
 <body>
   ${htmlContent}
