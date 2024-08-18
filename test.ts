@@ -3,8 +3,11 @@ import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
-const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+// const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/example-markdown-blog-post.md");
+const markdownFilePath = join(__dirname, "notes/example-js-blog.md");
+// const markdownFilePath = join(__dirname, "notes/example-py-blog.md");
+
 const htmlFilePath = join(__dirname, "test.html");
 
 // Read the Markdown file
@@ -119,8 +122,12 @@ const htmlTemplate = `
   .md-keyword { color: #66d9ef; font-weight: bold; }
   .md-string { color: #a6e22e; }
   .md-number { color: #ae81ff; }
-  .md-comment { color: #75715e; font-style: italic; }
-  .md-special { color: yellow; font-style: bold; }
+  .md-comment { color: #909090; font-style: italic; }
+  .md-special { color: #FF69B4; font-style: bold; }
+  .md-class { color: #39FF14; font-style: bold; }
+  .md-decorator { color: magenta; font-style: normal; }
+  .md-regex { color: red; font-style: normal; }
+  .md-call-method { color: yellow; font-style: bold; }
 </style>
 </head>
 <body>

@@ -7,6 +7,8 @@ import { Language, LanguageType } from "../models";
 export const languageAliases: Record<string, LanguageType> = {
   js: "javascript",
   javascript: "javascript",
+  typescript: "javascript",
+  ts: "javascript",
   python: "python",
   py: "python",
   html: "html",
@@ -18,6 +20,8 @@ type HighlightFunction = (code: string) => string;
 const highlightFunctions: Record<LanguageType, HighlightFunction> = {
   javascript: highlightJavaScript,
   js: highlightJavaScript,
+  ts: highlightJavaScript,
+  typescript: highlightJavaScript,
   python: highlightPython,
   py: highlightPython,
   html: highlightHtml,

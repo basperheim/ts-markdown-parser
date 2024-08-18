@@ -91,7 +91,9 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
     // console.log(`\ni BEFORE => ${i} - ${line}`);
 
     // Handle Headers
-    if (line.startsWith("#### ")) {
+    if (line.startsWith("##### ")) {
+      elements.push({ type: "h5", content: parseInlineStyles(line.slice(5)) });
+    } else if (line.startsWith("#### ")) {
       elements.push({ type: "h4", content: parseInlineStyles(line.slice(5)) });
     } else if (line.startsWith("### ")) {
       elements.push({ type: "h3", content: parseInlineStyles(line.slice(4)) });
@@ -153,11 +155,21 @@ export const elementToHtml = (element: MarkdownElement): string => {
       return `<h2>${element.content}</h2>\n`;
     case "h3":
       return `<h3>${element.content}</h3>\n`;
+    case "h4":
+      return `<h4>${element.content}</h4>\n`;
+    case "h5":
+      return `<h5>${element.content}</h5>\n`;
     case "code":
       if (element.language && Object.values(Language).includes(element.language as LanguageType)) {
         const lines = element.content.split("\n");
         const highlightedLines = lines.map((line) => highlightCode(element.language as LanguageType, line));
-        const highlightedCode = highlightedLines.join("\n");
+
+        let highlightedCode = highlightedLines.join("\n");
+        const blockCommentLangs = ["ts", "js", "javascript", "typescript"];
+        if (blockCommentLangs.includes(element.language)) {
+          const blockCommentRegex = /\/\*([\s\S]*?)\*\//gm;
+          highlightedCode = highlightedCode.replace(blockCommentRegex, `<span class="md-comment">&sol;&ast;$1&ast;&sol;</span>`);
+        }
 
         return `
           <div class="md-code-container">
