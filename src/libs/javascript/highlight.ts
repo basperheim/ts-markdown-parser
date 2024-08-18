@@ -70,7 +70,7 @@ export const highlightJavaScript = (code: string): string => {
   const methodCallRegEx = /\.(\w+)\(/g;
   highlighted = highlighted.replace(methodCallRegEx, '.<span class="md-call-method">$1</span>(');
 
-  // Step 5: Highlight reserved keywords
+  // Highlight reserved keywords
   const replaceKeywords = (text: string): string => {
     return text.replace(/(<span[^>]*>.*?<\/span>)|(\b\w+\b)/g, (match, span, word) => {
       if (span) return span; // Skip spans

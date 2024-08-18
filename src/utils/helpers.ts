@@ -163,12 +163,23 @@ export const elementToHtml = (element: MarkdownElement): string => {
       if (element.language && Object.values(Language).includes(element.language as LanguageType)) {
         const lines = element.content.split("\n");
         const highlightedLines = lines.map((line) => highlightCode(element.language as LanguageType, line));
-
         let highlightedCode = highlightedLines.join("\n");
-        const blockCommentLangs = ["ts", "js", "javascript", "typescript"];
-        if (blockCommentLangs.includes(element.language)) {
+
+        // Handle JavaScript/TypeScript block comments
+        const jsCommentLangs = ["ts", "js", "javascript", "typescript"];
+        if (jsCommentLangs.includes(element.language)) {
           const blockCommentRegex = /\/\*([\s\S]*?)\*\//gm;
           highlightedCode = highlightedCode.replace(blockCommentRegex, `<span class="md-comment">&sol;&ast;$1&ast;&sol;</span>`);
+        }
+
+        // Handle Python block comments
+        const pythonCommentLangs = ["py", "python"];
+        if (pythonCommentLangs.includes(element.language)) {
+          const pyCommentRegex = /"""([\s\S]*?)"""/gm;
+          if (pyCommentRegex.test(highlightedCode)) {
+            const pyComment = `<span class="md-comment">&quot;&quot;&quot;$1&quot;&quot;&quot;</span>`;
+            highlightedCode = highlightedCode.replace(pyCommentRegex, pyComment);
+          }
         }
 
         return `
