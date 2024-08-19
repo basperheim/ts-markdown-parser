@@ -154,6 +154,14 @@ const htmlTemplate = `
 // Output HTML to a file or use as needed
 ```
 
+### 5. **Optional: Additional TypeScript Configuration**
+
+- **Typescript Configuration for Consumers:** Ensure that your library's `tsconfig.json` and type declarations are compatible with typical consumer configurations. Consumers should be able to use your types out-of-the-box.
+
+- **Testing Types:** Consider adding tests for your type definitions if necessary to ensure they are accurate and provide the expected type information.
+
+By following these steps, you'll provide robust TypeScript support for your library and make it easier for TypeScript developers to use and integrate your library into their projects.
+
 ## Features
 
 - **Markdown Elements Supported:**
