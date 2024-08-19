@@ -1,0 +1,11 @@
+# Exclude directories and files not needed in the package
+node_modules/
+src/
+test.html
+test.ts
+notes/
+*.ts
+*.md
+
+*.log
+*.DS_Store
