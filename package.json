@@ -4,10 +4,19 @@
   "description": "TypeScript library that converts markdown to HTML (with code support).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*"
+  },
   "files": [
     "dist/",
     "README.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/basperheim/ts-markdown-parser"
+  },
+  "homepage": "https://github.com/basperheim/ts-markdown-parser",
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
