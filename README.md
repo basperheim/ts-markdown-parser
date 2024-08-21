@@ -154,13 +154,99 @@ const htmlTemplate = `
 // Output HTML to a file or use as needed
 ```
 
-### 5. **Optional: Additional TypeScript Configuration**
+### TypeScript Usage
 
-- **Typescript Configuration for Consumers:** Ensure that your library's `tsconfig.json` and type declarations are compatible with typical consumer configurations. Consumers should be able to use your types out-of-the-box.
+Here's how you might use it in your TypeScript code:
 
-- **Testing Types:** Consider adding tests for your type definitions if necessary to ensure they are accurate and provide the expected type information.
+```ts
+import * as fs from "fs";
+import { markdownToHtml, getMarkdownMetadata } from "ts-markdown-parser";
+// ...
+const file = "/path/to/my-markdown.md";
+const markdownString = fs.readFileSync(file, "utf8");
+const htmlString: string | undefined = markdownToHtml(markdownString);
 
-By following these steps, you'll provide robust TypeScript support for your library and make it easier for TypeScript developers to use and integrate your library into their projects.
+if (!htmlString) {
+  console.error(`Failed to generate HTML from: ${file}.`);
+}
+
+const metadata: Record<string, any> = getMarkdownMetadata(markdownString);
+if (!metadata?.title) {
+  console.error(`Markdown file '${file}' is missing metadata.`);
+}
+```
+
+## Metadata Parsing
+
+You can also extract metadata from your Markdown files using YAML front matter.
+
+Here's how to use the `getMarkdownMetadata()` function:
+
+```javascript
+const { getMarkdownMetadata } = require("ts-markdown-parser");
+
+// Your Markdown content with YAML front matter
+const markdown = `
+---
+title: "Example Markdown Article for HTML"
+author: "ChatGPT"
+date: 2024-08-19
+keywords: scripting, html, web development, markdown, blog
+slug: markdown-article-test-for-html
+---
+
+# Sample Heading
+
+Some text.
+`;
+
+// Extract metadata
+const metadata = getMarkdownMetadata(markdown);
+
+console.log(metadata);
+```
+
+The metadata object literal response should look something like this:
+
+```js
+{
+  title: 'Example Markdown Article for HTML',
+  author: 'ChatGPT',
+  date: '2024-08-19', // Date formatted as string
+  keywords: [ 'scripting', 'html', 'web development', 'markdown', 'blog' ],
+  slug: 'markdown-article-test-for-html'
+}
+```
+
+### Example YAML Front Matter
+
+YAML front matter is a way to include metadata at the top of your Markdown files. Here's another example:
+
+```yaml
+---
+title: "Example Markdown Article for HTML"
+author: "ChatGPT"
+date: 2024-08-19
+id: "1234"
+keywords: scripting, html, web development, markdown, blog
+slug: markdown-article-test-for-html
+---
+```
+
+### Metadata Extraction Result
+
+Given the YAML front matter above, `getMarkdownMetadata` would return:
+
+```json
+{
+  "title": "Example Markdown Article for HTML",
+  "author": "ChatGPT",
+  "date": "2024-08-19", // Date formatted as string
+  "id": 1234, // String representation of number parsed and casted as number
+  "keywords": ["scripting", "html", "web development", "markdown", "blog"],
+  "slug": "markdown-article-test-for-html"
+}
+```
 
 ## Features
 
@@ -179,6 +265,11 @@ By following these steps, you'll provide robust TypeScript support for your libr
   - JavaScript
   - TypeScript
   - Python
+
+- **Metadata Parsing:**
+
+  - Extract metadata from YAML front matter.
+  - Handles title, author, date, keywords, slug, and more.
 
 - **Note:** Table/grid support is not yet available.
 
