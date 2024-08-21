@@ -273,6 +273,16 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
 
 - **Note:** Table/grid support is not yet available.
 
+## Screenshots
+
+When you properly apply styles to the generated `md-*` CSS classes, the final HTML should look something like this:
+
+![Python Markdown-to-HTML Example](https://github.com/user-attachments/assets/d1989dd6-1348-4eb2-85be-a34578fe8a5d)
+
+![Markdown Sample Markdown-to-HTML with Image](https://github.com/user-attachments/assets/b17f8d23-eede-47e9-96ab-54b322e428f3)
+
+![HTML Code Block Markdown-to-HTML Example](https://github.com/user-attachments/assets/cdc3df63-b722-427c-ba1e-2cb16ca12489)
+
 ## Contributing
 
 We welcome suggestions and feedback, but all code contributions require prior permission. Please submit issues or feature requests, and if you would like to contribute code, contact the repository owner for permission.
