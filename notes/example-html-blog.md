@@ -1,3 +1,11 @@
+---
+title: "Example Markdown Article for HTML"
+author: "ChatGPT"
+date: 2024-08-19
+keywords: scripting, html, web development, markdown, blog
+slug: markdown-article-test-for-html
+---
+
 # Sample Markdown Article
 
 ![Learn JavaScript Logo](https://i.pinimg.com/736x/13/40/7c/13407c12f50f08d328800c3caef43f61.jpg)

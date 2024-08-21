@@ -1,6 +1,6 @@
 import { reservedKeywords } from "./keywords";
 import { pythonStandardLibrary } from "./libs";
-import { escapeHtml } from "../../utils/helpers";
+import { escapeHtml } from "../../utils/markdown-parser";
 
 export function highlightPython(code: string): string {
   // Escape HTML entities

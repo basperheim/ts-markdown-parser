@@ -1,6 +1,13 @@
 import { MarkdownElement, Language, LanguageType } from "../models";
 import { highlightCode } from "../libs";
 
+/**
+ * Escapes HTML special characters inside quotes or backticks to prevent HTML injection.
+ * - Converts special characters to their HTML entity equivalents.
+ *
+ * @param {string} html HTML string to be escaped.
+ * @returns {string} Escaped HTML string.
+ */
 export const escapeHtml = (html: string): string => {
   // Regular expression to match single quotes, double quotes, and backticks
   const regex = /(['"`])(.*?)\1/g;
@@ -23,6 +30,12 @@ export const escapeHtml = (html: string): string => {
   return escapedHtml;
 };
 
+/**
+ * Replaces special Unicode single quotes with a regular single quote.
+ *
+ * @param {string} text Text containing special single quotes.
+ * @returns {string} Text with special single quotes replaced.
+ */
 export const replaceSpecialQuotes = (text: string): string => {
   const specialSingleQuotes = [
     "\u2018", // Left Single Quotation Mark (U+2018)
@@ -40,7 +53,13 @@ export const replaceSpecialQuotes = (text: string): string => {
   return text;
 };
 
-// Function to handle inline styles like bold, italic, inline-HTML elements, links, images, and blockquotes
+/**
+ * Parses inline styles in Markdown text into HTML.
+ * - Handles inline code, images, links, bold, italic, and blockquotes.
+ *
+ * @param {string} text Markdown text to be parsed.
+ * @returns {string} HTML string with inline styles converted.
+ */
 const parseInlineStyles = (text: string): string => {
   // Escape special Markdown characters inside inline code blocks
   text = text.replace(/`([^`]*)`/g, (match, code) => {
@@ -79,16 +98,41 @@ const parseInlineStyles = (text: string): string => {
   return text;
 };
 
+/**
+ * Converts a Markdown string into an array of MarkdownElement objects.
+ * - Handles headers, code blocks, unordered lists, and paragraphs.
+ *
+ * @param {string} markdown Markdown string to be parsed.
+ * @returns {MarkdownElement[]} An array of MarkdownElement objects.
+ */
 export const parseMarkdown = (markdown: string): MarkdownElement[] => {
   const lines = markdown.split("\n");
   const processedLines: number[] = [];
   const elements: MarkdownElement[] = [];
   let i = 0;
 
+  let inMetadata = false;
   while (i < lines.length) {
     const line = replaceSpecialQuotes(lines[i]).trim();
 
-    // console.log(`\ni BEFORE => ${i} - ${line}`);
+    // Detect start of YAML front matter
+    if (line === "---" && i === 0) {
+      inMetadata = true;
+      i++;
+      continue;
+    }
+
+    // Detect end of YAML front matter
+    if (line === "---" && inMetadata) {
+      inMetadata = false;
+      i++;
+      continue;
+    }
+
+    if (inMetadata) {
+      i++;
+      continue; // Skip processing of lines inside metadata block
+    }
 
     // Handle Headers
     if (line.startsWith("##### ")) {
@@ -141,12 +185,18 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
     processedLines.push(i);
 
     i++;
-    // console.log(`\ni AFTER => ${i} - ${line}`);
   }
 
   return elements;
 };
 
+/**
+ * Converts a MarkdownElement object to an HTML string.
+ * - Handles different element types including headers, code blocks, and lists.
+ *
+ * @param {MarkdownElement} element MarkdownElement object to be converted.
+ * @returns {string} HTML representation of the MarkdownElement.
+ */
 export const elementToHtml = (element: MarkdownElement): string => {
   switch (element.type) {
     case "h1":

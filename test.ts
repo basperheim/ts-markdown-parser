@@ -1,12 +1,14 @@
-import { markdownToHtml } from "./src/index";
+import { markdownToHtml, getMarkdownMetadata } from "./src/index";
 import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
 // const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-markdown-blog-post.md");
 // const markdownFilePath = join(__dirname, "notes/example-js-blog.md");
-const markdownFilePath = join(__dirname, "notes/regex-in-python.md");
+// const markdownFilePath = join(__dirname, "notes/regex-in-python.md");
+// const markdownFilePath = join(__dirname, "notes/example-meta-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-py-blog.md");
 
 const htmlFilePath = join(__dirname, "test.html");
@@ -18,6 +20,13 @@ try {
 } catch (error) {
   console.error("Error reading Markdown file:", error);
   process.exit(1); // Exit the process with an error code
+}
+
+try {
+  const metadata = getMarkdownMetadata(markdown);
+  console.dir({ metadata });
+} catch (err) {
+  console.error("Error processing markdown metadata:", err);
 }
 
 // Convert Markdown to HTML

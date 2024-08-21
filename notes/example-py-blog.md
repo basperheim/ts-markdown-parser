@@ -1,3 +1,11 @@
+---
+title: "Introduction to Python"
+author: "ChatGPT"
+date: 2024-08-21
+keywords: scripting, python, software, it, computer science
+slug: python-language-overview
+---
+
 # Introduction to Python
 
 Python is a versatile programming language that is widely used in various fields, including web development, data science, artificial intelligence, and more. This article covers some fundamental aspects of Python.

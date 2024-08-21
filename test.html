@@ -106,43 +106,58 @@
 </style>
 </head>
 <body>
-  <h1>RegExp in Python</h1>
-<p>Python handles regular expressions a bit differently compared to JavaScript or TypeScript, particularly in how strings are processed and used in regular expressions. Here's a comparison:</p>
-<h3>Python Regular Expressions</h3>
-<p>1. <b>Raw Strings for Regex</b>:</p>
+  <h1>Sample Markdown Article</h1>
+<p><img src="https://i.pinimg.com/736x/13/40/7c/13407c12f50f08d328800c3caef43f61.jpg" alt="Learn JavaScript Logo" /></p>
+<h2>Introduction</h2>
+<p>This is an example of a sample Markdown article with various elements for testing purposes.</p>
+<p>Here is an <a href="https://example.com">example link</a> with some <b>bold text</b> and <i>italic text</i>.</p>
+<h2>Ordered List</h2>
+<p>1. First item</p>
+<p>2. Second item</p>
+<p>3. Third item</p>
+<h3>Another Ordered List</h3>
 <ul>
-<li>In Python, regular expressions are often written using raw strings (prefix <span class="md-inline-code">r</span>). This is because raw strings treat backslashes as literal characters and avoid issues with double escaping.</li><li>Example: <span class="md-inline-code">r'\d{3}-\d{2}-\d{4}'</span> is a raw string where backslashes are not treated as escape characters.</li>
+<li>First item</li><li>Second item</li><li>Third item with inline <span class="md-inline-code">&lt;html&gt;</span> element</li>
 </ul>
-<p>2. <b>String Representation</b>:</p>
+<h3>More Details</h3>
+<p>Here is a nested <span class="md-inline-code">&lt;span&gt;</span> inside a paragraph. Below is a code block:</p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-html"><span class="md-keyword">&lt;div </span><span class="md-special">class=&quot;container&quot;</span>&gt;
+  <span class="md-keyword">&lt;span&gt;</span>This is a span element<span class="md-keyword">&lt;/span&gt;</span>
+  <span class="md-keyword">&lt;span </span><span class="md-special">class=&quot;special&quot;</span>&gt;This is a special span<span class="md-keyword">&lt;/span&gt;</span>
+<span class="md-keyword">&lt;/div&gt;</span></code></pre>
+          </div>
+        <p>And another <span class="md-inline-code">&lt;span&gt;</span> inline example in a paragraph.</p>
+<h4>Code Block with Inline Span</h4>
+<p>Here's some example HTML code in an <span class="md-inline-code">&#x60;&#x60;&#x60;html</span> block:</p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-html">&lt;!DOCTYPE html&gt;
+<span class="md-keyword">&lt;html </span><span class="md-special">lang=&quot;en&quot;</span>&gt;
+  <span class="md-keyword">&lt;head&gt;</span>
+    <span class="md-keyword">&lt;meta </span><span class="md-special">charset=&quot;UTF-8&quot;</span> /&gt;
+    <span class="md-keyword">&lt;meta </span><span class="md-special">name=&quot;viewport&quot;</span> content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    <span class="md-keyword">&lt;title&gt;</span>Sample HTML Article<span class="md-keyword">&lt;/title&gt;</span>
+  <span class="md-keyword">&lt;/head&gt;</span>
+  <span class="md-keyword">&lt;body&gt;</span>
+    <span class="md-keyword">&lt;h1&gt;</span>Sample HTML Article<span class="md-keyword">&lt;/h1&gt;</span>
+    <span class="md-keyword">&lt;p&gt;</span>This is an example of a <span class="md-keyword">&lt;span </span><span class="md-special">class=&quot;example&quot;</span>&gt;sample HTML<span class="md-keyword">&lt;/span&gt;</span> article.<span class="md-keyword">&lt;/p&gt;</span>
+    <span class="md-keyword">&lt;a </span>href=<span class="md-string">&quot;https:\\example.com&quot;</span>&gt;Link<span class="md-keyword">&lt;/a&gt;</span>
+    <span class="md-keyword">&lt;b&gt;</span>Bold Text<span class="md-keyword">&lt;/b&gt;</span>, <span class="md-keyword">&lt;i&gt;</span>Italic Text<span class="md-keyword">&lt;/i&gt;</span>, <span class="md-keyword">&lt;em&gt;</span>Text With Emphasis<span class="md-keyword">&lt;/em&gt;</span>, and <span class="md-keyword">&lt;strong&gt;</span>Strong<span class="md-keyword">&lt;/strong&gt;</span>!
+    <span class="md-keyword">&lt;pre&gt;</span><span class="md-keyword">&lt;code&gt;</span><span class="md-keyword">&lt;span </span><span class="md-special">class=&quot;hello&quot;</span>&gt;Hello<span class="md-keyword">&lt;/span&gt;</span><span class="md-keyword">&lt;/code&gt;</span><span class="md-keyword">&lt;/pre&gt;</span>
+  <span class="md-keyword">&lt;/body&gt;</span>
+<span class="md-keyword">&lt;/html&gt;</span></code></pre>
+          </div>
+        <h4>Final Thoughts</h4>
+<p>This Markdown content includes a variety of elements for testing. You can see how different Markdown elements render and how code blocks handle HTML tags with <span class="md-inline-code">&lt;span&gt;</span> elements.</p>
+<h3>Explanation</h3>
 <ul>
-<li>Regular expressions in Python are always defined as strings. You don’t have regex literals like in JavaScript.</li><li>Example: <span class="md-inline-code">re.compile&#40;r'\d{3}-\d{2}-\d{4}'&#41;</span></li>
+<li><b>Headers</b>: The Markdown file includes headers from <span class="md-inline-code">#</span> to <span class="md-inline-code">####</span> for various levels of headings.</li><li><b>Ordered List</b>: An ordered list with three items.</li><li><b>Links and Text Styles</b>: An <a href="https://example.com">example link</a> (Just do <span class="md-inline-code">&#91;example link&#93;&#40;https://example.com&#41;</span>), bold (<span class="md-inline-code">&#42;&#42;bold text&#42;&#42;</span>), and italic (<span class="md-inline-code">&#42;italic text&#42;</span>) text.</li><li><b>Links and Text Styles Again!</b>: Another example bold (<span class="md-inline-code">&#95;&#95;bold text&#95;&#95;</span>), and italic (<span class="md-inline-code">&#95;italic text&#95;</span>) text using <span class="md-inline-code">&#95;</span> instead.</li><li><b>Inline Span Examples</b>: Inline <span class="md-inline-code">&lt;span&gt;</span> elements in both Markdown text and code blocks.</li><li><b>Code Blocks</b>: Includes HTML code blocks with <span class="md-inline-code">&lt;span&gt;</span> elements to test highlighting and parsing.</li>
 </ul>
-<p>3. <b>Regex Functions</b>:</p>
-<ul>
-<li>Python uses the <span class="md-inline-code">re</span> module for regex operations. Functions such as <span class="md-inline-code">re.match&#40;&#41;</span>, <span class="md-inline-code">re.search&#40;&#41;</span>, <span class="md-inline-code">re.findall&#40;&#41;</span>, and <span class="md-inline-code">re.sub&#40;&#41;</span> are used for pattern matching and substitution.</li><li>Example: <span class="md-inline-code">re.findall&#40;r'\d+', '123 abc 456'&#41;</span> returns <span class="md-inline-code">&#91;'123', '456'&#93;</span>.</li>
-</ul>
-<h3>JavaScript/TypeScript Regular Expressions</h3>
-<p>1. <b>Regex Literals</b>:</p>
-<ul>
-<li>In JavaScript and TypeScript, you can define regular expressions using regex literals enclosed in slashes.</li><li>Example: <span class="md-inline-code">/\d{3}-\d{2}-\d{4}/</span></li>
-</ul>
-<p>2. <b>String Representation</b>:</p>
-<ul>
-<li>You can also use the <span class="md-inline-code">RegExp</span> constructor to create regexes from strings, which allows for dynamic patterns.</li><li>Example: <span class="md-inline-code">new RegExp&#40;'\\d{3}-\\d{2}-\\d{4}'&#41;</span></li>
-</ul>
-<p>3. <b>Regex Functions</b>:</p>
-<ul>
-<li>JavaScript provides methods like <span class="md-inline-code">.match&#40;&#41;</span>, <span class="md-inline-code">.replace&#40;&#41;</span>, <span class="md-inline-code">.test&#40;&#41;</span>, and <span class="md-inline-code">.exec&#40;&#41;</span> for regex operations on strings.</li><li>Example: <span class="md-inline-code">'123 abc 456'.match&#40;/\d+/g&#41;</span> returns <span class="md-inline-code">&#91;'123', '456'&#93;</span>.</li>
-</ul>
-<h3>Conclusion</h3>
-<p>In Python:</p>
-<ul>
-<li>Use raw strings to simplify regex writing.</li><li>Treat regex patterns as strings in Python functions.</li>
-</ul>
-<p>In JavaScript/TypeScript:</p>
-<ul>
-<li>Use regex literals or the <span class="md-inline-code">RegExp</span> constructor.</li><li>Highlighting might need to be more nuanced if dealing with different regex notations or usage scenarios.</li>
-</ul>
+<p>This Markdown example will help you check how your parser deals with different types of content and ensure it handles <span class="md-inline-code">&lt;span&gt;</span> elements appropriately.</p>
 
   <script>
     function copyToClipboard(button) {

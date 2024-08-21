@@ -1,5 +1,5 @@
 import { reservedKeywords } from "./keywords";
-import { escapeHtml } from "../../utils/helpers";
+import { escapeHtml } from "../../utils/markdown-parser";
 
 export const highlightJavaScript = (code: string): string => {
   // Escape HTML entities
