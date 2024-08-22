@@ -3,8 +3,8 @@ import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
-// const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
-const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+// const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-markdown-blog-post.md");
 // const markdownFilePath = join(__dirname, "notes/example-js-blog.md");
 // const markdownFilePath = join(__dirname, "notes/regex-in-python.md");

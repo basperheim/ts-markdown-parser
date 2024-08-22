@@ -1,3 +1,5 @@
+import { stripLeadingWhitespace } from "../libs";
+
 /**
  * Converts a string to kebab-case format for slugs
  * (trims, removes spaces, special chars, double-hyphens, etc.. and makes lowercase).
@@ -71,7 +73,12 @@ const stripQuotes = (str: string): string => {
  * @returns {Record<string, any>} Parsed YAML object.
  */
 const parseYaml = (yamlString: string): Record<string, any> => {
-  const yamlLines = yamlString.split("\n");
+  if (typeof yamlString !== "string" || !yamlString) {
+    throw new Error(`YAML string is invalid: ${typeof yamlString}`);
+  }
+
+  const yamlLines = stripLeadingWhitespace(yamlString).split("\n");
+  // console.dir({ yamlLines });
   const result: Record<string, any> = {};
 
   yamlLines.forEach((line) => {
@@ -141,7 +148,9 @@ export const parseMetadata = (markdown: string): Record<string, any> => {
     return {};
   }
 
-  const lines = markdown.split("\n");
+  const lines = stripLeadingWhitespace(markdown).split("\n");
+  // console.dir({ lines });
+
   const metadataBlock: string[] = [];
 
   let metadata: Record<string, any> = {};

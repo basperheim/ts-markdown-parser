@@ -1,5 +1,5 @@
 import { MarkdownElement, Language, LanguageType } from "../models";
-import { highlightCode } from "../libs";
+import { highlightCode, stripLeadingWhitespace, countOccurrences } from "../libs";
 
 /**
  * Escapes HTML special characters inside quotes or backticks to prevent HTML injection.
@@ -106,32 +106,39 @@ const parseInlineStyles = (text: string): string => {
  * @returns {MarkdownElement[]} An array of MarkdownElement objects.
  */
 export const parseMarkdown = (markdown: string): MarkdownElement[] => {
-  const lines = markdown.split("\n");
+  if (typeof markdown !== "string" || !markdown) {
+    throw new Error(`Markdown string is invalid: ${typeof markdown}`);
+  }
+
+  const lines = stripLeadingWhitespace(markdown).split("\n");
   const processedLines: number[] = [];
   const elements: MarkdownElement[] = [];
   let i = 0;
 
+  const totalYamlFrontLines = countOccurrences(lines, "---");
   let inMetadata = false;
   while (i < lines.length) {
     const line = replaceSpecialQuotes(lines[i]).trim();
 
-    // Detect start of YAML front matter
-    if (line === "---" && i === 0) {
-      inMetadata = true;
-      i++;
-      continue;
-    }
+    if (totalYamlFrontLines >= 2) {
+      // Detect start of YAML front matter
+      if (line === "---" && i === 0) {
+        inMetadata = true;
+        i++;
+        continue;
+      }
 
-    // Detect end of YAML front matter
-    if (line === "---" && inMetadata) {
-      inMetadata = false;
-      i++;
-      continue;
-    }
+      // Detect end of YAML front matter
+      if (line === "---" && inMetadata) {
+        inMetadata = false;
+        i++;
+        continue;
+      }
 
-    if (inMetadata) {
-      i++;
-      continue; // Skip processing of lines inside metadata block
+      if (inMetadata) {
+        i++;
+        continue; // Skip processing of lines inside metadata block
+      }
     }
 
     // Handle Headers
