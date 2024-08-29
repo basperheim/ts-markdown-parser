@@ -82,7 +82,11 @@ const parseYaml = (yamlString: string): Record<string, any> => {
   const result: Record<string, any> = {};
 
   yamlLines.forEach((line) => {
-    const [key, value] = line.split(":").map((str) => str.trim());
+    const [key, ...valueParts] = line.split(":").map((str) => str.trim());
+
+    // Handle cases where the value might contain colons
+    const value = valueParts.join(":").trim();
+
     if (key && value) {
       const trimmedKey = key.trim();
 
