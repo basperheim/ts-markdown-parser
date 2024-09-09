@@ -1,10 +1,11 @@
 import { highlightJavaScript } from "./javascript/highlight";
 import { highlightPython } from "./python/highlight";
 import { highlightHtml } from "./html/highlight";
-import { Language, LanguageType } from "../models";
+import { highlightCss } from "./css/highlight";
+import { highlightGo } from "./golang/highlight";
 
 // Mapping from aliases to full language names
-export const languageAliases: Record<string, LanguageType> = {
+export const languageAliases: Record<string, string> = {
   js: "javascript",
   javascript: "javascript",
   typescript: "javascript",
@@ -12,12 +13,16 @@ export const languageAliases: Record<string, LanguageType> = {
   python: "python",
   py: "python",
   html: "html",
+  css: "css",
+  scss: "scss",
+  go: "golang",
+  golang: "golang",
 };
 
 // Ensure all Language types are covered in highlightFunctions
 type HighlightFunction = (code: string) => string;
 
-const highlightFunctions: Record<LanguageType, HighlightFunction> = {
+const highlightFunctions: Record<string, HighlightFunction> = {
   javascript: highlightJavaScript,
   js: highlightJavaScript,
   ts: highlightJavaScript,
@@ -25,11 +30,15 @@ const highlightFunctions: Record<LanguageType, HighlightFunction> = {
   python: highlightPython,
   py: highlightPython,
   html: highlightHtml,
+  css: highlightCss,
+  scss: highlightCss,
+  go: highlightGo,
+  golang: highlightGo,
 };
 
 export const highlightCode = (language: string, code: string): string => {
   const normalizedLanguage = languageAliases[language] || language;
-  const highlightFunction = highlightFunctions[normalizedLanguage as LanguageType];
+  const highlightFunction = highlightFunctions[normalizedLanguage as string];
   return highlightFunction ? highlightFunction(code) : code;
 };
 

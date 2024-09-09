@@ -1,4 +1,4 @@
-import { MarkdownElement, Language, LanguageType } from "../models";
+import { MarkdownElement } from "../models";
 import { highlightCode, stripLeadingWhitespace, countOccurrences } from "../libs";
 
 /**
@@ -229,9 +229,9 @@ export const elementToHtml = (element: MarkdownElement): string => {
     case "h5":
       return `<h5>${element.content}</h5>\n`;
     case "code":
-      if (element.language && Object.values(Language).includes(element.language as LanguageType)) {
+      if (element.language && typeof element.language === "string") {
         const lines = element.content.split("\n");
-        const highlightedLines = lines.map((line) => highlightCode(element.language as LanguageType, line));
+        const highlightedLines = lines.map((line) => highlightCode(element.language as string, line));
         let highlightedCode = highlightedLines.join("\n");
 
         // Handle JavaScript/TypeScript block comments

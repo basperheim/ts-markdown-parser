@@ -270,9 +270,11 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
 - **Code Highlighting Supported For:**
 
   - HTML
+  - CSS/SCSS
   - JavaScript
   - TypeScript
   - Python
+  - Golang
 
 - **Metadata Parsing:**
 

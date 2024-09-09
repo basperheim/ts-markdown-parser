@@ -15,7 +15,9 @@
   }
 
   img {
-    max-width: 3rem;
+    max-width: 80%;
+    margin: auto;
+    display: block;
   }
 
   h1, h2, h3, h4 {
@@ -113,16 +115,26 @@
 <li><b>Simplicity</b>: Go’s syntax is clean and easy to understand, making it a great language for beginners and experienced developers alike.</li><li><b>Concurrency</b>: Go has built-in support for concurrent programming with goroutines and channels, which makes it easier to write programs that can handle multiple tasks at once.</li><li><b>Performance</b>: As a compiled language, Go offers high performance and efficiency, which is useful for building scalable and fast applications.</li>
 </ul>
 <h2>Basic Syntax</h2>
-<p>Here's a simple Go program that prints "Hello, World!" to the console:</p>
+<h3>6. <b>HTML Entities:</b></h3>
+<p>Markdown parsers generally allow embedding of HTML entities like <span class="md-inline-code">&amp;</span> (for <span class="md-inline-code">&</span>), <span class="md-inline-code">&lt;</span> (for <span class="md-inline-code">&lt;</span>), etc. Ensure your parser doesn't unintentionally alter or double-escape these.</p>
+<p>Here's an example codeblock of a <span class="md-inline-code">doesnotexist</span> (<span class="md-inline-code">&#96;&#96;&#96;doesnotexist</span>) language that does not exist:</p>
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code">package main
+            <pre><code class="md-code-doesnotexist">var madeUp: num = 1234; // this lang does not exist</code></pre>
+          </div>
+        <p>Here's a simple Go program that prints "Hello, World!" to the console:</p>
 
-import "fmt"
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-go"><span class="md-keyword">package </span>main
 
-func main() {
-    fmt.Println("Hello, World!")
+<span class="md-keyword">import </span><span class="md-string">&quot;fmt&quot;</span>
+
+<span class="md-comment">//  \&#x<span class="md-number">60</span>;\&#x<span class="md-number">60</span>;\&#x<span class="md-number">60</span>;\dsdsaad</span>
+
+<span class="md-keyword">func </span>main() {
+    fmt.<span class="md-call-method">Println</span>(<span class="md-string">&quot;Hello, World!&quot;</span>)
 }</code></pre>
           </div>
         <h2>Variables and Types</h2>
@@ -130,23 +142,23 @@ func main() {
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code">var name string = "Go"
-var age int = 10</code></pre>
+            <pre><code class="md-code-go"><span class="md-keyword">var </span>name string = <span class="md-string">&quot;Go&quot;</span>
+<span class="md-keyword">var </span>age int = <span class="md-number">10</span></code></pre>
           </div>
         <p>Alternatively, Go supports type inference:</p>
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code">name := "Go"
-age := 10</code></pre>
+            <pre><code class="md-code-go"><span class="md-number">name</span> := <span class="md-string">&quot;Go&quot;</span>
+<span class="md-number">age</span> := <span class="md-number">10</span></code></pre>
           </div>
         <h2>Control Structures</h2>
 <p>Go includes standard control structures such as <span class="md-inline-code">if</span>, <span class="md-inline-code">for</span>, and <span class="md-inline-code">switch</span>. Here's an example of a <span class="md-inline-code">for</span> loop:</p>
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code">for i := 0; i < 5; i++ {
-    fmt.Println(i)
+            <pre><code class="md-code-go"><span class="md-keyword">for </span><span class="md-number">i</span> := <span class="md-number">0</span>; i &lt; <span class="md-number">5</span>; i++ {
+    fmt.<span class="md-call-method">Println</span>(i)
 }</code></pre>
           </div>
         <h3>Conclusion</h3>
@@ -212,7 +224,189 @@ age := 10</code></pre>
 <span class="md-special">print</span>(multiply(2, 7))
 <span class="md-special">print</span>(divide(9, 3))</code></pre>
           </div>
-        
+        <h2>Mix of Examples</h2>
+<p>Certainly! Here are some short examples of HTML, CSS, SCSS, Python, JavaScript, and TypeScript in Markdown format. Each example includes some Markdown formatting elements like bold, italics, and links.</p>
+<h3>HTML Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-html"><span class="md-comment">&lt;!-- HTML example --&gt;</span>
+&lt;!DOCTYPE html&gt;
+<span class="md-keyword">&lt;html </span><span class="md-special">lang=&quot;en&quot;</span>&gt;
+  <span class="md-keyword">&lt;head&gt;</span>
+    <span class="md-keyword">&lt;meta </span><span class="md-special">charset=&quot;UTF-8&quot;</span> /&gt;
+    <span class="md-keyword">&lt;meta </span><span class="md-special">name=&quot;viewport&quot;</span> content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    <span class="md-keyword">&lt;title&gt;</span>Document<span class="md-keyword">&lt;/title&gt;</span>
+  <span class="md-keyword">&lt;/head&gt;</span>
+  <span class="md-keyword">&lt;body&gt;</span>
+    <span class="md-keyword">&lt;h1&gt;</span>Welcome to My Page<span class="md-keyword">&lt;/h1&gt;</span>
+    <span class="md-keyword">&lt;p&gt;</span>This is a <span class="md-keyword">&lt;i&gt;</span>simple<span class="md-keyword">&lt;/i&gt;</span> HTML example with <span class="md-keyword">&lt;strong&gt;</span>bold<span class="md-keyword">&lt;/strong&gt;</span> text.<span class="md-keyword">&lt;/p&gt;</span>
+    <span class="md-keyword">&lt;a </span>href=<span class="md-string">&quot;https:\\example.com&quot;</span>&gt;Click here<span class="md-keyword">&lt;/a&gt;</span> to visit an example link.
+  <span class="md-keyword">&lt;/body&gt;</span>
+<span class="md-keyword">&lt;/html&gt;</span></code></pre>
+          </div>
+        <h3>CSS Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-css"><span class="md-comment"><span class="md-comment">/* CSS example */</span></span>
+<span class="md-decorator">body</span> {
+  <span class="md-keyword">font-family</span>: Arial, sans-serif;
+  <span class="md-keyword">background-color</span>: <span class="md-special">#f4f4f4</span>;
+}
+
+<span class="md-decorator">h1</span> {
+  <span class="md-keyword">color</span>: <span class="md-special">#333</span>;
+}
+
+<span class="md-decorator">p</span> {
+  <span class="md-keyword">color</span>: <span class="md-special">#555</span>;
+}
+
+<span class="md-decorator">#my-id</span> {
+  <span class="md-keyword">color</span>: red;
+  <span class="md-keyword">font-size</span>: <span class="md-number">1.3em</span>;
+  <span class="md-keyword">background-color</span>: <span class="md-special">#ffffff</span>;
+  <span class="md-keyword">margin</span>: <span class="md-number">1rem</span>;
+}
+
+<span class="md-decorator">.my-class</span> {
+  <span class="md-keyword">color</span>: green;
+  <span class="md-keyword">font-size</span>: <span class="md-number">1em</span>;
+  <span class="md-keyword">background-color</span>: <span class="md-special">#ffffff</span>;
+  <span class="md-keyword">margin</span>: <span class="md-number">1.2rem</span>;
+}</code></pre>
+          </div>
+        <h3>SCSS Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-scss"><span class="md-comment">// SCSS example</span>
+<span class="md-special">$primary-color</span>: <span class="md-special">#333</span>;
+<span class="md-special">$secondary-color</span>: <span class="md-special">#555</span>;
+
+<span class="md-decorator">body</span> {
+  <span class="md-keyword">font-family</span>: <span class="md-string"><span class="md-string">&quot;Trebuchet MS&quot;</span></span>, <span class="md-string"><span class="md-string">&quot;Some-Madeup-Font&quot;</span></span>, Arial, sans-serif;
+  <span class="md-keyword">background-color</span>: <span class="md-special">#f4f4f4</span>;
+}
+
+<span class="md-decorator">h1</span> {
+  <span class="md-keyword">color</span>: $primary-color;
+}
+
+<span class="md-decorator">p</span> {
+  <span class="md-keyword">color</span>: $secondary-color;
+}</code></pre>
+          </div>
+        <h3>Python Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-python"><span class="md-comment"># Python example</span>
+<span class="md-keyword">def</span> <span class="md-special">greet</span>(name):
+    <span class="md-comment">&quot;&quot;&quot;Return a greeting message.&quot;&quot;&quot;</span>
+    <span class="md-keyword">return</span> f<span class="md-string">"Hello, {name}!"</span>
+
+<span class="md-special">print</span>(greet(<span class="md-string">"World"</span>))</code></pre>
+          </div>
+        <h3>JavaScript Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-javascript"><span class="md-comment">// JavaScript example</span>
+<span class="md-keyword">function</span> <span class="md-special">greet</span>(name) {
+  <span class="md-comment">// Return a greeting message</span>
+  <span class="md-keyword">return</span> <span class="md-string">`Hello, ${name}!`</span>;
+}
+
+console.<span class="md-call-method">log</span>(greet(<span class="md-string">"World"</span>));</code></pre>
+          </div>
+        <h3>TypeScript Example</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-typescript"><span class="md-comment">// TypeScript example</span>
+<span class="md-keyword">function</span> <span class="md-special">greet</span>(name: string): string {
+  <span class="md-comment">// Return a greeting message</span>
+  <span class="md-keyword">return</span> <span class="md-string">`Hello, ${name}!`</span>;
+}
+
+console.<span class="md-call-method">log</span>(greet(<span class="md-string">"World"</span>));</code></pre>
+          </div>
+        <p>Feel free to test these examples with your markdown parser!</p>
+<h3>1. <b>Keywords</b></h3>
+<ul>
+<li><b>Reserved Words</b>: <span class="md-inline-code">const</span>, <span class="md-inline-code">let</span>, <span class="md-inline-code">var</span>, <span class="md-inline-code">function</span>, <span class="md-inline-code">return</span>, <span class="md-inline-code">if</span>, <span class="md-inline-code">else</span>, <span class="md-inline-code">for</span>, <span class="md-inline-code">while</span>, <span class="md-inline-code">switch</span>, etc.</li><li><b>Other Important Keywords</b>: <span class="md-inline-code">class</span>, <span class="md-inline-code">import</span>, <span class="md-inline-code">export</span>, <span class="md-inline-code">new</span>, <span class="md-inline-code">await</span>, <span class="md-inline-code">async</span>, <span class="md-inline-code">try</span>, <span class="md-inline-code">catch</span>, <span class="md-inline-code">finally</span>, etc.</li>
+</ul>
+<h3>2. <b>Variables</b></h3>
+<ul>
+<li><b>Global Variables</b>: <span class="md-inline-code">window</span>, <span class="md-inline-code">document</span>, <span class="md-inline-code">console</span>, etc.</li><li><b>Local Variables</b>: Variable names, which can vary and should be distinguishable from keywords.</li>
+</ul>
+<h3>3. <b>Data Types</b></h3>
+<ul>
+<li><b>Primitive Types</b>: <span class="md-inline-code">number</span>, <span class="md-inline-code">string</span>, <span class="md-inline-code">boolean</span>, <span class="md-inline-code">null</span>, <span class="md-inline-code">undefined</span></li><li><b>Special Objects</b>: <span class="md-inline-code">Array</span>, <span class="md-inline-code">Object</span>, <span class="md-inline-code">Date</span>, <span class="md-inline-code">RegExp</span>, etc.</li>
+</ul>
+<h3>4. <b>Operators</b></h3>
+<ul>
+<li><b>Arithmetic Operators</b>: <span class="md-inline-code">+</span>, <span class="md-inline-code">-</span>, <span class="md-inline-code">&#42;</span>, <span class="md-inline-code">/</span>, <span class="md-inline-code">%</span>, <span class="md-inline-code">++</span>, <span class="md-inline-code">--</span></li><li><b>Comparison Operators</b>: <span class="md-inline-code">==</span>, <span class="md-inline-code">===</span>, <span class="md-inline-code">!=</span>, <span class="md-inline-code">!==</span>, <span class="md-inline-code">&gt;</span>, <span class="md-inline-code">&lt;</span>, <span class="md-inline-code">&gt;=</span>, <span class="md-inline-code">&lt;=</span></li><li><b>Logical Operators</b>: <span class="md-inline-code">&&</span>, <span class="md-inline-code">||</span>, <span class="md-inline-code">!</span>, <span class="md-inline-code">?</span></li><li><b>Assignment Operators</b>: <span class="md-inline-code">=</span>, <span class="md-inline-code">+=</span>, <span class="md-inline-code">-=</span>, <span class="md-inline-code">&#42;=</span>, <span class="md-inline-code">/=</span>, <span class="md-inline-code">%=</span></li>
+</ul>
+<h3>5. <b>Control Structures</b></h3>
+<ul>
+<li><b>Statements</b>: <span class="md-inline-code">if</span>, <span class="md-inline-code">else if</span>, <span class="md-inline-code">else</span>, <span class="md-inline-code">switch</span>, <span class="md-inline-code">case</span>, <span class="md-inline-code">default</span></li><li><b>Loops</b>: <span class="md-inline-code">for</span>, <span class="md-inline-code">while</span>, <span class="md-inline-code">do...while</span></li><li><b>Function Structures</b>: Function definitions, arrow functions</li>
+</ul>
+<h3>6. <b>Comments</b></h3>
+<ul>
+<li><b>Single-Line Comments</b>: <span class="md-inline-code">//</span></li><li><b>Multi-Line Comments</b>: <span class="md-inline-code">/&#42; ... &#42;/</span></li>
+</ul>
+<h3>7. <b>Strings</b></h3>
+<ul>
+<li><b>String Literals</b>: <span class="md-inline-code">'...'</span>, <span class="md-inline-code">"..."</span>, <span class="md-inline-code"></span> <span class="md-inline-code">...</span> <span class="md-inline-code"></span> (template literals)</li><li><b>String Interpolation</b>: <span class="md-inline-code">${...}</span> within template literals</li>
+</ul>
+<h3>8. <b>Numbers</b></h3>
+<ul>
+<li><b>Integers and Floats</b>: <span class="md-inline-code">123</span>, <span class="md-inline-code">12.34</span></li><li><b>Scientific Notation</b>: <span class="md-inline-code">1e10</span>, <span class="md-inline-code">1e-10</span></li>
+</ul>
+<h3>9. <b>Special Symbols</b></h3>
+<ul>
+<li><b>Brackets</b>: <span class="md-inline-code">{}</span>, <span class="md-inline-code">&#91;&#93;</span>, <span class="md-inline-code">&#40;&#41;</span></li><li><b>Punctuation</b>: <span class="md-inline-code">,</span>, <span class="md-inline-code">.</span>, <span class="md-inline-code">:</span>, <span class="md-inline-code">;</span>, <span class="md-inline-code">=&gt;</span></li>
+</ul>
+<h3>Implementation Strategy</h3>
+<p>1. <b>Define Patterns</b>: Create regular expressions for each component (keywords, variables, etc.).</p>
+<p>2. <b>Apply Styles</b>: Map each pattern to CSS classes.</p>
+<p>3. <b>Testing</b>: Ensure that all components are correctly identified and styled.</p>
+<h3>Example Approach</h3>
+<p>Here's a basic approach to highlighting JavaScript code:</p>
+<p>1. <b>Define CSS Classes</b></p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-css"><span class="md-decorator">.keyword</span> {
+  <span class="md-keyword">color</span>: blue;
+  <span class="md-keyword">font-weight</span>: bold;
+}
+<span class="md-decorator">.variable</span> {
+  <span class="md-keyword">color</span>: red;
+}
+<span class="md-decorator">.datatype</span> {
+  <span class="md-keyword">color</span>: green;
+}
+<span class="md-decorator">.comment</span> {
+  <span class="md-keyword">color</span>: grey;
+  <span class="md-keyword">font-style</span>: italic;
+}
+<span class="md-decorator">.string</span> {
+  <span class="md-keyword">color</span>: orange;
+}
+<span class="md-decorator">.number</span> {
+  <span class="md-keyword">color</span>: purple;
+}</code></pre>
+          </div>
+        <p>2. <b>Modify Parsing Logic</b></p>
+<ul>
+<li>Add regex patterns for JavaScript syntax components.</li><li>Adjust <span class="md-inline-code">parseMarkdown</span> to recognize and categorize these patterns.</li><li>Update <span class="md-inline-code">elementToHtml</span> to apply corresponding CSS classes.</li>
+</ul>
+<p>By breaking down JavaScript into these components and implementing custom highlighting, you'll be able to create a more effective and visually distinct representation of code in your Markdown parser.</p>
+
   <script>
     function copyToClipboard(button) {
       const codeBlock = button.parentElement.querySelector('code');

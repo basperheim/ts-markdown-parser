@@ -3,9 +3,9 @@ import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
-// const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
-const markdownFilePath = join(__dirname, "notes/test-markdown-links.md");
+// const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/double-slash-meta-test.md");
 // const markdownFilePath = join(__dirname, "notes/example-markdown-blog-post.md");
 // const markdownFilePath = join(__dirname, "notes/example-js-blog.md");
@@ -33,8 +33,8 @@ try {
 
 // Convert Markdown to HTML
 const htmlContent = markdownToHtml(markdown);
-console.log(htmlContent);
-process.exit();
+// console.log(htmlContent);
+// process.exit();
 
 // Basic HTML template
 const htmlTemplate = `
@@ -54,7 +54,9 @@ const htmlTemplate = `
   }
 
   img {
-    max-width: 3rem;
+    max-width: 80%;
+    margin: auto;
+    display: block;
   }
 
   h1, h2, h3, h4 {
