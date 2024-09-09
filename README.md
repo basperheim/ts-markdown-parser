@@ -176,6 +176,14 @@ if (!metadata?.title) {
 }
 ```
 
+### npx Command to Test Code
+
+Use `npx ts-node` to test a TypeScript usage of this package:
+
+```bash
+npx ts-node test.ts
+```
+
 ## Metadata Parsing
 
 You can also extract metadata from your Markdown files using YAML front matter.

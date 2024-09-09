@@ -78,22 +78,34 @@ const parseInlineStyles = (text: string): string => {
   // Images
   text = text.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" />');
 
-  // Links
-  text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+  // Extract links and temporarily replace them with a placeholder
+  const links: { placeholder: string; html: string }[] = [];
+  let linkIndex = 0;
+  text = text.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
+    const placeholder = `{{LINK_${linkIndex}}}`;
+    links.push({ placeholder, html: `<a href="${url}">${linkText}</a>` });
+    linkIndex++;
+    return placeholder;
+  });
 
   // Bold
-  text = text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
-  text = text.replace(/__(.*?)__/g, "<b>$1</b>");
+  text = text.replace(/\*\*(?![^<]*?>)(.*?)\*\*/g, "<b>$1</b>");
+  text = text.replace(/__(?![^<]*?>)(.*?)__/g, "<b>$1</b>");
 
   // Italic
-  text = text.replace(/\*(.*?)\*/g, "<i>$1</i>");
-  text = text.replace(/_(.*?)_/g, "<i>$1</i>");
+  text = text.replace(/\*(?![^<]*?>)(.*?)\*/g, "<i>$1</i>");
+  text = text.replace(/_(?![^<]*?>)(.*?)_/g, "<i>$1</i>");
 
-  // Blockquotes (just wrap text in a blockquote tag)
+  // Blockquotes
   text = text.replace(/^>\s*(.*)/gm, "<blockquote>$1</blockquote>");
 
   // Inline code
   text = text.replace(/`(.*?)`/g, `<span class="md-inline-code">$1</span>`);
+
+  // Reinsert the links
+  links.forEach((link) => {
+    text = text.replace(link.placeholder, link.html);
+  });
 
   return text;
 };
