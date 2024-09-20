@@ -3,6 +3,7 @@ import { highlightPython } from "./python/highlight";
 import { highlightHtml } from "./html/highlight";
 import { highlightCss } from "./css/highlight";
 import { highlightGo } from "./golang/highlight";
+import { highlightJSX } from "./jsx/highlight";
 
 // Mapping from aliases to full language names
 export const languageAliases: Record<string, string> = {
@@ -17,6 +18,8 @@ export const languageAliases: Record<string, string> = {
   scss: "scss",
   go: "golang",
   golang: "golang",
+  jsx: "jsx",
+  tsx: "jsx",
 };
 
 // Ensure all Language types are covered in highlightFunctions
@@ -34,6 +37,8 @@ const highlightFunctions: Record<string, HighlightFunction> = {
   scss: highlightCss,
   go: highlightGo,
   golang: highlightGo,
+  jsx: highlightJSX,
+  tsx: highlightJSX,
 };
 
 export const highlightCode = (language: string, code: string): string => {
