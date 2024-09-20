@@ -24,8 +24,9 @@ export const escapeHtml = (html: string): string => {
     return `${p1}${escapedContent}${p1}`;
   });
 
-  // Handle links after escaping
-  // escapedHtml = escapedHtml.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+  // Specifically replace <Image and <img tags
+  escapedHtml = escapedHtml.replace(/<\/?Image/g, "&lt;Image");
+  escapedHtml = escapedHtml.replace(/<\/?img/g, "&lt;img");
 
   return escapedHtml;
 };
