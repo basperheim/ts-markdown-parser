@@ -4,6 +4,7 @@ import { highlightHtml } from "./html/highlight";
 import { highlightCss } from "./css/highlight";
 import { highlightGo } from "./golang/highlight";
 import { highlightJSX } from "./jsx/highlight";
+import { highlightSQL } from "./sql/highlight";
 
 // Mapping from aliases to full language names
 export const languageAliases: Record<string, string> = {
@@ -20,6 +21,7 @@ export const languageAliases: Record<string, string> = {
   golang: "golang",
   jsx: "jsx",
   tsx: "jsx",
+  sql: "sql",
 };
 
 // Ensure all Language types are covered in highlightFunctions
@@ -39,6 +41,7 @@ const highlightFunctions: Record<string, HighlightFunction> = {
   golang: highlightGo,
   jsx: highlightJSX,
   tsx: highlightJSX,
+  sql: highlightSQL,
 };
 
 export const highlightCode = (language: string, code: string): string => {

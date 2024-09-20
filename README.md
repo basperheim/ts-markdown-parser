@@ -184,6 +184,12 @@ Use `npx ts-node` to test a TypeScript usage of this package:
 npx ts-node test.ts
 ```
 
+You can also use `ts-node` like so:
+
+```bash
+ts-node test.ts
+```
+
 ## Metadata Parsing
 
 You can also extract metadata from your Markdown files using YAML front matter.
