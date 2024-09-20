@@ -1,6 +1,6 @@
 # ts-markdown-parser
 
-`ts-markdown-parser` is a TypeScript-based library for converting Markdown to HTML with built-in syntax highlighting for various programming languages. Currently, it supports HTML, JavaScript, TypeScript, and Python code highlighting, with plans to expand to more languages in the future.
+`ts-markdown-parser` is a TypeScript-based library for converting Markdown to HTML with built-in syntax highlighting for various programming languages. Currently, it supports HTML, JavaScript, TypeScript, SQL, Python, and others for code highlighting, with plans to expand to more languages in the future.
 
 ## Installation
 
@@ -281,6 +281,8 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - TypeScript
   - Python
   - Golang
+  - SQL
+  - TSX/JSX
 
 - **Metadata Parsing:**
 
