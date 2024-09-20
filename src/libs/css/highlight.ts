@@ -47,10 +47,8 @@ export const highlightCss = (code: string): string => {
   escapedCode = escapedCode.replace(/(&quot;.*?&quot;|'.*?')/g, `<span class="md-string">$1</span>`);
 
   // Step 4: Highlight CSS properties/keywords
-  reservedKeywords.forEach((keyword) => {
-    const regexKeyword = new RegExp(`(${keyword})(?=\\s*:)`, "g"); // Match CSS properties before ":"
-    escapedCode = escapedCode.replace(regexKeyword, `<span class="md-keyword">$1</span>`);
-  });
+  const cssPropertyRegex = /([a-zA-Z-]+)(?=\s*:)/g;
+  escapedCode = escapedCode.replace(cssPropertyRegex, '<span class="md-keyword">$1</span>');
 
   // Step 5: Highlight CSS numbers and units (e.g., px, em, rem, etc.)
   escapedCode = escapedCode.replace(/(\d*\.?\d+)(px|em|rem|%|vh|vw|vmin|vmax|deg)/g, `<span class="md-number">$1$2</span>`);
