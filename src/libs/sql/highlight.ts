@@ -1,5 +1,5 @@
 import { escapeHtml } from "../../utils/markdown-parser";
-import { reservedKeywords, sqlDataTypes } from "./keywords";
+import { reservedKeywords, sqlDataTypes, sqlFunctions } from "./keywords";
 
 /**
  * Highlights SQL code blocks with syntax highlighting.
@@ -11,39 +11,69 @@ export const highlightSQL = (code: string): string => {
   // Escape HTML entities
   let escapedCode = escapeHtml(code);
 
-  // Highlight strings (single and double quotes)
-  const stringRegex = /(['"])(?:(?=(\\?))\2.)*?\1/g;
+  // Highlight strings (single quotes) and identifiers (double quotes) in SQL
+  const stringRegex = /'(?:''|[^'])*'|"(?:""|[^"])*"/g;
   escapedCode = escapedCode.replace(stringRegex, '<span class="md-string">$&</span>');
 
-  // Highlight SQL reserved keywords (any word before space, comma, parenthesis, etc.)
-  reservedKeywords.forEach((keyword) => {
-    const regexKeyword = new RegExp(`(${keyword})`, "g");
-    escapedCode = escapedCode.replace(regexKeyword, '<span class="md-keyword">$1</span>');
-  });
+  // Highlight comments (single-line and multi-line)
+  const commentRegex = /(--.*$|\/\*[\s\S]*?\*\/)/gm;
+  escapedCode = escapedCode.replace(commentRegex, '<span class="md-comment">$&</span>');
 
-  sqlDataTypes.forEach((keyword) => {
-    const regexKeyword = new RegExp(`(${keyword})`, "g");
-    escapedCode = escapedCode.replace(regexKeyword, '<span class="md-decorator">$1</span>');
-  });
+  // Split the code into parts: strings, comments, and other code
+  const codeParts = escapedCode.split(/(<span class="md-string">[\s\S]*?<\/span>|<span class="md-comment">[\s\S]*?<\/span>)/g);
 
-  // Highlight `DO $$` function declaration in SQL
-  escapedCode = escapedCode.replace(/(\$\$)/g, '<span class="md-decorator">$1</span>');
+  // Process each part
+  escapedCode = codeParts
+    .map((part) => {
+      if (part.startsWith('<span class="md-string">') || part.startsWith('<span class="md-comment">')) {
+        // It's a string or comment, leave it as is
+        return part;
+      } else {
+        let newPart = part;
 
-  // Highlight numbers
-  const numberRegex = /\b\d+(\.\d+)?\b/g;
-  escapedCode = escapedCode.replace(numberRegex, '<span class="md-number">$&</span>');
+        // Highlight SQL reserved keywords
+        reservedKeywords.forEach((keyword) => {
+          const regexKeyword = new RegExp(`\\b(${keyword})\\b`, "g");
+          newPart = newPart.replace(regexKeyword, '<span class="md-keyword">$1</span>');
+        });
 
-  // Highlight parentheses and braces
-  const parenthesesRegex = /[(){}[\]]/g;
-  escapedCode = escapedCode.replace(parenthesesRegex, '<span class="md-special">$&</span>');
+        // Highlight SQL data types
+        sqlDataTypes.forEach((keyword) => {
+          const regexKeyword = new RegExp(`\\b(${keyword})\\b`, "g");
+          newPart = newPart.replace(regexKeyword, '<span class="md-decorator">$1</span>');
+        });
 
-  // Highlight commas and semicolons
-  const commaSemicolonRegex = /[;,]/g;
-  escapedCode = escapedCode.replace(commaSemicolonRegex, '<span class="md-special">$&</span>');
+        // Highlight SQL built-in functions
+        sqlFunctions.forEach((keyword) => {
+          const regexKeyword = new RegExp(`\\b(${keyword})\\b`, "g");
+          newPart = newPart.replace(regexKeyword, '<span class="md-call-method">$1</span>');
+        });
 
-  // Comments
-  const regexComment = /--(.*)/g;
-  escapedCode = escapedCode.replace(regexComment, '<span class="md-comment">--$1</span>');
+        // Postgres `pg_` functions
+        const pgFunctionRegex = /\b(pg_[a-zA-Z0-9_]+)(?=\s*\()/g;
+        newPart = newPart.replace(pgFunctionRegex, '<span class="md-call-method">$1</span>');
+
+        // Highlight `$$` in function declarations, and other operators
+        newPart = newPart.replace(/(\$\$)/g, '<span class="md-decorator">$1</span>');
+        newPart = newPart.replace(/(\:\:)/g, '<span class="md-decorator">$1</span>');
+        newPart = newPart.replace(/\s(=)\s/g, '<span class="md-decorator">$1</span>');
+
+        // Highlight numbers
+        const numberRegex = /\b\d+(\.\d+)?\b/g;
+        newPart = newPart.replace(numberRegex, '<span class="md-number">$&</span>');
+
+        // Highlight parentheses and braces
+        const parenthesesRegex = /[(){}[\]]/g;
+        newPart = newPart.replace(parenthesesRegex, '<span class="md-special">$&</span>');
+
+        // Highlight commas and semicolons
+        const commaSemicolonRegex = /[;,]/g;
+        newPart = newPart.replace(commaSemicolonRegex, '<span class="md-special">$&</span>');
+
+        return newPart;
+      }
+    })
+    .join("");
 
   return escapedCode;
 };
