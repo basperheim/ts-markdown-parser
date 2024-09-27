@@ -283,6 +283,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - Golang
   - SQL
   - TSX/JSX
+  - Lua
 
 - **Metadata Parsing:**
 
