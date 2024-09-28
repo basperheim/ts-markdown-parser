@@ -1,6 +1,6 @@
 {
   "name": "ts-markdown-parser",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "TypeScript library that converts markdown to HTML (with code support).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
