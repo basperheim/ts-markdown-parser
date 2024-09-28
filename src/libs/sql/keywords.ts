@@ -273,3 +273,29 @@ export const sqlFunctions: string[] = [
   "ARRAY_AGG",
   "ARRAY_TO_STRING",
 ];
+
+export const specialIdentifiers: string[] = [
+  "current_database", // Name of the current database
+  "information_schema",
+  "connamespace",
+  "current_user", // Current database user
+  "session_user", // Session user
+  "current_schema", // Current schema
+  "current_time", // Current time
+  "current_timestamp", // Current timestamp
+  "current_date", // Current date
+  "conname", // Communications connection identifier
+  "nspname",
+  "relname",
+  "tablename",
+  "schemaname",
+  "sequencename",
+  "increment_by",
+  "usename",
+  "conrelid",
+  "user", // User connected to the database
+  "tc",
+  "ccu",
+  "kcu",
+  "now", // Current date and time
+];
