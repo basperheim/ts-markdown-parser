@@ -47,6 +47,41 @@ const highlightFunctions: Record<string, HighlightFunction> = {
   lua: highlightLua,
 };
 
+const cssStart = /(^\/\*)/;
+const cssEnd = /(^\*\/|^\s\*\/)/;
+const regexJavaScriptStart = /(^\/\*\*|^\/\*)/; // Matches /* and /** but not * or **
+const regexJavaScriptEnd = /(^\*\/|^\s\*\/)/; // Matches `*/` or ` */`
+const regexPython = /('''|""")/; // Matches the start of a Python multiline comment (''' or """)
+const goRegexStart = /(^\/\*)/; // Go block comment start
+const goRegexEnd = /(^\*\/)/; // Go block comment end
+
+export interface MultilineCommentRegex {
+  start: RegExp;
+  end: RegExp;
+}
+
+const multilineCommentMap: Record<string, MultilineCommentRegex> = {
+  javascript: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  js: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  typescript: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  jsx: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  tsx: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  ts: { start: regexJavaScriptStart, end: regexJavaScriptEnd },
+  python: { start: regexPython, end: regexPython },
+  py: { start: regexPython, end: regexPython },
+  html: { start: /<!--/, end: /-->/ }, // HTML comments are not multiline but for structure
+  css: { start: cssStart, end: cssEnd },
+  scss: { start: cssStart, end: cssEnd },
+  go: { start: goRegexStart, end: goRegexEnd },
+  golang: { start: goRegexStart, end: goRegexEnd },
+  sql: { start: /\/\*/, end: /\*\// },
+  lua: { start: /(^--\[\[)/, end: /(^--\]\]|^]])/ }, // Lua block comments
+};
+
+export const getMultilineCommentRegex = (language: string): MultilineCommentRegex | null => {
+  return multilineCommentMap[language] || null;
+};
+
 export const highlightCode = (language: string, code: string): string => {
   const normalizedLanguage = languageAliases[language] || language;
   const highlightFunction = highlightFunctions[normalizedLanguage as string];

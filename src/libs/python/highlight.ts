@@ -2,7 +2,7 @@ import { reservedKeywords } from "./keywords";
 import { pythonStandardLibrary } from "./libs";
 import { escapeHtml } from "../../utils/markdown-parser";
 
-export function highlightPython(code: string): string {
+export const highlightPython = (code: string): string => {
   // Escape HTML entities
   code = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/`/g, "&#x60;");
   let highlighted = code;
@@ -46,4 +46,4 @@ export function highlightPython(code: string): string {
 
   // Highlight reserved keywords
   return replaceKeywords(highlighted);
-}
+};

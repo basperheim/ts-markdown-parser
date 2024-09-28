@@ -3,7 +3,7 @@ import { escapeHtml } from "../../utils/markdown-parser";
 
 export const highlightJavaScript = (code: string): string => {
   // Escape HTML entities
-  code = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&#039;");
+  code = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&#039;").replace(/\s\*/g, " &#42;");
 
   // Check if there's an opening comment but no closing comment
   const hasOpenComment = /\/\*/g.test(code);

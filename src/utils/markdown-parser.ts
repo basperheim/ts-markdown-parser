@@ -1,5 +1,5 @@
 import { MarkdownElement } from "../models";
-import { highlightCode, stripLeadingWhitespace, countOccurrences } from "../libs";
+import { highlightCode, stripLeadingWhitespace, countOccurrences, getMultilineCommentRegex, MultilineCommentRegex } from "../libs";
 
 /**
  * Escapes HTML special characters inside quotes or backticks to prevent HTML injection.
@@ -231,40 +231,105 @@ export const elementToHtml = (element: MarkdownElement): string => {
       return `<h5>${element.content}</h5>\n`;
     case "code":
       if (element.language && typeof element.language === "string") {
-        const lines = element.content.split("\n");
-        const highlightedLines = lines.map((line) => highlightCode(element.language as string, line));
-        let highlightedCode = highlightedLines.join("\n");
+        const codeBlock = element.content;
+        const lines = codeBlock.split("\n");
+        const multiLineCommentRegex: MultilineCommentRegex | null = getMultilineCommentRegex(element.language);
+        const finalLines = [];
 
-        // Handle JavaScript/TypeScript block comments
-        const jsCommentLangs = ["ts", "js", "javascript", "typescript"];
-        if (jsCommentLangs.includes(element.language)) {
-          const blockCommentRegex = /\/\*([\s\S]*?)\*\//gm;
-          highlightedCode = highlightedCode.replace(blockCommentRegex, `<span class="md-comment">&sol;&ast;$1&ast;&sol;</span>`);
-        }
+        let inBlockComment: boolean = false,
+          pythonCommentIsOpen: boolean = false,
+          isPython: boolean = !!(element.language === "py" || element.language === "python");
 
-        // Handle Python block comments
-        const pythonCommentLangs = ["py", "python"];
-        if (pythonCommentLangs.includes(element.language)) {
-          const pyCommentRegex = /"""([\s\S]*?)"""/gm;
-          if (pyCommentRegex.test(highlightedCode)) {
-            const pyComment = `<span class="md-comment">&quot;&quot;&quot;$1&quot;&quot;&quot;</span>`;
-            highlightedCode = highlightedCode.replace(pyCommentRegex, pyComment);
+        for (let i = 0; i < lines.length; i++) {
+          let line = lines[i];
+          // console.log(`\nline: '${line}'`);
+
+          let isBlockStart = false,
+            isBlockEnd = false;
+
+          if (multiLineCommentRegex) {
+            const startRegex = multiLineCommentRegex.start;
+            const endRegex = multiLineCommentRegex.end;
+            isBlockStart = startRegex.test(line);
+            isBlockEnd = endRegex.test(line);
+          }
+
+          // HTML escape closing multiline comments
+          // isClosingJS = closingJSRegEx.test(line) || /^\*\*\//.test(line);
+          // if (isClosingJS) {
+          //   line = line.replace(closingJSRegEx, " &ast;&sol;");
+          // }
+
+          // console.dir({ isBlockStart, isBlockEnd, inBlockComment });
+
+          // Handle Python as a special case since opening/closing are the same
+          if (isPython) {
+            // Python `'''` and `"""` comments
+            const regexPython = /('''|""")/;
+
+            // Matches the start of a Python multiline comment (''' or """)
+            const isPythonMultiCommentMarker = regexPython.test(line);
+
+            if (isPythonMultiCommentMarker) {
+              pythonCommentIsOpen = !pythonCommentIsOpen;
+              if (pythonCommentIsOpen) {
+                finalLines.push(`<span class="md-comment">${line}`);
+              } else {
+                finalLines.push(`${line}</span>`);
+              }
+            } else {
+              if (pythonCommentIsOpen) {
+                // Do not highlight anything if inside an open Python multi-line comment
+                finalLines.push(line);
+              } else {
+                finalLines.push(`</span>${highlightCode(element.language as string, line)}`);
+              }
+            }
+          }
+
+          // All other languages
+          else {
+            // Handle opening the block comment
+            if (isBlockStart && !inBlockComment) {
+              finalLines.push(`<span class="md-comment">${line}`);
+              inBlockComment = true;
+            }
+
+            // If we're still inside a block comment
+            else if (inBlockComment && !isBlockStart && !isBlockEnd) {
+              finalLines.push(line);
+            }
+
+            // Close the md-comment span for multi-line comments
+            else if (inBlockComment && isBlockEnd) {
+              finalLines.push(`${line}</span>`);
+              inBlockComment = false;
+            }
+
+            // Regular code highlighting for non-block comment lines
+            else {
+              const highlightedCode = highlightCode(element.language as string, line);
+              finalLines.push(highlightedCode); // Push highlighted code only if not in block comment
+            }
           }
         }
 
+        // console.dir({ finalLines });
+        const highlightedCode = finalLines.join("\n");
+
         return `
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-${element.language}">${escapeHtml(highlightedCode)}</code></pre>
-          </div>
-        `;
+            <div class="md-code-container">
+              <button onclick="copyToClipboard(this)">Copy</button>
+              <pre><code class="md-code-${element.language}">${escapeHtml(highlightedCode)}</code></pre>
+            </div>
+          `;
       } else {
         return `
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code">${escapeHtml(element.content)}</code></pre>
-          </div>
-        `;
+            <div class="md-code-container">
+              <button onclick="copyToClipboard(this)">Copy</button>
+              <pre><code class="md-code">${escapeHtml(element.content)}</code></pre>
+            </div>
+          `;
       }
     case "ul":
       return `<ul>\n${element.content}\n</ul>\n`;
