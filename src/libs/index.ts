@@ -49,11 +49,11 @@ const highlightFunctions: Record<string, HighlightFunction> = {
 
 const cssStart = /(^\/\*)/;
 const cssEnd = /(^\*\/|^\s\*\/)/;
-const regexJavaScriptStart = /(^\/\*\*|^\/\*)/; // Matches /* and /** but not * or **
-const regexJavaScriptEnd = /(^\*\/|^\s\*\/)/; // Matches `*/` or ` */`
+const regexJavaScriptStart = /(^\/\*\*|^\/\*|\s\/\*\*|\s\/\*)/; // Matches /* and /** but not * or **
+const regexJavaScriptEnd = /(^\*\/|\s\*\/)/; // Matches `*/` or ` */`
 const regexPython = /('''|""")/; // Matches the start of a Python multiline comment (''' or """)
-const goRegexStart = /(^\/\*)/; // Go block comment start
-const goRegexEnd = /(^\*\/)/; // Go block comment end
+const goRegexStart = /(\/\*)/; // Go block comment start
+const goRegexEnd = /(\*\/)/; // Go block comment end
 
 export interface MultilineCommentRegex {
   start: RegExp;
@@ -123,4 +123,34 @@ export const countOccurrences = (arr: string[], target: string): number => {
   }
 
   return total;
+};
+
+/**
+ * Replaces specified characters in a string, ignoring any characters that are part of HTML entities.
+ *
+ * @param {string} text
+ * @param {string} replaceRegex
+ * @param {string} replacement
+ * @returns {string}
+ */
+export const markdownReplace = (text: string, replaceRegex: RegExp, replacement: string): string => {
+  const htmlEntityRegex = /(&.+;)(.*?)(\1)/gi;
+
+  // Split the text by HTML entities
+  const parts = text.split(htmlEntityRegex);
+
+  const replacedParts = parts.map((item) => {
+    // If it's an HTML entity, return it unchanged
+    const isHTMLEntity = /(&.+;)(.*?)/g.test(item);
+    if (isHTMLEntity) return item;
+
+    // If it's a `<span class="md` element, return it unchanged
+    // const spanRegex = new RegExp(`<span class="md-'`, "g");
+    // const isSpan = spanRegex.test(item);
+    // if (isSpan) return item;
+
+    return item.replace(replaceRegex, replacement);
+  });
+
+  return replacedParts.join("");
 };

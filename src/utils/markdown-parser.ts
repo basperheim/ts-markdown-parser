@@ -254,13 +254,7 @@ export const elementToHtml = (element: MarkdownElement): string => {
             isBlockEnd = endRegex.test(line);
           }
 
-          // HTML escape closing multiline comments
-          // isClosingJS = closingJSRegEx.test(line) || /^\*\*\//.test(line);
-          // if (isClosingJS) {
-          //   line = line.replace(closingJSRegEx, " &ast;&sol;");
-          // }
-
-          // console.dir({ isBlockStart, isBlockEnd, inBlockComment });
+          // console.dir({ isBlockStart, isBlockEnd });
 
           // Handle Python as a special case since opening/closing are the same
           if (isPython) {

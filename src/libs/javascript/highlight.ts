@@ -1,10 +1,7 @@
-import { reservedKeywords } from "./keywords";
+import { reservedKeywords, tsTypes } from "./keywords";
 import { escapeHtml } from "../../utils/markdown-parser";
 
 export const highlightJavaScript = (code: string): string => {
-  // Escape HTML entities
-  code = code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/'/g, "&#039;").replace(/\s\*/g, " &#42;");
-
   // Check if there's an opening comment but no closing comment
   const hasOpenComment = /\/\*/g.test(code);
   const hasCloseComment = /\*\//g.test(code);
@@ -22,9 +19,28 @@ export const highlightJavaScript = (code: string): string => {
   highlighted = highlighted.replace(/<span class="md-comment">.*?<\/span>|(["'`])(.*?)(\1)/g, (match, p1, p2, p3) => {
     // If it's a comment, return it unchanged
     if (match.startsWith('<span class="md-comment">')) return match;
+
     // Otherwise, highlight the string
     return `<span class="md-string">${p1}${p2}${p3}</span>`;
   });
+
+  //? Hacky way to fix JS lines with comments on end
+  // TODO: Maybe come up with a better way later
+  const mdCommentSpan = `<span class="md-comment">`;
+  let commentPart = "";
+  if (highlighted.includes(mdCommentSpan)) {
+    const splitLine = highlighted.split(mdCommentSpan);
+    if (splitLine.length > 1) {
+      if (splitLine[0].includes(mdCommentSpan)) {
+        return highlighted;
+      } else {
+        highlighted = splitLine[0];
+        commentPart = mdCommentSpan + splitLine[1];
+      }
+    } else {
+      return highlighted;
+    }
+  }
 
   // Highlight specific RegExp patterns
   const regexEqualsPattern = /=([\s+]?\/.*\/[gimuy]*;)/g;
@@ -80,6 +96,19 @@ export const highlightJavaScript = (code: string): string => {
       return word;
     });
   };
+  highlighted = replaceKeywords(highlighted);
 
-  return replaceKeywords(highlighted);
+  // Highlight TS types
+  tsTypes.forEach((tsType) => {
+    tsType = tsType.replace(": ", "");
+    tsType = tsType.replace(":", "");
+
+    const regexKeyword = new RegExp(`\\b(${tsType})\\b`, "g");
+    highlighted = highlighted.replace(regexKeyword, '<span class="md-decorator">$1</span>');
+  });
+
+  // TODO: Hacky way to fix broken `https://` strings--maybe come up with a better way later
+  highlighted = highlighted.replace(`:<span class="</span>md-comment<span class="md-string">">//`, `://`);
+
+  return highlighted + commentPart;
 };
