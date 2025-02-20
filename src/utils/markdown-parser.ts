@@ -83,7 +83,7 @@ const parseInlineStyles = (text: string): string => {
   const links: { placeholder: string; html: string }[] = [];
   let linkIndex = 0;
   text = text.replace(/\[(.*?)\]\((.*?)\)/g, (match, linkText, url) => {
-    const placeholder = `{{LINK_${linkIndex}}}`;
+    const placeholder = `{{LINK~${linkIndex}}}`;
     links.push({ placeholder, html: `<a href="${url}">${linkText}</a>` });
     linkIndex++;
     return placeholder;
@@ -104,9 +104,13 @@ const parseInlineStyles = (text: string): string => {
   text = text.replace(/`(.*?)`/g, `<span class="md-inline-code">$1</span>`);
 
   // Reinsert the links
-  links.forEach((link) => {
-    text = text.replace(link.placeholder, link.html);
-  });
+  // links.forEach((link) => {
+  for (let i = 0; i < links.length; i++) {
+    const link = links[i];
+    text = text.replace(new RegExp(link.placeholder, "g"), link.html);
+    console.dir({ placeholder: link.placeholder, html: link.html });
+  }
+  // });
 
   return text;
 };
@@ -195,7 +199,9 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
 
       // Handle Paragraphs
     } else if (line.trim().length > 0) {
-      elements.push({ type: "p", content: parseInlineStyles(line) });
+      const fixedLine = parseInlineStyles(line);
+      console.dir({ fixedLine });
+      elements.push({ type: "p", content: fixedLine });
     }
 
     if (processedLines.includes(i)) {

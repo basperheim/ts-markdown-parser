@@ -4,6 +4,7 @@ import { join } from "path";
 
 // Define the paths for the Markdown file and the HTML output file
 const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+// const markdownFilePath = join(__dirname, "notes/used-car-questions.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/double-slash-meta-test.md");
@@ -47,10 +48,11 @@ const htmlTemplate = `
 <style>
   body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0.5rem;
+    margin-left: 1rem;
     line-height: 1.6;
     color: #333;
-    background-color: #f9f9f9;
+    background-color: white;
   }
 
   img {
@@ -61,22 +63,26 @@ const htmlTemplate = `
 
   h1, h2, h3, h4 {
     color: #444;
-    margin-bottom: 15px;
+    margin-bottom: 0.2rem;
     border-bottom: 2px solid #ddd;
     padding-bottom: 5px;
   }
 
-  h1 { font-size: 2em; }
-  h2 { font-size: 1.75em; }
-  h3 { font-size: 1.5em; }
-  h4 { font-size: 1.25em; }
+  h1 { font-size: 1.5em; }
+  h2 { font-size: 1.3em; }
+  h3 { font-size: 1.2em; }
+  h4 { font-size: 1em; }
+
+  h1, h2 {
+    margin-top: 2rem;
+  }
 
   p {
-    margin: 15px 0;
+    margin: 0.1rem 0;
   }
 
   ul, ol {
-    margin: 15px 0;
+    margin: 0.2rem 0;
     padding-left: 40px;
   }
 
@@ -95,7 +101,7 @@ const htmlTemplate = `
 
   pre {
     background: #2d2d2d;
-    padding: 15px;
+    padding: 0.2rem;
     border-radius: 8px;
     color: #f8f8f2;
     overflow-x: auto;
@@ -113,7 +119,7 @@ const htmlTemplate = `
   }
 
   .md-code-container {
-    margin-bottom: 20px;
+    margin-bottom: 0.2rem;
     position: relative;
   }
 
