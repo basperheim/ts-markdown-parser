@@ -69,10 +69,13 @@ const parseInlineStyles = (text: string): string => {
       .replace(/_/g, "&#95;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
+      .replace(/＜/g, "&lt;")
+      .replace(/＞/g, "&gt;")
       .replace(/\[/g, "&#91;")
       .replace(/\]/g, "&#93;")
       .replace(/\(/g, "&#40;")
       .replace(/\)/g, "&#41;");
+
     return `<span class="md-inline-code">${escapedCode}</span>`;
   });
 
@@ -200,7 +203,7 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
       // Handle Paragraphs
     } else if (line.trim().length > 0) {
       const fixedLine = parseInlineStyles(line);
-      console.dir({ fixedLine });
+      // console.dir({ fixedLine });
       elements.push({ type: "p", content: fixedLine });
     }
 
@@ -349,7 +352,8 @@ export const globalScript = (): string => `
   <script>
     function copyToClipboard(button) {
       const codeBlock = button.parentElement.querySelector('code');
-      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
+      navigator.clipboard.writeText(text).then(() => {
         button.innerText = 'Copied!';
         setTimeout(() => button.innerText = 'Copy', 2000);
       });

@@ -11,6 +11,9 @@ export const highlightJavaScript = (code: string): string => {
     return code; // Return early if the code does not have a complete multi-line comment
   }
 
+  // Ensure TypeScript generics (<T extends ...> and similar constructs) are properly escaped
+  code = code.replace(/</g, "＜").replace(/>/g, "＞");
+
   // Highlight comments
   const commentRegex = /(\/\/.*|\/\*[\s\S]*?\*\/)/g;
   let highlighted = code.replace(commentRegex, '<span class="md-comment">$1</span>');
@@ -21,7 +24,9 @@ export const highlightJavaScript = (code: string): string => {
     if (match.startsWith('<span class="md-comment">')) return match;
 
     // Otherwise, highlight the string
-    return `<span class="md-string">${p1}${p2}${p3}</span>`;
+    const stringLine = `<span class="md-string">${p1}${p2}${p3}</span>`;
+    console.dir({ stringLine });
+    return stringLine;
   });
 
   //? Hacky way to fix JS lines with comments on end
@@ -64,17 +69,25 @@ export const highlightJavaScript = (code: string): string => {
   const declareFuncRegexWithSpace = /(\w+\s+[if]) \s*\(([^)]*)\)/gi;
   highlighted = highlighted.replace(declareFuncRegexWithSpace, '<span class="md-special">$1</span> ($2)');
 
+  // else if() statements and other function/method calls and declarations (with space between keywords and parenth)
+  const elseIfRegex = /(if+|else\sif+)\s*\(([^)]*)\)/g;
+  highlighted = highlighted.replace(elseIfRegex, '<span class="md-special">$1</span> ($2)');
+
   // Function/method calls and declarations (without space)
   const declareFuncRegex = /(\w+\s+[if])\s*\(([^)]*)\)/gi;
   highlighted = highlighted.replace(declareFuncRegex, '<span class="md-special">$1</span>($2)');
 
   // Highlight code like `function funcName(`
-  const functionDeclareRe = /function (\w+)\(/g;
-  highlighted = highlighted.replace(functionDeclareRe, 'function <span class="md-special">$1</span>(');
+  const functionDeclareRe = /function (\w+)(<[^>]+>)?\(/g;
+  highlighted = highlighted.replace(functionDeclareRe, (match, funcName, generics) => {
+    return `function <span class="md-special">${funcName}</span>${generics || ""}(`;
+  });
 
   // Highlight code like `function funcName(`
-  const constFuncDeclareRe = /const (\w+) =/g;
-  highlighted = highlighted.replace(constFuncDeclareRe, 'const <span class="md-special">$1</span> =');
+  const constFuncDeclareRe = /const (\w+)(<[^>]+>)? =/g;
+  highlighted = highlighted.replace(constFuncDeclareRe, (match, funcName, generics) => {
+    return `const <span class="md-special">${funcName}</span>${generics || ""} =`;
+  });
 
   // Class declaration statements
   const classDeclareRegex = /^(?:export\s+)?class\s+([A-Z][a-zA-Z0-9_]*)/gi;
@@ -99,13 +112,13 @@ export const highlightJavaScript = (code: string): string => {
   highlighted = replaceKeywords(highlighted);
 
   // Highlight TS types
-  tsTypes.forEach((tsType) => {
-    tsType = tsType.replace(": ", "");
-    tsType = tsType.replace(":", "");
+  // tsTypes.forEach((tsType) => {
+  //   tsType = tsType.replace(": ", "");
+  //   tsType = tsType.replace(":", "");
 
-    const regexKeyword = new RegExp(`\\b(${tsType})\\b`, "g");
-    highlighted = highlighted.replace(regexKeyword, '<span class="md-decorator">$1</span>');
-  });
+  //   const regexKeyword = new RegExp(`\\b(${tsType})\\b`, "g");
+  //   highlighted = highlighted.replace(regexKeyword, '<span class="md-decorator">$1</span>');
+  // });
 
   // TODO: Hacky way to fix broken `https://` strings--maybe come up with a better way later
   highlighted = highlighted.replace(`:<span class="</span>md-comment<span class="md-string">">//`, `://`);
