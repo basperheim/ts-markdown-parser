@@ -35,7 +35,7 @@ Some text.
 `;
 
 // Convert Markdown to HTML
-const htmlContent = markdownToHtml(markdown);
+const htmlContent = markdownToHtml(markdown, false); // Pass 'true' as the 2nd arg to inject <code> block generic "Copy" buttons
 
 // Basic HTML template
 const htmlTemplate = `
@@ -206,6 +206,8 @@ if (!metadata?.title) {
 }
 ```
 
+**NOTE**: Pass `false` as the second argument to `markdownToHtml()` to disable the copy-to-clipboard `<button>` feature.
+
 ### npx Command to Test Code
 
 Use `npx ts-node` to test a TypeScript usage of this package:
@@ -302,6 +304,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - Inline code and code blocks
   - Images (`![Alt text](url)`)
   - Links (`[Link text](url)`)
+  - Tables
 
 - **Code Highlighting Supported For:**
 
@@ -319,8 +322,6 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
 
   - Extract metadata from YAML front matter.
   - Handles title, author, date, keywords, slug, and more.
-
-- **Note:** Table/grid support is not yet available.
 
 ## Screenshots
 
