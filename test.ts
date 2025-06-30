@@ -2,6 +2,9 @@ import { markdownToHtml, getMarkdownMetadata } from "./src/index";
 import { writeFileSync, truncateSync, readFileSync } from "fs";
 import { join } from "path";
 
+//! Command
+// npx ts-node test.ts
+
 // Define the paths for the Markdown file and the HTML output file
 const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/used-car-questions.md");
@@ -138,6 +141,36 @@ const htmlTemplate = `
 
   .md-code-container button:hover {
     background-color: #444;
+  }
+
+  .md-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95em;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .md-table th,
+  .md-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .md-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .md-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .md-table tbody tr:hover {
+    background-color: #f1f1f1;
   }
 
   /* Syntax highlighting */

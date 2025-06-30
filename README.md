@@ -133,6 +133,36 @@ const htmlTemplate = `
     background-color: #444;
   }
 
+  .md-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95em;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .md-table th,
+  .md-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .md-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .md-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .md-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
   /* Syntax highlighting */
   .md-keyword { color: #66d9ef; font-weight: bold; }
   .md-string { color: #a6e22e; }

@@ -32,6 +32,36 @@ export const escapeHtml = (html: string): string => {
 };
 
 /**
+ * Replaces markdown tables (that contain `|` and `_` characters) with table-related HTML elements.
+ *
+ * @param {string[]} lines Text containing markdown tables
+ * @returns {string} Text with `<table>` and `<tbody>` HTML injected into it
+ */
+export const markdownTableToHTML = (lines: string[]): string => {
+  if (lines.length < 2) return "";
+
+  const headerCells = lines[0]
+    .split("|")
+    .map((cell) => parseInlineStyles(cell.trim()))
+    .filter(Boolean);
+  const bodyLines = lines.slice(2);
+
+  const thead = `<thead><tr>${headerCells.map((c) => `<th>${c}</th>`).join("")}</tr></thead>`;
+
+  const tbodyRows = bodyLines.map((row) => {
+    const cells = row
+      .split("|")
+      .map((cell) => parseInlineStyles(cell.trim()))
+      .filter(Boolean);
+    return `<tr>${cells.map((c) => `<td>${c}</td>`).join("")}</tr>`;
+  });
+
+  const tbody = `<tbody>${tbodyRows.join("")}</tbody>`;
+
+  return `<table class="md-table">\n${thead}\n${tbody}\n</table>`;
+};
+
+/**
  * Replaces special Unicode single quotes with a regular single quote.
  *
  * @param {string} text Text containing special single quotes.
@@ -107,13 +137,14 @@ const parseInlineStyles = (text: string): string => {
   text = text.replace(/`(.*?)`/g, `<span class="md-inline-code">$1</span>`);
 
   // Reinsert the links
-  // links.forEach((link) => {
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
     text = text.replace(new RegExp(link.placeholder, "g"), link.html);
     console.dir({ placeholder: link.placeholder, html: link.html });
   }
-  // });
+
+  // Remove backslash escape for * and _ outside of code
+  text = text.replace(/\\([*_])/g, "$1");
 
   return text;
 };
@@ -201,6 +232,28 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
       continue; // Skip to next iteration to avoid re-processing the same line
 
       // Handle Paragraphs
+    }
+
+    // Handle Tables
+    else if (line.includes("|") && i + 1 < lines.length && /^\s*\|?\s*-+/.test(lines[i + 1])) {
+      const tableLines: string[] = [];
+
+      // Capture header and separator rows
+      tableLines.push(lines[i]);
+      tableLines.push(lines[i + 1]);
+      i += 2;
+
+      // Capture remaining rows
+      while (i < lines.length && lines[i].includes("|") && !lines[i].trim().startsWith("#") && lines[i].trim().length > 0) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+
+      // Convert table to HTML
+      const tableHtml = markdownTableToHTML(tableLines);
+      elements.push({ type: "table", content: tableHtml });
+
+      continue; // Skip to next iteration
     } else if (line.trim().length > 0) {
       const fixedLine = parseInlineStyles(line);
       // console.dir({ fixedLine });
@@ -221,7 +274,7 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
 
 /**
  * Converts a MarkdownElement object to an HTML string.
- * - Handles different element types including headers, code blocks, and lists.
+ * - Handles different element types including headers, code blocks, tables, and lists.
  *
  * @param {MarkdownElement} element MarkdownElement object to be converted.
  * @returns {string} HTML representation of the MarkdownElement.
@@ -238,6 +291,8 @@ export const elementToHtml = (element: MarkdownElement): string => {
       return `<h4>${element.content}</h4>\n`;
     case "h5":
       return `<h5>${element.content}</h5>\n`;
+    case "table":
+      return `${element.content}\n`;
     case "code":
       if (element.language && typeof element.language === "string") {
         const codeBlock = element.content;
@@ -313,6 +368,24 @@ export const elementToHtml = (element: MarkdownElement): string => {
             else {
               const highlightedCode = highlightCode(element.language as string, line);
               finalLines.push(highlightedCode); // Push highlighted code only if not in block comment
+
+              // Handle Tables
+              if (line.includes("|") && i + 1 < lines.length && /^\s*\|?\s*-+/.test(lines[i + 1])) {
+                const tableLines: string[] = [];
+
+                // Capture header and separator rows
+                tableLines.push(lines[i]);
+                tableLines.push(lines[i + 1]);
+                i += 2;
+
+                // Capture remaining rows
+                while (i < lines.length && lines[i].includes("|") && !lines[i].trim().startsWith("#") && lines[i].trim().length > 0) {
+                  tableLines.push(lines[i]);
+                  i++;
+                }
+
+                continue; // Skip to next iteration
+              }
             }
           }
         }

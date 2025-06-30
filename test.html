@@ -100,6 +100,36 @@
     background-color: #444;
   }
 
+  .md-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.95em;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .md-table th,
+  .md-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .md-table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .md-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .md-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
   /* Syntax highlighting */
   .md-keyword { color: #66d9ef; font-weight: bold; }
   .md-string { color: #a6e22e; }
@@ -113,902 +143,87 @@
 </style>
 </head>
 <body>
-  <h1>Test Markdown Article</h1>
-<p>Below is an example of Markdown that includes various headers, lists, and code blocks for each of the specified languages, including block comments with actual code inside. This will help you verify that the block comments are not being highlighted while ensuring that regular code outside the comments is highlighted correctly.</p>
-<h2>Lua Language Overview</h2>
-<p>Lua is a lightweight, high-performance scripting language known for its simple syntax and efficient execution. Like Python, Lua is dynamically typed, meaning variables do not need explicit type declarations, making both languages easy to write and flexible. Lua's syntax is clean and concise, with similarities to Python in its handling of loops, conditionals, and functions, though Lua often requires fewer lines of code for basic operations.</p>
-<p><b>DISCLAIMER</b>: The majority of this article was generated from ChatGPT prompts, and curated/edited by a human being.</p>
-<h2>What is Lua Used For</h2>
-<p>Lua is a versatile scripting language widely used in game development, particularly for 2D games with frameworks like <a href="https://love2d.org/">LÖVE2D</a>. Its lightweight design and easy integration with C and other programming languages make it ideal for embedding in applications, enabling developers to extend functionality and customize behavior. Additionally, Lua is popular in fields such as web development, where it powers server-side applications with frameworks like <a href="https://openresty.org/en/">OpenResty</a>, and in embedded systems for IoT devices due to its efficiency and small footprint. Its flexibility also allows it to be used in data processing, configuration scripting, and as a general-purpose language in various applications.</p>
-<h3>Why is Lua Used in Games</h3>
-<p>Lua is widely used in game development for several compelling reasons:</p>
-<ul>
-<li>1. <b>Performance</b>: Lua is designed to be lightweight and efficient, making it ideal for game engines where performance is crucial. Its execution speed is competitive, allowing for real-time scripting without significant overhead.</li><li>2. <b>Ease of Integration & Embedding</b>: Lua can be easily embedded in applications written in C, C++, or other languages, making it a popular choice for game engines. This allows developers to extend game functionality and customize behavior without recompiling the entire application.</li><li>3. <b>Flexible & Dynamic Typing</b>: Lua's dynamic typing allows for rapid prototyping and iterative development, which is essential in game development where design and mechanics often evolve during the process.</li><li>4. <b>Ease of Learning and Use</b>: Lua has a straightforward and readable syntax, making it accessible for developers, designers, allowing even non-programmers to use it effectively. This ease of use encourages collaboration between developers and other team members.</li><li>5. <b>Cross-Platform Compatibility</b>: Lua is highly portable and can run on various platforms, making it suitable for multi-platform game development. Developers can use the same Lua scripts across different devices with minimal adjustments.</li>
-</ul>
-<p>Lua's popularity in the industry is evidenced by its use in many well-known game engines and titles, enabling developers to create rich and engaging gaming experiences.</p>
-<h2>How to Install Lua</h2>
-<p>Visit <a href="https://www.lua.org/download.html">Lua's downloads page</a> to get started.</p>
-<h3>How to Install Lua on Windows</h3>
-<p>To install Lua on Windows, you will need to either compile an executable from <a href="https://www.lua.org/ftp/#source">the source code</a>, or download a <a href="https://sourceforge.net/projects/luabinaries/">pre-compiled SourceForge binary</a>.</p>
-<h3>How to Install Lua on macOS</h3>
-<p>You can get started with Lua on macOS using <a href="https://formulae.brew.sh/formula/lua">Homebrew</a>. Use the following <span class="md-inline-code">brew</span> command to install it:</p>
+  <h1>Test</h1>
+<p><b>The Proto-Germanic Masculine Nominative Singular Suffix *-az: A Reconstruction and its Reflexes</b></p>
+<p><img src="https://learnprogramming.us/cdn/angular-website-builder.gif" alt="AI Website Builder Screenshot of Web Page Builder" /></p>
+<h5> Decorators for Relations</h5>
 
             <div class="md-code-container">
               <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-bash">brew install lua</code></pre>
-            </div>
-          <h3>Building Lua from Source</h3>
-<p>On a UNIX-like machine, like macOS or Linux, you can compile it from source using <span class="md-inline-code">make</span> by doing something like this:</p>
+              <pre><code class="md-code-ts"><span class="md-keyword">import</span> { Entity, PrimaryGeneratedColumn, Column, ManyToOne } <span class="md-keyword">from</span> <span class="md-string">"typeorm"</span>;
+<span class="md-keyword">import</span> { User } <span class="md-keyword">from</span> <span class="md-string">"./User"</span>;
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-bash">curl -L -R -O https://www.lua.org/ftp/lua-5.4.7.tar.gz
-tar zxf lua-5.4.7.tar.gz
-cd lua-5.4.7
-make all test</code></pre>
-            </div>
-          <p>Check out <a href="https://www.lua.org/faq.html#1.1">Lua's FAQ page</a> for more details.</p>
-<h2>Lua Language Syntax and Conventions</h2>
-<p>Let's now learn the Lua programming language basics with a brief overview of Lua's style, syntax, and typical conventions.</p>
-<h3>Lua Naming Conventions</h3>
-<p>According to Lua's own <a href="https://www.lua.org/manual/2.4/node5.html#S410">Lexical Conventions</a>, the variables (called 'names' and 'identifiers') "can be any string of letters, digits, and underscores, not beginning with a digit", and 'camelCase' is the most typical convention used when declaring identifiers.</p>
-<h4>Naming Conventions for Lua Functions</h4>
-<p>As per their own documentation: "A function name consisting of multiple words may run together as in (<span class="md-inline-code">getmetatable</span>), as done in the standard Lua functions, though you may choose to use underscores (<span class="md-inline-code">print&#95;table</span>)", and that some may also use "CapitalCase" (like <span class="md-inline-code">MyFunction</span>).</p>
-<p>The naming conventions in Lua can feel a bit vague, as they often depend on the context and the specific practices of the Lua community. Here's a breakdown of the conventions mentioned in the documentation and some guidelines to help you decide:</p>
-<h5> Lua Conventions When Naming Variables</h5>
-<p>Local variables typically use <span class="md-inline-code">snake&#95;case</span> or simple lowercase names.</p>
-<ul>
-<li>Short and Descriptive: For local variables, short and lowercase names (like <span class="md-inline-code">color</span>, <span class="md-inline-code">count</span>) are commonly used. It's acceptable to use single-letter names (like <span class="md-inline-code">i</span>) for loop counters or short-lived variables.</li><li>Descriptive Globals: Global variables should have more descriptive names to avoid conflicts and improve readability. Avoid single-letter names for globals.</li>
-</ul>
-<h5> Lua Conventions When Naming Functions</h5>
-<ul>
-<li>Underscores: Functions can be named using underscores to separate words (e.g., <span class="md-inline-code">print&#95;table</span>).</li><li>CamelCase: Some developers use CamelCase (e.g., <span class="md-inline-code">GetValue</span>), but this is less common in Lua's standard library.</li><li>Consistency: Choose one style and stick to it within your project for consistency.</li>
-</ul>
-<h5> Other Lua Naming Conventions</h5>
-<ul>
-<li>Prefix with <span class="md-inline-code">is&#95;</span> or <span class="md-inline-code">has&#95;</span>: For Boolean values or functions that return a Boolean, it's helpful to prefix them (e.g., <span class="md-inline-code">is&#95;directory</span>, <span class="md-inline-code">has&#95;permission</span>). This improves readability by indicating the nature of the variable.</li><li>Screaming Snake Case Constants: Constants should be named in uppercase with underscores separating words (e.g., <span class="md-inline-code">MAX&#95;LINES</span>, <span class="md-inline-code">PI&#95;VALUE</span>).</li><li>Concatenated Words: Modules are typically named in lowercase with no separators (e.g., <span class="md-inline-code">luasql</span>, <span class="md-inline-code">socket</span>).</li>
-</ul>
-<p>The main thing to keep in mind is being consistent in how you name things throughout the entire Lua application.</p>
-<h3>Lua Indentation</h3>
-<p>According to <a href="https://www.lua.org/manual/5.1/manual.html#2.1">Lua's manual</a>, its syntax and naming conventions are very similar to Python's. Lua uses indentation, however, unlike Python, it does not enforce indentation as part of its syntax, and is completely optional, although it's highly recommended to follow their indentation convention.</p>
-<p>Here are some key points regarding indentation in Lua:</p>
-<ul>
-<li>Flexible Indentation: Lua does not require specific indentation levels to interpret blocks of code. You can use spaces or tabs, and you can indent code as much or as little as you like without causing syntax errors.</li><li>Convention Over Enforcement: While Lua doesn't enforce indentation, it's a common convention to use consistent indentation for readability. Developers often use indentation to visually delineate code blocks, making it easier to understand the structure of the code.</li><li>Brackets and Keywords: In Lua, code blocks are typically defined using keywords (like <span class="md-inline-code">do</span>, <span class="md-inline-code">then</span>, <span class="md-inline-code">end</span>) rather than indentation.</li>
-</ul>
-<p>For example:</p>
+<span class="md-decorator">@Entity</span>()
+<span class="md-keyword">export</span> <span class="md-keyword">class</span> <span class="md-class">Post</span> {
+ <span class="md-decorator"> @PrimaryGeneratedColumn</span>()
+  id: number;
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">if</span> condition <span class="md-keyword">then</span>
-    <span class="md-comment">-- This is indented for readability</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Condition met"</span><span class="md-special">)</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>In the above example, the <span class="md-inline-code">print</span> statement is indented to indicate that it belongs to the <span class="md-inline-code">if</span> block, but if you choose not to indent it, the code would still function correctly:</p>
+ <span class="md-decorator"> @Column</span>()
+  title: string;
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">if</span> condition <span class="md-keyword">then</span> <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Condition met"</span><span class="md-special">)</span> <span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>Even though you <i>could</i> do something like the above, and write one-liners, you should ideally stick to Lua's indentation conventions whenever possible.</p>
-<h2>Learn About the Lua Basics</h2>
-<p>Here a some of the core functions, features, and practices to keep in mind while writing Lua scripts.</p>
-<h3>Lua's Print Function</h3>
-<p>To print output to the console, use the <span class="md-inline-code">print</span> function:</p>
+ <span class="md-decorator"> @Column</span>()
+  content: string;
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Hello, Lua!"</span><span class="md-special">)</span></code></pre>
-            </div>
-          <h4>Lua Print Table Examples</h4>
-<p>To print a Lua table you'll have to use a <span class="md-inline-code">for</span> loop, like so:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua">mytable = <span class="md-special">{</span><span class="md-string">'hello'</span><span class="md-special">,</span> <span class="md-string">'world'</span><span class="md-special">}</span>
-<span class="md-keyword">for</span> k<span class="md-special">,</span> v <span class="md-keyword">in</span> <span class="md-decorator">pairs</span><span class="md-special">(</span>mytable<span class="md-special">)</span> <span class="md-keyword">do</span>
-  <span class="md-decorator">print</span><span class="md-special">(</span>k<span class="md-special">,</span> v<span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-comment">--[[  Prints
-1	hello
-2	world
---]]</span></code></pre>
-            </div>
-          <p>The above example loops over the key-value pairs of the Lua table, and prints each one respectively.</p>
-<h5> Custom Lua Print Table Function</h5>
-<p>Another clever solution is to create your own custom, <a href="https://stackoverflow.com/a/27028488/2251559">recursive function</a> to handle this for you, like in the following example:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">tableprint</span><span class="md-special">(</span>t<span class="md-special">)</span>
-    <span class="md-keyword">if</span> <span class="md-decorator">type</span><span class="md-special">(</span>t<span class="md-special">)</span> == <span class="md-string">'table'</span> <span class="md-keyword">then</span>
-        <span class="md-keyword">local</span> s = <span class="md-string">'{ '</span>
-        <span class="md-keyword">for</span> k<span class="md-special">,</span> v <span class="md-keyword">in</span> <span class="md-decorator">pairs</span><span class="md-special">(</span>t<span class="md-special">)</span> <span class="md-keyword">do</span>
-            <span class="md-keyword">if</span> <span class="md-decorator">type</span><span class="md-special">(</span>k<span class="md-special">)</span> ~= <span class="md-string">'number'</span> <span class="md-keyword">then</span>
-                k = <span class="md-string">'&quot;'</span> <span class="md-decorator">..</span> k <span class="md-decorator">..</span> <span class="md-string">'&quot;'</span>
-            <span class="md-keyword">end</span>
-            s = s <span class="md-decorator">..</span> <span class="md-string">'['</span> <span class="md-decorator">..</span> k <span class="md-decorator">..</span> <span class="md-string">'] = '</span> <span class="md-decorator">..</span> <span class="md-call-method">tableprint</span><span class="md-special">(</span>v<span class="md-special">)</span> <span class="md-decorator">..</span> <span class="md-string">', '</span>
-        <span class="md-keyword">end</span>
-        <span class="md-keyword">return</span> s <span class="md-decorator">..</span> <span class="md-string">'} '</span>
-    <span class="md-keyword">else</span>
-        <span class="md-keyword">return</span> <span class="md-decorator">tostring</span><span class="md-special">(</span>t<span class="md-special">)</span> <span class="md-comment">-- Use 't' instead of 'o'</span>
-    <span class="md-keyword">end</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>You can then just pass the table to the <span class="md-inline-code">tableprint&#40;&#41;</span> function call like so:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-call-method">tableprint</span><span class="md-special">(</span>mytable<span class="md-special">)</span>
-<span class="md-comment">-- Prints: `{ [1] = hello, [2] = world, }`</span></code></pre>
-            </div>
-          <h3>Lua Variables and Data Types</h3>
-<p>Lua has several basic data types, including:</p>
-<ul>
-<li>Nil: Represents a non-existent value.</li><li>Boolean: <span class="md-inline-code">true</span> or <span class="md-inline-code">false</span>.</li><li>Number: Represents numeric values. Lua uses double-precision floating-point numbers.</li><li>String: Textual data enclosed in double quotes <span class="md-inline-code">" "</span> or single quotes <span class="md-inline-code">' '</span>.</li><li>Table: The primary data structure in Lua, used for arrays, dictionaries, and more.</li>
-</ul>
-<p>To declare variables you can either declare it like you would a Python variable, or use the <span class="md-inline-code">local</span> keyword:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> number = <span class="md-number">42</span>
-<span class="md-keyword">local</span> name = <span class="md-string">"Lua"</span>
-is_active = <span class="md-keyword">true</span></code></pre>
-            </div>
-          <p><b>NOTE</b>: Make sure to use the <span class="md-inline-code">local</span> keyword to declare variables whenever possible. If you don't do this it could potentially pollute the namespace with global declarations, and cause memory issues among other problems.</p>
-<h3>Basic Lua Operators</h3>
-<p>-Arithmetic Operators: <span class="md-inline-code">+</span>, <span class="md-inline-code">-</span>, <span class="md-inline-code">&#42;</span>, <span class="md-inline-code">/</span>, <span class="md-inline-code">%</span> (modulo), <span class="md-inline-code">^</span> (exponentiation)</p>
-<p>-Comparison Operators: <span class="md-inline-code">==</span>, <span class="md-inline-code">~=</span> (not equal), <span class="md-inline-code">&lt;</span>, <span class="md-inline-code">&gt;</span>, <span class="md-inline-code">&lt;=</span>, <span class="md-inline-code">&gt;=</span></p>
-<p>-Logical Operators: <span class="md-inline-code">and</span>, <span class="md-inline-code">or</span>, <span class="md-inline-code">not</span></p>
-<h4>Lua Colon Operator</h4>
-<p>The Lua colon operator (<span class="md-inline-code">:</span>) is just syntactic sugar that simplifies method calls on tables, particularly when dealing with object-oriented programming concepts.</p>
-<p>Even though Lua doesn't really support OOP, it nonetheless acts as a highly flexible and extensible language that allows developers to implement OOP concepts using its existing features, such as tables and metatables.</p>
-<p>The following is an example of how to use it:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> Dog = <span class="md-special">{</span><span class="md-special">}</span>
-Dog.__index = Dog
-
-<span class="md-keyword">function</span> Dog:<span class="md-call-method">new</span><span class="md-special">(</span>name<span class="md-special">)</span>
-    <span class="md-keyword">local</span> instance = <span class="md-decorator">setmetatable</span><span class="md-special">(</span><span class="md-special">{</span><span class="md-special">}</span><span class="md-special">,</span> Dog<span class="md-special">)</span>
-    instance.name = name
-    <span class="md-keyword">return</span> instance
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">function</span> Dog:<span class="md-call-method">bark</span><span class="md-special">(</span><span class="md-special">)</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>self.name <span class="md-decorator">..</span> <span class="md-string">" says Woof!"</span><span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> myDog = Dog:<span class="md-call-method">new</span><span class="md-special">(</span><span class="md-string">"Buddy"</span><span class="md-special">)</span>
-myDog:<span class="md-call-method">bark</span><span class="md-special">(</span><span class="md-special">)</span> <span class="md-comment">-- Output: Buddy says Woof!</span></code></pre>
-            </div>
-          <p>In this example:</p>
-<ul>
-<li>The new method creates a new instance of the <span class="md-inline-code">Dog</span> table and sets its <span class="md-inline-code">name</span> property.</li><li>The <span class="md-inline-code">bark</span> method is defined with the colon operator, allowing it to access <span class="md-inline-code">self.name</span>.</li>
-</ul>
-<h3>Lua Dot Operator</h3>
-<p>When you define a function that doesn't require the self argument, you can use the dot operator (<span class="md-inline-code">.</span>) instead of the colon operator.</p>
-<p>Example:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> Dog.<span class="md-call-method">sit</span><span class="md-special">(</span><span class="md-special">)</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Sitting..."</span><span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-Dog.<span class="md-call-method">sit</span><span class="md-special">(</span><span class="md-special">)</span> <span class="md-comment">-- This is called without an instance</span></code></pre>
-            </div>
-          <h3>Lua 'if' Statement with Multiple Conditions</h3>
-<p>Here's an example of how an if-else statement works in Lua:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> x = <span class="md-number">10</span>
-<span class="md-keyword">if</span> x > <span class="md-number">5</span> <span class="md-keyword">then</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"x is greater than 5"</span><span class="md-special">)</span>
-<span class="md-keyword">elseif</span> x == <span class="md-number">5</span> <span class="md-keyword">then</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"x is equal to 5"</span><span class="md-special">)</span>
-<span class="md-keyword">else</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"x is less than 5"</span><span class="md-special">)</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h3>Lua For Loop</h3>
-<p>A typical <span class="md-inline-code">for</span> loop in Lua works like this:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-comment">-- Numeric for loop</span>
-<span class="md-keyword">for</span> i = <span class="md-number">1</span><span class="md-special">,</span> <span class="md-number">5</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>i<span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-comment">-- Generic for loop with iterators</span>
-<span class="md-keyword">local</span> animals = <span class="md-special">{</span><span class="md-string">"cat"</span><span class="md-special">,</span> <span class="md-string">"dog"</span><span class="md-special">,</span> <span class="md-string">"bird"</span><span class="md-special">}</span>
-<span class="md-keyword">for</span> index<span class="md-special">,</span> value <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>animals<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>index<span class="md-special">,</span> value<span class="md-special">)</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h4>Lua 'for break' Example</h4>
-<p>Additionally, you can break out of these loops using the <span class="md-inline-code">break</span> statement. Here's a breakdown of the various loop types and how to break from them:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">for</span> i = <span class="md-number">1</span><span class="md-special">,</span> <span class="md-number">10</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>i<span class="md-special">)</span>  <span class="md-comment">-- Prints numbers from 1 to 10</span>
-    <span class="md-keyword">if</span> i == <span class="md-number">5</span> <span class="md-keyword">then</span>
-        <span class="md-keyword">break</span>  <span class="md-comment">-- Breaks out of the loop when i equals 5</span>
-    <span class="md-keyword">end</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>Here's another example that breaks out of a <span class="md-inline-code">for</span> loop in Lua:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> fruits = <span class="md-special">{</span><span class="md-string">"apple"</span><span class="md-special">,</span> <span class="md-string">"banana"</span><span class="md-special">,</span> <span class="md-string">"cherry"</span><span class="md-special">}</span>
-
-<span class="md-keyword">for</span> index<span class="md-special">,</span> value <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>fruits<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>index<span class="md-special">,</span> value<span class="md-special">)</span>
-    <span class="md-keyword">if</span> value == <span class="md-string">"banana"</span> <span class="md-keyword">then</span>
-        <span class="md-keyword">break</span>  <span class="md-comment">-- Breaks out of the loop when the value is "banana"</span>
-    <span class="md-keyword">end</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h3>Lua While Loop</h3>
-<p>A while loop looks like this:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> count = <span class="md-number">1</span>
-<span class="md-keyword">while</span> count <= <span class="md-number">5</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>count<span class="md-special">)</span>
-    count = count + <span class="md-number">1</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h3>Lua 'repeat until' Example</h3>
-<p>The <span class="md-inline-code">repeat</span> loop in Lua is similar to a <span class="md-inline-code">while</span> loop, except you use it in conjunction with the <span class="md-inline-code">until</span> keyword to break out from it:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> count = <span class="md-number">1</span>
-<span class="md-keyword">repeat</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>count<span class="md-special">)</span>
-    count = count + <span class="md-number">1</span>
-<span class="md-keyword">until</span> count > <span class="md-number">5</span></code></pre>
-            </div>
-          <h3>Lua Functions</h3>
-<p>Define functions using the <span class="md-inline-code">function</span> keyword in Lua:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">greet</span><span class="md-special">(</span>name<span class="md-special">)</span>
-    <span class="md-keyword">return</span> <span class="md-string">"Hello, "</span> <span class="md-decorator">..</span> name
-<span class="md-keyword">end</span>
-
-<span class="md-decorator">print</span><span class="md-special">(</span><span class="md-call-method">greet</span><span class="md-special">(</span><span class="md-string">"Lua"</span><span class="md-special">)</span><span class="md-special">)</span></code></pre>
-            </div>
-          <h3>Lua Tables</h3>
-<p>Tables are the core data structure in Lua, used for arrays, dictionaries, and objects.</p>
-<p>Creating a Table:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> person = <span class="md-special">{</span>
-    name = <span class="md-string">"Alice"</span><span class="md-special">,</span>
-    age = <span class="md-number">30</span><span class="md-special">,</span>
-    is_employee = <span class="md-keyword">true</span>
-<span class="md-special">}</span></code></pre>
-            </div>
-          <p>Accessing Table Elements:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-decorator">print</span><span class="md-special">(</span>person.name<span class="md-special">)</span> <span class="md-comment">-- Output: Alice</span>
-<span class="md-decorator">print</span><span class="md-special">(</span>person<span class="md-special">[</span><span class="md-string">"age"</span><span class="md-special">]</span><span class="md-special">)</span> <span class="md-comment">-- Output: 30</span></code></pre>
-            </div>
-          <p>Using Tables as Arrays:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> colors = <span class="md-special">{</span><span class="md-string">"red"</span><span class="md-special">,</span> <span class="md-string">"green"</span><span class="md-special">,</span> <span class="md-string">"blue"</span><span class="md-special">}</span>
-<span class="md-decorator">print</span><span class="md-special">(</span>colors<span class="md-special">[</span><span class="md-number">1</span><span class="md-special">]</span><span class="md-special">)</span> <span class="md-comment">-- Output: red (Lua arrays are 1-indexed)</span></code></pre>
-            </div>
-          <h4>Iterate Over Lua Tables</h4>
-<p>The <span class="md-inline-code">ipairs&#40;&#41;</span> function in Lua is specifically designed for iterating over array-like tables (also known as sequences) that have integer keys starting from 1. It is a useful function for traversing tables where the elements are indexed by consecutive integers, making it straightforward to access each element in order. Here's a detailed overview of how <span class="md-inline-code">ipairs&#40;&#41;</span> works:</p>
-<p>Iterating Over Tables:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-comment">-- For array-like tables</span>
-<span class="md-keyword">for</span> index<span class="md-special">,</span> value <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>colors<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>index<span class="md-special">,</span> value<span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-comment">-- For dictionary-like tables</span>
-<span class="md-keyword">for</span> key<span class="md-special">,</span> value <span class="md-keyword">in</span> <span class="md-decorator">pairs</span><span class="md-special">(</span>person<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>key<span class="md-special">,</span> value<span class="md-special">)</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p><b>Sequential Access</b>: <span class="md-inline-code">ipairs&#40;&#41;</span> iterates over the elements of the table starting from index 1 and continues until it encounters the first <span class="md-inline-code">nil</span> value.</p>
-<p>This means that if the table has non-integer keys or if there are gaps in the integer sequence, <span class="md-inline-code">ipairs&#40;&#41;</span> will stop iterating at the first gap.</p>
-<h4>Lua Table of Tables Example</h4>
-<p>Lua does not have built-in array or list types as found in many other programming languages. Instead, Lua uses tables as its primary and versatile data structure, which can be used to represent arrays, dictionaries (key-value pairs), and even more complex data structures.</p>
-<p>Here's a simple example of a table containing other tables (also known as a nested table in Lua). This example represents a collection of <span class="md-inline-code">students</span>, where each student has their own details stored in a sub-table:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-comment">-- Table of students</span>
-<span class="md-keyword">local</span> students = <span class="md-special">{</span>
-    <span class="md-special">{</span> name = <span class="md-string">"Alice"</span><span class="md-special">,</span> age = <span class="md-number">20</span><span class="md-special">,</span> major = <span class="md-string">"Computer Science"</span> <span class="md-special">}</span><span class="md-special">,</span>
-    <span class="md-special">{</span> name = <span class="md-string">"Bob"</span><span class="md-special">,</span> age = <span class="md-number">22</span><span class="md-special">,</span> major = <span class="md-string">"Mathematics"</span> <span class="md-special">}</span><span class="md-special">,</span>
-    <span class="md-special">{</span> name = <span class="md-string">"Charlie"</span><span class="md-special">,</span> age = <span class="md-number">21</span><span class="md-special">,</span> major = <span class="md-string">"Physics"</span> <span class="md-special">}</span>
-<span class="md-special">}</span>
-
-<span class="md-comment">-- Iterate over the table of students and print their details</span>
-<span class="md-keyword">for</span> _<span class="md-special">,</span> student <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>students<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Name: "</span> <span class="md-decorator">..</span> student.name<span class="md-special">)</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Age: "</span> <span class="md-decorator">..</span> student.age<span class="md-special">)</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Major: "</span> <span class="md-decorator">..</span> student.major<span class="md-special">)</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-special">)</span>  <span class="md-comment">-- Print a blank line for better readability</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>Notice how it uses the dot notation and <span class="md-inline-code">ipairs&#40;&#41;</span> function to loop over and print the nested values.</p>
-<h4>Lua Remove From Table Examples</h4>
-<p>Removing an item from a Lua table can be done in several ways, depending on whether you're dealing with an array-like table (sequential indices) or a dictionary-like table (key-value pairs).</p>
-<p>When dealing with an array (where indices are numeric), you can remove an item by setting its index to <span class="md-inline-code">nil</span>:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> fruits = <span class="md-special">{</span><span class="md-string">"apple"</span><span class="md-special">,</span> <span class="md-string">"banana"</span><span class="md-special">,</span> <span class="md-string">"cherry"</span><span class="md-special">,</span> <span class="md-string">"date"</span><span class="md-special">}</span>
-
-<span class="md-comment">-- Remove "banana"</span>
-fruits<span class="md-special">[</span><span class="md-number">2</span><span class="md-special">]</span> = <span class="md-keyword">nil</span>
-
-<span class="md-comment">-- The table now has a nil value at index 2</span>
-<span class="md-keyword">for</span> i<span class="md-special">,</span> fruit <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>fruits<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>i<span class="md-special">,</span> fruit<span class="md-special">)</span> <span class="md-comment">-- This will skip the nil value</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p><b>NOTE</b>: Setting an item to <span class="md-inline-code">nil</span> in a Lua table can affect its length. Specifically, functions like <span class="md-inline-code">#</span> (the length operator) do not count <span class="md-inline-code">nil</span> values. As a result, if there are any nil entries, <span class="md-inline-code">ipairs</span> will skip over them, and you may not iterate over the entire table as expected. Consider using table.remove() to maintain the integrity of the array indices.</p>
-<h5> Using 'table.remove' in Lua</h5>
-<p>The <span class="md-inline-code">table.remove</span> function is useful for removing an element from an array-like table by shifting the subsequent elements down:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> fruits = <span class="md-special">{</span><span class="md-string">"apple"</span><span class="md-special">,</span> <span class="md-string">"banana"</span><span class="md-special">,</span> <span class="md-string">"cherry"</span><span class="md-special">,</span> <span class="md-string">"date"</span><span class="md-special">}</span>
-
-<span class="md-comment">-- Remove the second element ("banana")</span>
-<span class="md-decorator">table</span>.<span class="md-call-method">remove</span><span class="md-special">(</span>fruits<span class="md-special">,</span> <span class="md-number">2</span><span class="md-special">)</span>
-
-<span class="md-comment">-- The table now contains "apple", "cherry", and "date"</span>
-<span class="md-keyword">for</span> i<span class="md-special">,</span> fruit <span class="md-keyword">in</span> <span class="md-decorator">ipairs</span><span class="md-special">(</span>fruits<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>i<span class="md-special">,</span> fruit<span class="md-special">)</span> <span class="md-comment">-- Outputs: 1 apple, 2 cherry, 3 date</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h5> Removing a Key-Value Pair from a Lua Table</h5>
-<p>To remove a key-value pair from a table that acts like a dictionary, simply set a key's value to <span class="md-inline-code">nil</span>:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> person = <span class="md-special">{</span>
-    name = <span class="md-string">"Alice"</span><span class="md-special">,</span>
-    age = <span class="md-number">30</span><span class="md-special">,</span>
-    job = <span class="md-string">"Engineer"</span>
-<span class="md-special">}</span>
-
-<span class="md-comment">-- Remove the "age" key</span>
-person.age = <span class="md-keyword">nil</span>
-
-<span class="md-comment">-- The table now has the key "age" removed</span>
-<span class="md-keyword">for</span> key<span class="md-special">,</span> value <span class="md-keyword">in</span> <span class="md-decorator">pairs</span><span class="md-special">(</span>person<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>key<span class="md-special">,</span> value<span class="md-special">)</span> <span class="md-comment">-- Outputs: name Alice, job Engineer</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>In Lua, you can remove items from tables in various ways, including:</p>
-<ul>
-<li>Setting an index to <span class="md-inline-code">nil</span> for array-like tables.</li><li>Using <span class="md-inline-code">table.remove&#40;&#41;</span> to shift elements in an array.</li><li>Setting a key to <span class="md-inline-code">nil</span> to remove key-value pairs in dictionary-like tables.</li><li>Filtering through a loop to create a new table with only the desired items.</li>
-</ul>
-<h3>Lua Type Checking</h3>
-<p>To check the type of a variable, use the <span class="md-inline-code">type</span> function:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-decorator">print</span><span class="md-special">(</span><span class="md-decorator">type</span><span class="md-special">(</span>number<span class="md-special">)</span><span class="md-special">)</span> <span class="md-comment">-- Output: number</span>
-<span class="md-decorator">print</span><span class="md-special">(</span><span class="md-decorator">type</span><span class="md-special">(</span>name<span class="md-special">)</span><span class="md-special">)</span> <span class="md-comment">-- Output: string</span>
-<span class="md-decorator">print</span><span class="md-special">(</span><span class="md-decorator">type</span><span class="md-special">(</span>person<span class="md-special">)</span><span class="md-special">)</span> <span class="md-comment">-- Output: table</span>
-<span class="md-decorator">print</span><span class="md-special">(</span><span class="md-decorator">type</span><span class="md-special">(</span>is_active<span class="md-special">)</span><span class="md-special">)</span> <span class="md-comment">-- Output: boolean</span></code></pre>
-            </div>
-          <h3>Lua Metatables and Metamethods</h3>
-<p>Metatables allow you to define behavior for operations on tables (e.g., addition, indexing). For example:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> mt = <span class="md-special">{</span>
-    __add = <span class="md-keyword">function</span><span class="md-special">(</span>t1<span class="md-special">,</span> t2<span class="md-special">)</span>
-        <span class="md-keyword">return</span> t1.value + t2.value
-    <span class="md-keyword">end</span>
-<span class="md-special">}</span>
-
-<span class="md-keyword">local</span> a = <span class="md-special">{</span>value = <span class="md-number">10</span><span class="md-special">}</span>
-<span class="md-keyword">local</span> b = <span class="md-special">{</span>value = <span class="md-number">20</span><span class="md-special">}</span>
-
-<span class="md-decorator">setmetatable</span><span class="md-special">(</span>a<span class="md-special">,</span> mt<span class="md-special">)</span>
-<span class="md-decorator">setmetatable</span><span class="md-special">(</span>b<span class="md-special">,</span> mt<span class="md-special">)</span>
-
-<span class="md-decorator">print</span><span class="md-special">(</span>a + b<span class="md-special">)</span> <span class="md-comment">-- Output: 30</span></code></pre>
-            </div>
-          <h3>Lua ipairs vs pairs</h3>
-<p>Here's how <span class="md-inline-code">ipairs&#40;&#41;</span> compares with the <span class="md-inline-code">pairs&#40;&#41;</span> function:</p>
-<ul>
-<li><span class="md-inline-code">ipairs&#40;&#41;</span> is used for ordered, sequential arrays (integer keys starting from <span class="md-inline-code">1</span>), and returns two values on each iteration (index and key).</li><li><span class="md-inline-code">pairs&#40;&#41;</span> can be used for any table and iterates over all key-value pairs, regardless of their type, but does not guarantee order.</li>
-</ul>
-<h3>String Manipulation in Lua</h3>
-<p>Lua has built-in support for string manipulation, but its capabilities for regular expressions (regex) are somewhat limited compared to languages like Python or JavaScript. Here's an overview of how Lua handles string manipulation and pattern matching:</p>
-<p>Let's now go over how Lua handles string manipulation and pattern matching.</p>
-<h4>Built-In Lua Functions for String Manipulation</h4>
-<p>Lua provides a set of built-in functions for string manipulation, such as the <span class="md-inline-code">..</span> operator:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> str1 = <span class="md-string">"Hello"</span>
-<span class="md-keyword">local</span> str2 = <span class="md-string">"World"</span>
-<span class="md-keyword">local</span> result = str1 <span class="md-decorator">..</span> <span class="md-string">" "</span> <span class="md-decorator">..</span> str2 <span class="md-comment">-- "Hello World"</span></code></pre>
-            </div>
-          <p>Use the <span class="md-inline-code">#</span> operator to get the length of a string.</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> length = #result
-<span class="md-comment">-- length should now equal `11`</span></code></pre>
-            </div>
-          <p>Use the <span class="md-inline-code">string.sub</span> function to extract substrings in Lua:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> substring = <span class="md-decorator">string</span>.<span class="md-call-method">sub</span><span class="md-special">(</span>result<span class="md-special">,</span> <span class="md-number">1</span><span class="md-special">,</span> <span class="md-number">5</span><span class="md-special">)</span>  <span class="md-comment">-- "Hello"</span></code></pre>
-            </div>
-          <p>Lua provides the <span class="md-inline-code">string.gsub</span> function for global substitution, and <span class="md-inline-code">string.find</span> for finding patterns:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> new_str = <span class="md-decorator">string</span>.<span class="md-call-method">gsub</span><span class="md-special">(</span>result<span class="md-special">,</span> <span class="md-string">"World"</span><span class="md-special">,</span> <span class="md-string">"Lua"</span><span class="md-special">)</span>  <span class="md-comment">-- "Hello Lua"</span></code></pre>
-            </div>
-          <h4>RegEx Pattern Matching in Lua</h4>
-<p>Lua has a unique pattern matching system that is simpler than full regex, yet powerful for many use cases, and supports basic pattern syntax, such as:</p>
-<ul>
-<li><span class="md-inline-code">%a</span>: Matches any letter.</li><li><span class="md-inline-code">%d</span>: Matches any digit.</li><li><span class="md-inline-code">.</span>: Matches any character except a newline.</li><li><span class="md-inline-code">%s</span>: Matches any space character.</li><li><span class="md-inline-code">&#42;</span>, <span class="md-inline-code">+</span>, <span class="md-inline-code">-</span>, and <span class="md-inline-code">?</span> can be used for repetition.</li>
-</ul>
-<p>Let's go over some of the pattern functions in Lua you can use.</p>
-<p>The <span class="md-inline-code">string.match</span> function returns the first match of a pattern in a string:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> match = <span class="md-decorator">string</span>.<span class="md-call-method">match</span><span class="md-special">(</span><span class="md-string">"Hello Lua"</span><span class="md-special">,</span> <span class="md-string">"%a+"</span><span class="md-special">)</span>
-<span class="md-comment">-- "Hello"</span></code></pre>
-            </div>
-          <p>The <span class="md-inline-code">string.gmatch</span>: function returns an iterator for all matches of a pattern in a string:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">for</span> word <span class="md-keyword">in</span> <span class="md-decorator">string</span>.<span class="md-call-method">gmatch</span><span class="md-special">(</span><span class="md-string">"Hello Lua"</span><span class="md-special">,</span> <span class="md-string">"%a+"</span><span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>word<span class="md-special">)</span>
-    <span class="md-comment">-- Prints "Hello" and "Lua"</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>The best way to search a string is to use <span class="md-inline-code">string.find</span> and look for a pattern which will return the starting and ending indices:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> start_pos<span class="md-special">,</span> end_pos = <span class="md-decorator">string</span>.<span class="md-call-method">find</span><span class="md-special">(</span><span class="md-string">"Hello Lua"</span><span class="md-special">,</span> <span class="md-string">"Lua"</span><span class="md-special">)</span>
-<span class="md-comment">-- 7, 9</span></code></pre>
-            </div>
-          <p>Lua's pattern matching is not as powerful or feature-rich as full regular expressions. It lacks certain constructs such as lookaheads, lookbehinds, and more complex grouping capabilities.</p>
-<p>For users needing more advanced regex capabilities, there are third-party libraries available, such as <a href="https://rrthomas.github.io/lrexlib/">Lrexlib</a> (A binding to the PCRE), which allows Lua to use more advanced regex features.</p>
-<p>Lrexlib can be installed with the LuaRocks package manager like so:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-bash">luarocks install lrexlib-FLAVOUR</code></pre>
-            </div>
-          <p>Replace <span class="md-inline-code">FLAVOUR</span> with <span class="md-inline-code">PCRE</span>, <span class="md-inline-code">PCRE2</span>, <span class="md-inline-code">POSIX</span>, <span class="md-inline-code">oniguruma</span>, <span class="md-inline-code">TRE</span>, or <span class="md-inline-code">GNU</span>.</p>
-<h2>Error Handling in Lua</h2>
-<p>Error handling in Lua is primarily managed through a combination of the <span class="md-inline-code">pcall&#40;&#41;</span> (protected call) and <span class="md-inline-code">xpcall&#40;&#41;</span> functions, along with the use of error handling mechanisms.</p>
-<p>The <span class="md-inline-code">pcall&#40;&#41;</span> function allows you to call a function in protected mode. If the function executes successfully, it returns <span class="md-inline-code">true</span> followed by the function's return values. If it throws an error, it returns <span class="md-inline-code">false</span> followed by the error message:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">riskyFunction</span><span class="md-special">(</span><span class="md-special">)</span>
-    <span class="md-decorator">error</span><span class="md-special">(</span><span class="md-string">"Something went wrong!"</span><span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> status<span class="md-special">,</span> err = <span class="md-decorator">pcall</span><span class="md-special">(</span>riskyFunction<span class="md-special">)</span>
-
-<span class="md-keyword">if</span> <span class="md-keyword">not</span> status <span class="md-keyword">then</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Error:"</span><span class="md-special">,</span> err<span class="md-special">)</span> <span class="md-comment">-- Output: Error: Something went wrong!</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p>Similar to <span class="md-inline-code">pcall&#40;&#41;</span>, there is also a <span class="md-inline-code">xpcall&#40;&#41;</span> function that allows you to specify an error handler function that will be called in case of an error. This is useful for custom error handling logic:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">errorHandler</span><span class="md-special">(</span>err<span class="md-special">)</span>
-    <span class="md-keyword">return</span> <span class="md-string">"Handled error: "</span> <span class="md-decorator">..</span> err
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> status<span class="md-special">,</span> err = <span class="md-decorator">xpcall</span><span class="md-special">(</span>riskyFunction<span class="md-special">,</span> errorHandler<span class="md-special">)</span>
-
-<span class="md-keyword">if</span> <span class="md-keyword">not</span> status <span class="md-keyword">then</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>err<span class="md-special">)</span> <span class="md-comment">-- Output: Handled error: Something went wrong!</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h3>Throwing Errors in Lua</h3>
-<p>You can throw errors using the <span class="md-inline-code">error&#40;&#41;</span> function, which can be used to signal that something went wrong in your code:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">divide</span><span class="md-special">(</span>a<span class="md-special">,</span> b<span class="md-special">)</span>
-  <span class="md-keyword">if</span> b == <span class="md-number">0</span> <span class="md-keyword">then</span>
-      <span class="md-decorator">error</span><span class="md-special">(</span><span class="md-string">"Division by zero"</span><span class="md-special">)</span>
-  <span class="md-keyword">end</span>
-  <span class="md-keyword">return</span> a / b
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <p><b>Best Practices for Error Handling</b></p>
-<ul>
-<li>Use <span class="md-inline-code">pcall&#40;&#41;</span> for Safe Function Calls: Always wrap potentially error-throwing function calls in <span class="md-inline-code">pcall&#40;&#41;</span> or <span class="md-inline-code">xpcall&#40;&#41;</span> to gracefully handle errors without crashing the program.</li><li>Custom Error Handlers: If you have specific error handling logic, use <span class="md-inline-code">xpcall&#40;&#41;</span> to define how to manage different types of errors more effectively.</li><li>Return Error Information: When defining functions, consider returning error information (like <span class="md-inline-code">nil</span> and an error message) rather than using <span class="md-inline-code">error&#40;&#41;</span> to allow the caller to decide how to handle the situation.</li><li>Keep Error Messages Clear: Ensure that error messages are informative to help with debugging. Include relevant context about what caused the error.</li><li>Graceful Degradation: Implement fallback logic or default values to ensure that your application can continue running even if certain operations fail.</li>
-</ul>
-<p>Here's an example of a function returning an error message (similar to how Go safely handles errors):</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">safeDivide</span><span class="md-special">(</span>a<span class="md-special">,</span> b<span class="md-special">)</span>
-    <span class="md-keyword">if</span> b == <span class="md-number">0</span> <span class="md-keyword">then</span>
-        <span class="md-keyword">return</span> <span class="md-keyword">nil</span><span class="md-special">,</span> <span class="md-string">"Division by zero"</span>
-    <span class="md-keyword">end</span>
-    <span class="md-keyword">return</span> a / b
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> result<span class="md-special">,</span> err = <span class="md-call-method">safeDivide</span><span class="md-special">(</span><span class="md-number">10</span><span class="md-special">,</span> <span class="md-number">0</span><span class="md-special">)</span>
-<span class="md-keyword">if</span> <span class="md-keyword">not</span> result <span class="md-keyword">then</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Error:"</span><span class="md-special">,</span> err<span class="md-special">)</span> <span class="md-comment">-- Output: Error: Division by zero</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h3>Debugging Lua Errors</h3>
-<p>Use <span class="md-inline-code">debug.traceback&#40;&#41;</span> in conjunction with error handling to get a stack trace when an error occurs, which can help identify where the error originated:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">function</span> <span class="md-call-method">riskyFunction</span><span class="md-special">(</span><span class="md-special">)</span>
-  <span class="md-decorator">error</span><span class="md-special">(</span><span class="md-string">"Something went wrong!"</span><span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> <span class="md-keyword">function</span> <span class="md-call-method">callWithTrace</span><span class="md-special">(</span><span class="md-special">)</span>
-  <span class="md-keyword">return</span> <span class="md-call-method">riskyFunction</span><span class="md-special">(</span><span class="md-special">)</span>
-<span class="md-keyword">end</span>
-
-<span class="md-keyword">local</span> status<span class="md-special">,</span> err = <span class="md-decorator">xpcall</span><span class="md-special">(</span>callWithTrace<span class="md-special">,</span> <span class="md-keyword">function</span><span class="md-special">(</span>err<span class="md-special">)</span>
-  <span class="md-keyword">return</span> <span class="md-decorator">debug</span>.<span class="md-call-method">traceback</span><span class="md-special">(</span>err<span class="md-special">)</span>
-<span class="md-keyword">end</span><span class="md-special">)</span>
-
-<span class="md-keyword">if</span> <span class="md-keyword">not</span> status <span class="md-keyword">then</span>
-  <span class="md-decorator">print</span><span class="md-special">(</span>err<span class="md-special">)</span>  <span class="md-comment">-- Outputs the error with a stack trace</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h2>Lua vs Python</h2>
-<p>One significant advantage Lua holds over Python is its speed—Lua is designed to be fast and lightweight, often outperforming Python in execution time, especially for embedded systems and game development. Lua's close integration with C allows for seamless C bindings, giving it an edge in performance-critical applications where direct interaction with system-level functions is necessary. While Python excels in a broad range of applications with an extensive standard library, Lua shines when high performance, simplicity, and small footprint are priorities.</p>
-<h3>Lua Tables vs Python Dictionaries</h3>
-<p>Lua tables and Python dictionaries are both versatile data structures used for storing collections of data, but they have some key differences in design, functionality, and usage. Here's a comparison of the two:</p>
-<ul>
-<li>A table in Lua is a general-purpose data structure that can be used as an array, a dictionary (key-value pairs), or even an object (using metatables).</li><li>It can hold values of any type, including other tables, making it extremely flexible.</li>
-</ul>
-<p>In Lua, keys can be any Lua type, including numbers, strings, and even other tables. However, tables can only use strings and numbers as keys in practice.</p>
-<h4>Python Dictionaries</h4>
-<p>A dictionary in Python is specifically designed to store key-value pairs. A Python dictionary also allows keys of various immutable types (like strings, numbers, or tuples) and values of any type, but it is primarily focused on the mapping of keys to values.</p>
-<h3>Python vs Lua Array Behavior</h3>
-<p><b>Lua Table</b>:</p>
-<ul>
-<li>Tables can function as arrays, allowing for numerical indexing starting from 1 (Lua uses 1-based indexing).</li><li>You can use integer keys for array-like access, allowing for a mix of array and dictionary behavior.</li>
-</ul>
-<p><b>Python Dictionary</b>:</p>
-<ul>
-<li>Dictionaries do not support numerical indexing in the same way arrays or lists do. They are strictly key-value pairs and do not maintain order until Python 3.7, when insertion order was guaranteed.</li>
-</ul>
-<h3>Lua For Loop</h3>
-<p>-Lua Table:</p>
-<ul>
-<li>You typically use the <span class="md-inline-code">pairs&#40;&#41;</span> function to iterate over key-value pairs and <span class="md-inline-code">ipairs&#40;&#41;</span> for iterating over array-like sequences (1-based).</li>
-</ul>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-keyword">local</span> myTable = <span class="md-special">{</span>a = <span class="md-number">1</span><span class="md-special">,</span> b = <span class="md-number">2</span><span class="md-special">}</span>
-<span class="md-keyword">for</span> k<span class="md-special">,</span> v <span class="md-keyword">in</span> <span class="md-decorator">pairs</span><span class="md-special">(</span>myTable<span class="md-special">)</span> <span class="md-keyword">do</span>
-    <span class="md-decorator">print</span><span class="md-special">(</span>k<span class="md-special">,</span> v<span class="md-special">)</span>
-<span class="md-keyword">end</span></code></pre>
-            </div>
-          <h4>Loop Dict in Python</h4>
-<p>You can iterate over keys, values, or items directly using a for loop.</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-python"></span>my_dict = {<span class="md-string">'a'</span>: 1, <span class="md-string">'b'</span>: 2}
-</span><span class="md-keyword">for</span> k, v <span class="md-keyword">in</span> my_dict.<span class="md-special">items</span>():
-</span>    <span class="md-special">print</span>(k, v)</code></pre>
-            </div>
-          <h3>Lua Performance vs Python</h3>
-<p>Both data structures are implemented to provide efficient lookups, insertions, and deletions, but performance can vary depending on specific use cases and implementation.</p>
-<p><b>Metatables (Lua Specific)</b>:</p>
-<ul>
-<li>Lua Table: Lua allows you to define metatables, enabling you to change the behavior of tables, such as how they handle indexing or arithmetic operations.</li><li>Python Dictionary: Python dictionaries do not have a built-in mechanism for metaprogramming like Lua's metatables, although you can subclass the <span class="md-inline-code">dict</span> class to customize behavior.</li>
-</ul>
-<p>In summary, while Lua tables and Python dictionaries serve similar roles in storing collections of data, they differ in structure, behavior, and capabilities. Lua tables are more flexible, supporting multiple data types and serving multiple roles (arrays, dictionaries, objects), while Python dictionaries are specifically focused on key-value pair storage with immutable keys. Each has its strengths, depending on the programming context and use case.</p>
-<h2>Lua Embedded in Multiple Projects</h2>
-<p>Lua is widely used as an embedded scripting language in various applications and platforms beyond Neovim and Roblox. Here are some notable examples, whiuch <a href="https://neovim.io/doc/user/lua.html">neovim</a> being .</p>
-<p>1. <b>Game Development</b>:</p>
-<ul>
-<li>Roblox: <a href="https://create.roblox.com/docs/tutorials/scripting/basic-scripting/intro-to-scripting">Roblox</a> uses Lua for scripting games within its platform, allowing users to create interactive experiences and game logic.</li><li>Corona SDK: This cross-platform <a href="https://coronalabs.com/">framework</a> for mobile app development uses Lua for scripting games and apps, enabling developers to write code once and deploy on multiple platforms.</li><li>Love2D: <a href="https://love2d.org/wiki/Getting_Started">Love2D</a> is a popular 2D game engine that uses Lua for game development, providing a simple and efficient framework for creating games.</li>
-</ul>
-<p>2. <b>Embedded Systems</b>:</p>
-<ul>
-<li>OpenResty: A web platform that embeds Lua into Nginx, allowing developers to write web applications with Lua for handling requests and responses efficiently.</li><li>ESP8266/ESP32: These popular microcontrollers can run Lua scripts using the NodeMCU firmware, making it easier to develop Internet of Things (IoT) applications.</li>
-</ul>
-<p>3. <b>Software Applications</b>:</p>
-<ul>
-<li>Wireshark: The network protocol analyzer uses Lua for writing custom dissectors and plugins, allowing users to extend its functionality.</li><li>Adobe Lightroom: Uses Lua for scripting to automate tasks and customize workflows within the application.</li>
-</ul>
-<p>4. <b>Simulation and Modeling</b>:</p>
-<ul>
-<li>Dwarf Fortress: Lua is used for scripting mods and extensions in this popular simulation game, allowing users to create custom features and behaviors.</li><li>Factorio: While the primary scripting language is Lua, players can write scripts to enhance gameplay, create mods, and automate processes.</li>
-</ul>
-<p>5. <b>Scripting in Various Applications</b>:</p>
-<ul>
-<li>World of Warcraft: Lua is used for creating add-ons, allowing players to customize their interface and gameplay experience.</li><li>The Sims Series: Some versions allow scripting with Lua for creating custom game mechanics and interactions.</li>
-</ul>
-<p>6. <b>Networking and Server Management</b>:</p>
-<ul>
-<li>OpenWrt: This Linux distribution for embedded devices allows scripting with Lua for managing router configurations and automating tasks.</li><li>Lighttpd: This web server can be extended with Lua to handle custom request processing and dynamic content generation.</li>
-</ul>
-<p>7. <b>IDEs</b>:</p>
-<ul>
-<li>Neovim: The popular IDE <span class="md-inline-code">nvim</span> also embeds Lua to provide a powerful and flexible scripting interface for configuration, plugins, and extensions.</li>
-</ul>
-<p>Lua's versatility and lightweight nature make it an excellent choice for embedding in a variety of applications, particularly in gaming, web development, embedded systems, and software applications. Its ability to provide a powerful yet easy-to-use scripting environment has contributed to its popularity across different domains.</p>
-<h2>Lua Drawbacks and Limitations</h2>
-<p>While Lua is a powerful and efficient language, especially for embedded systems and game development, it does have some notable limitations compared to languages like Python or Node.js, particularly in terms of libraries and built-in features. Here are some key areas where Lua may fall short:</p>
-<p>1. <b>Scientific Computing and Data Analysis</b>:</p>
-<ul>
-<li>Missing Libraries: Lua lacks libraries equivalent to Python's NumPy and Pandas, which provide extensive capabilities for numerical computations and data manipulation.</li><li>While there are some libraries for numerical operations in Lua (like Torch, primarily used for machine learning), they do not match the breadth and depth of Python's offerings.</li>
-</ul>
-<p>2. <b>Machine Learning and AI</b>:</p>
-<ul>
-<li>Limited ML Libraries: While there are some machine learning libraries in Lua, such as <a href="http://torch.ch/">Torch</a> (now transitioned to PyTorch in Python), it lacks the comprehensive ecosystem found in Python with libraries like <a href="https://www.tensorflow.org/">TensorFlow</a>, <a href="https://keras.io/">Keras</a>, and Scikit-learn.</li>
-</ul>
-<p>3. <b>Web Development Frameworks</b>:</p>
-<ul>
-<li>Fewer Options: Lua has web frameworks like <a href="https://leafo.net/lapis/">Lapis</a> and <a href="https://github.com/sailorproject">Sailor</a>, but these are less popular and feature-rich compared to Python's <a href="https://www.djangoproject.com/">Django</a> and <a href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a> or Node.js frameworks like <a href="https://expressjs.com/">Express</a>. The community support and ecosystem around Lua for web development are not as robust.</li>
-</ul>
-<p>4. <b>Data Science and Visualization</b>:</p>
-<ul>
-<li>Visualization Libraries: Lua has very few libraries for data visualization, making it less suitable for data science projects compared to Python's <a href="https://matplotlib.org/">Matplotlib</a>, <a href="https://seaborn.pydata.org/">Seaborn</a>, or Plotly.</li>
-</ul>
-<p>5. <b>Concurrency and Asynchronous Programming</b>:</p>
-<ul>
-<li>Limited Support: While Lua provides coroutines for cooperative multitasking, it lacks built-in support for asynchronous programming like Node.js's event-driven model, which is particularly useful for I/O-bound tasks.</li>
-</ul>
-<p>6. <b>Standard Library Features</b>:</p>
-<ul>
-<li>Less Comprehensive Standard Library: Lua's standard library is more minimalistic compared to Python's extensive standard library, which includes modules for everything from file I/O to regular expressions and internet protocols.</li>
-</ul>
-<p>7. <b>Object-Oriented Programming (OOP)</b>:</p>
-<ul>
-<li>No Built-in OOP Support: Lua does support OOP through its metatables, but it doesn't have built-in OOP features like Python's classes and inheritance. This can make designing complex systems more cumbersome.</li>
-</ul>
-<p>8. <b>Community and Ecosystem</b>:</p>
-<ul>
-<li>Smaller Community: Lua has a smaller community compared to Python and Node.js, resulting in fewer available libraries, resources, and tutorials. This can be a significant barrier for new developers looking for help.</li>
-</ul>
-<p>While Lua is highly efficient and excellent for specific use cases (especially in game development and embedded systems), it lacks many of the libraries and features that make Python and Node.js appealing for scientific computing, machine learning, web development, and general-purpose programming. If your project requires extensive libraries for data manipulation, machine learning, or web frameworks, Python or Node.js may be better suited for your needs.</p>
-<h2>Conclusion</h2>
-<p>As we've explored in this article, Lua offers a unique blend of simplicity, flexibility, and performance, making it an excellent choice for applications ranging from game development to embedded systems. Its lightweight nature and ease of embedding within other applications allow developers to extend functionalities and add scripting capabilities without significant overhead. Lua's syntactical simplicity contributes to a short learning curve, further aiding its adoption across various sectors.</p>
-<p>However, while Lua excels in performance and integration, it does have limitations, especially when compared to languages like Python, in terms of available libraries and community support for certain applications like web development and data science. These limitations underscore the importance of choosing the right tool for the job based on the specific needs and constraints of your project.</p>
-<p>In conclusion, Lua is not just a powerful scripting language but also a versatile tool in a developer's arsenal, well-suited for those who need a fast, efficient, and easily integrable language with a gentle learning curve. Whether you're developing a mobile game, scripting for a high-performance web server, or creating custom features in a software application, Lua's capabilities should be strongly considered alongside more popular languages like Python and JavaScript.</p>
-<h2>Example Markdown</h2>
-<ul>
-<li>List 1</li><li>List 2</li>
-</ul>
-<p>1. Numbered item</p>
-<p>2. Another numbered item</p>
-<p>Here's a <a href="example.com">link</a> to another site.</p>
-<p>Here's an example codeblock of a <span class="md-inline-code">doesnotexist</span> (<span class="md-inline-code">&#96;&#96;&#96;doesnotexist</span>) language that does not exist:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-doesnotexist">var madeUp: num = 1234; // this lang does not exist</code></pre>
-            </div>
-          <h2>HTML Test</h2>
-<p>Here's some example HTML code in an <span class="md-inline-code">&#x60;&#x60;&#x60;html</span> block:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-html">&lt;!DOCTYPE html&gt;
-<span class="md-keyword">&lt;h1 </span><span class="md-special">class=&quot;my-heading&quot;</span> style=&quot;color:red&quot;&gt;Heading<span class="md-keyword">&lt;/h1&gt;</span>
-<span class="md-keyword">&lt;a </span>href=<span class="md-string">&quot;https:\\example.com&quot;</span>&gt;Link<span class="md-keyword">&lt;/a&gt;</span>
-<span class="md-keyword">&lt;span </span><span class="md-special">class=&quot;hello&quot;</span>&gt;Hello<span class="md-keyword">&lt;/span&gt;</span>
-<span class="md-keyword">&lt;p&gt;</span>Hello<span class="md-keyword">&lt;/p&gt;</span>
-<span class="md-comment"><!-- this is a comment
- with multiple lines
- --></span></code></pre>
-            </div>
-          <p>Here's a simple Go program that prints "Hello, World!" to the console:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-go"><span class="md-keyword">package</span> main
-
-<span class="md-keyword">import</span> <span class="md-string">&quot;fmt&quot;</span>
-
-<span class="md-comment">// a = 1233</span>
-
-<span class="md-comment">/*
-a = 1223
-*/</span>
-<span class="md-keyword">func</span> main() {
-    <span class="md-comment">// A comment!</span>
-    fmt.Println(<span class="md-string">&quot;Hello, World!&quot;</span>)
+ <span class="md-decorator"> @ManyToOne</span>(() =＞ User, (user) =＞ user.posts)
+  author: User;
 }</code></pre>
             </div>
-          <h2>JavaScript Example</h2>
-<p>Here's an example of JavaScript with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-javascript"><span class="md-comment">/**
- * This is a block comment
- * with multiple lines.
- * const a = "DO NOT HIGHLIGHT THIS";
- */</span>
-<span class="md-keyword">const</span> <span class="md-special">greeting</span> = <span class="md-&lt;span class="md-decorator"&gt;string&lt;/span&gt;">"Hello, World!"</span>;
-console.<span class="md-call-method">log</span>(greeting); <span class="md-comment">// This should be highlighted</span></code></pre>
-            </div>
-          <p>Some mo' JavaScript:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-js"><span class="md-comment">/**
- * This is a block comment
- * with multiple lines.
- * const a = "DO NOT HIGHLIGHT THIS";
- */</span>
-<span class="md-keyword">const</span> <span class="md-special">greeting</span> = <span class="md-&lt;span class="md-decorator"&gt;string&lt;/span&gt;">"Hello, World!"</span>;
-console.<span class="md-call-method">log</span>(greeting); <span class="md-comment">// This should be highlighted</span>
-
-<span class="md-comment">/*
-DO NOT HIGHLIGHT THIS
-const a = "DO NOT HIGHLIGHT THIS";
-*/</span></code></pre>
-            </div>
-          <h2>TypeScript Example</h2>
-<p>TypeScript example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-typescript"><span class="md-comment">/**
- * Block comment in TypeScript
- * This function adds two numbers.
- */</span>
-<span class="md-keyword">function</span> <span class="md-special">add</span>(a: <span class="md-decorator">number</span>, b: <span class="md-decorator">number</span>): <span class="md-decorator">number</span> {
-  <span class="md-keyword">return</span> a + b; <span class="md-comment">// This should be highlighted</span>
-}</code></pre>
-            </div>
-          <h2>Python Example</h2>
-<p>Python example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-python"><span class="md-comment">"""
-This is a block comment in Python
-with some code that should not be highlighted:
-a = 123
-print(a)
-"""</span>
-</span>
-</span>x = 5
-</span><span class="md-special">print</span>(x) <span class="md-comment"># This should be highlighted, but not this comment part</span></code></pre>
-            </div>
-          
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-py"><span class="md-comment">"""
-Another block comment in Python
-"""</span>
-</span>y = 10
-</span><span class="md-special">print</span>(y)  <span class="md-comment"># This should also be highlighted</span>
-</span>
-</span><span class="md-keyword">def</span> <span class="md-special">my_func</span>(a, b):
-<span class="md-comment">  '''
-  This describes a Python function
-  '''</span>
-</span>  <span class="md-keyword">return</span> a + b
-</span>
-</span><span class="md-special">my_func</span>(1, 2)</code></pre>
-            </div>
-          <h2>HTML Example</h2>
-<p>HTML example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-html"><span class="md-comment"><!--
-This is an HTML comment
-It should not highlight this line.
---></span>
-<span class="md-keyword">&lt;div&gt;</span>Hello, HTML!<span class="md-keyword">&lt;/div&gt;</span>
-<span class="md-comment"><!-- This should NOT be highlighted --></code></pre>
-            </div>
-          <h2>CSS Example</h2>
-<p>CSS example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-css"><span class="md-comment">/*
-This is a CSS comment
-It should not highlight this property.
-*/</span>
-<span class="md-decorator">body</span> {
-  <span class="md-keyword">background-color</span>: <span class="md-special">#f0f0f0</span>; <span class="md-comment"><span class="md-comment">/* This should be commented out &lt;span&gt;HELLO&lt;/span&gt; */</span></span>
-}</code></pre>
-            </div>
-          <h2>Go Example</h2>
-<p>Go example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-go"><span class="md-comment">/*
-This is a block comment in Go
-Here's some code that should not be highlighted:
-var a str = "dasddad"
-*/</span>
-<span class="md-keyword">func</span> main() {
-    fmt.Println(<span class="md-string">&quot;var age int&quot;</span>) <span class="md-comment">// This should be commented out</span>
-}</code></pre>
-            </div>
-          <h2>SQL Example</h2>
-<p>SQL example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-sql"><span class="md-comment">/*
-This is a SQL comment
-It should not highlight this query.
-*/</span>
-<span class="md-keyword">SELECT</span> * <span class="md-keyword">FROM</span> users<span class="md-special">;</span> <span class="md-comment">-- This should be commented out</span></code></pre>
-            </div>
-          <h2>Lua Example</h2>
-<p>Lua example with a block comment:</p>
-
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-lua"><span class="md-comment">--[[
-This is a block comment in Lua
-This should not be highlighted.
-]]</span>
-<span class="md-decorator">print</span><span class="md-special">(</span><span class="md-string">"Hello, Lua; local test = &#039;abcd&#039;"</span><span class="md-special">)</span> <span class="md-comment">-- This should be commented out</span></code></pre>
-            </div>
-          <h3>Key Points:</h3>
+          <h2>More Tests</h2>
+<h1>Customize FFprobe Metadata Output as JSON</h1>
+<p>If you've worked with media files on the command line, you're probably familiar with <a href="https://ffmpeg.org/">FFmpeg</a>. But not everyone knows about its quieter, metadata-loving sibling: <span class="md-inline-code">ffprobe</span>.</p>
+<p>In this article, you'll learn how to:</p>
 <ul>
-<li>Each code block contains a block comment that spans multiple lines and includes code within it.</li><li>After the block comments, there are also lines of code that should be highlighted normally.</li><li>The structure includes various Markdown elements such as headers and lists to represent a more comprehensive document.</li>
+<li>Use <span class="md-inline-code">ffprobe</span> to extract structured metadata from video and image files</li><li>Suppress the noisy banner output</li><li>Format the output as JSON</li><li>Use <span class="md-inline-code">jq</span> to extract just the fields you care about</li><li>Wrap all of this in a Bash function for clean, reusable scripting</li>
 </ul>
-<h3>Testing:</h3>
-<p>When you run this through your Markdown-to-HTML conversion logic, you can verify that:</p>
-<p>1. The content inside the block comments is not highlighted.</p>
-<p>2. The code outside of the block comments is correctly highlighted.</p>
-<p>3. The overall Markdown structure (headers, lists, etc.) is rendered properly in the output HTML.</p>
-<p>Feel free to run this example and let me know if you need further adjustments or additional scenarios!</p>
+<h2>What Is 'ffprobe' (and How Is It Different from 'ffmpeg')?</h2>
+<p>While <span class="md-inline-code">ffmpeg</span> is designed for <b>media processing</b> — transcoding, muxing, filtering, and converting — <span class="md-inline-code">ffprobe</span> is designed purely for <b>analyzing</b> media files. It gives you detailed information about formats, streams, codecs, resolution, colorspace, framerate, and embedded metadata.</p>
+<table class="md-table">
+<thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+<tbody><tr><td><span class="md-inline-code">ffmpeg</span></td><td>Edit, convert, stream, and encode media</td></tr><tr><td><span class="md-inline-code">ffprobe</span></td><td>Inspect media metadata only</td></tr></tbody>
+</table>
+<p>Think of <span class="md-inline-code">ffprobe</span> as the <span class="md-inline-code">ffmpeg</span> version of <span class="md-inline-code">exiftool</span> for video, audio, and image containers.</p>
+<h2>Key <span class="md-inline-code">ffprobe</span> Flags You Should Know</h2>
+<p>Here are a few of the most essential <span class="md-inline-code">ffprobe</span> flags:</p>
+<table class="md-table">
+<thead><tr><th>Flag</th><th>Purpose</th></tr></thead>
+<tbody><tr><td><span class="md-inline-code">-v quiet</span></td><td>Suppresses log output (like progress info)</td></tr><tr><td><span class="md-inline-code">-hide&#95;banner</span></td><td>Hides the FFmpeg build/version info</td></tr><tr><td><span class="md-inline-code">-print&#95;format json</span></td><td>Outputs the metadata in JSON format</td></tr><tr><td><span class="md-inline-code">-show&#95;format</span></td><td>Displays container-level metadata (like format name, tags, etc.)</td></tr><tr><td><span class="md-inline-code">-show&#95;streams</span></td><td>Displays stream-level metadata (video/audio/image details)</td></tr></tbody>
+</table>
+<p>You can combine these like so:</p>
+
+            <div class="md-code-container">
+              <button onclick="copyToClipboard(this)">Copy</button>
+              <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json -show_format -show_streams myfile.avif</code></pre>
+            </div>
+          <h2>Why JSON? Why <span class="md-inline-code">jq</span>?</h2>
+<p>JSON is machine- and human-readable, and using tools like <a href="https://jqlang.org/"><span class="md-inline-code">jq</span></a> you can programmatically filter or extract exactly the data you need — no regex hacks, no fragile greps.</p>
+<p>Here's how you can extract just the video codec and resolution of the first stream:</p>
+
+            <div class="md-code-container">
+              <button onclick="copyToClipboard(this)">Copy</button>
+              <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json \
+  -show_streams myfile.avif | jq '.streams[0] | {codec_name, width, height}'</code></pre>
+            </div>
+          <p>It should output something like this JSON:</p>
+
+            <div class="md-code-container">
+              <button onclick="copyToClipboard(this)">Copy</button>
+              <pre><code class="md-code-json">{
+  "codec_name": "av1",
+  "width": 1170,
+  "height": 659
+}</code></pre>
+            </div>
+          <h2>Example: Extract Useful AVIF Metadata</h2>
+<p>Let's say you're working with <span class="md-inline-code">.avif</span> images and just want:</p>
+<ul>
+<li>The container format</li><li>The <span class="md-inline-code">"compatible&#95;brands"</span> tag</li><li>Key per-stream info like <span class="md-inline-code">codec&#95;name</span>, <span class="md-inline-code">pix&#95;fmt</span>, and resolution</li>
+</ul>
 
   <script>
     function copyToClipboard(button) {
       const codeBlock = button.parentElement.querySelector('code');
-      navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
+      navigator.clipboard.writeText(text).then(() => {
         button.innerText = 'Copied!';
         setTimeout(() => button.innerText = 'Copy', 2000);
       });
