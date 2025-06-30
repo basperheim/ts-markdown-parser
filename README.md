@@ -194,7 +194,7 @@ import { markdownToHtml, getMarkdownMetadata } from "ts-markdown-parser";
 // ...
 const file = "/path/to/my-markdown.md";
 const markdownString = fs.readFileSync(file, "utf8");
-const htmlString: string | undefined = markdownToHtml(markdownString);
+const htmlString: string | undefined = markdownToHtml(markdownString, true);
 
 if (!htmlString) {
   console.error(`Failed to generate HTML from: ${file}.`);

@@ -148,9 +148,9 @@
 <p><img src="https://learnprogramming.us/cdn/angular-website-builder.gif" alt="AI Website Builder Screenshot of Web Page Builder" /></p>
 <h5> Decorators for Relations</h5>
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-ts"><span class="md-keyword">import</span> { Entity, PrimaryGeneratedColumn, Column, ManyToOne } <span class="md-keyword">from</span> <span class="md-string">"typeorm"</span>;
+          <div class="md-code-container">
+            
+            <pre><code class="md-code-ts"><span class="md-keyword">import</span> { Entity, PrimaryGeneratedColumn, Column, ManyToOne } <span class="md-keyword">from</span> <span class="md-string">"typeorm"</span>;
 <span class="md-keyword">import</span> { User } <span class="md-keyword">from</span> <span class="md-string">"./User"</span>;
 
 <span class="md-decorator">@Entity</span>()
@@ -167,8 +167,8 @@
  <span class="md-decorator"> @ManyToOne</span>(() =＞ User, (user) =＞ user.posts)
   author: User;
 }</code></pre>
-            </div>
-          <h2>More Tests</h2>
+          </div>
+        <h2>More Tests</h2>
 <h1>Customize FFprobe Metadata Output as JSON</h1>
 <p>If you've worked with media files on the command line, you're probably familiar with <a href="https://ffmpeg.org/">FFmpeg</a>. But not everyone knows about its quieter, metadata-loving sibling: <span class="md-inline-code">ffprobe</span>.</p>
 <p>In this article, you'll learn how to:</p>
@@ -190,45 +190,34 @@
 </table>
 <p>You can combine these like so:</p>
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json -show_format -show_streams myfile.avif</code></pre>
-            </div>
-          <h2>Why JSON? Why <span class="md-inline-code">jq</span>?</h2>
+          <div class="md-code-container">
+            
+            <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json -show_format -show_streams myfile.avif</code></pre>
+          </div>
+        <h2>Why JSON? Why <span class="md-inline-code">jq</span>?</h2>
 <p>JSON is machine- and human-readable, and using tools like <a href="https://jqlang.org/"><span class="md-inline-code">jq</span></a> you can programmatically filter or extract exactly the data you need — no regex hacks, no fragile greps.</p>
 <p>Here's how you can extract just the video codec and resolution of the first stream:</p>
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json \
+          <div class="md-code-container">
+            
+            <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json \
   -show_streams myfile.avif | jq '.streams[0] | {codec_name, width, height}'</code></pre>
-            </div>
-          <p>It should output something like this JSON:</p>
+          </div>
+        <p>It should output something like this JSON:</p>
 
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-json">{
+          <div class="md-code-container">
+            
+            <pre><code class="md-code-json">{
   "codec_name": "av1",
   "width": 1170,
   "height": 659
 }</code></pre>
-            </div>
-          <h2>Example: Extract Useful AVIF Metadata</h2>
+          </div>
+        <h2>Example: Extract Useful AVIF Metadata</h2>
 <p>Let's say you're working with <span class="md-inline-code">.avif</span> images and just want:</p>
 <ul>
 <li>The container format</li><li>The <span class="md-inline-code">"compatible&#95;brands"</span> tag</li><li>Key per-stream info like <span class="md-inline-code">codec&#95;name</span>, <span class="md-inline-code">pix&#95;fmt</span>, and resolution</li>
 </ul>
-
-  <script>
-    function copyToClipboard(button) {
-      const codeBlock = button.parentElement.querySelector('code');
-      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
-      navigator.clipboard.writeText(text).then(() => {
-        button.innerText = 'Copied!';
-        setTimeout(() => button.innerText = 'Copy', 2000);
-      });
-    }
-  </script>
 
 </body>
 </html>

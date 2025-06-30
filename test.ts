@@ -36,7 +36,7 @@ try {
 }
 
 // Convert Markdown to HTML
-const htmlContent = markdownToHtml(markdown);
+const htmlContent = markdownToHtml(markdown, false);
 // console.log(htmlContent);
 // process.exit();
 

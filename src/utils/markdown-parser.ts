@@ -279,7 +279,7 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
  * @param {MarkdownElement} element MarkdownElement object to be converted.
  * @returns {string} HTML representation of the MarkdownElement.
  */
-export const elementToHtml = (element: MarkdownElement): string => {
+export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: boolean = true): string => {
   switch (element.type) {
     case "h1":
       return `<h1>${element.content}</h1>\n`;
@@ -294,6 +294,7 @@ export const elementToHtml = (element: MarkdownElement): string => {
     case "table":
       return `${element.content}\n`;
     case "code":
+      let highlightedCode: string = "";
       if (element.language && typeof element.language === "string") {
         const codeBlock = element.content;
         const lines = codeBlock.split("\n");
@@ -366,7 +367,7 @@ export const elementToHtml = (element: MarkdownElement): string => {
 
             // Regular code highlighting for non-block comment lines
             else {
-              const highlightedCode = highlightCode(element.language as string, line);
+              highlightedCode = highlightCode(element.language as string, line);
               finalLines.push(highlightedCode); // Push highlighted code only if not in block comment
 
               // Handle Tables
@@ -390,23 +391,16 @@ export const elementToHtml = (element: MarkdownElement): string => {
           }
         }
 
-        // console.dir({ finalLines });
-        const highlightedCode = finalLines.join("\n");
-
-        return `
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code-${element.language}">${escapeHtml(highlightedCode)}</code></pre>
-            </div>
-          `;
-      } else {
-        return `
-            <div class="md-code-container">
-              <button onclick="copyToClipboard(this)">Copy</button>
-              <pre><code class="md-code">${escapeHtml(element.content)}</code></pre>
-            </div>
-          `;
+        highlightedCode = finalLines.join("\n");
       }
+
+      return `
+          <div class="md-code-container">
+            ${addCopyToClipboard ? `<button onclick="copyToClipboard(this)">Copy</button>` : ""}
+            <pre><code class="md-code${element.language ? "-" + element.language : ""}">${escapeHtml(highlightedCode)}</code></pre>
+          </div>
+        `;
+
     case "ul":
       return `<ul>\n${element.content}\n</ul>\n`;
     case "ol":

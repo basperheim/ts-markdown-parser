@@ -4,9 +4,11 @@ import { parseMetadata } from "./utils/metadata-parser";
 /**
  * Converts a Markdown string into an HTML string.
  *
- * This function parses the Markdown content to generate HTML and appends a global script.
+ * This function parses the Markdown content to generate HTML. Optionally appends
+ * a global script for copy-to-clipboard functionality used by code blocks.
  *
  * @param {string} markdown - The Markdown content to be converted to HTML.
+ * @param {boolean} addCopyToClipboard - Adds "Copy" button to HTML `<code>` blocks.
  * @returns {string} The resulting HTML content.
  *
  * @example
@@ -14,10 +16,14 @@ import { parseMetadata } from "./utils/metadata-parser";
  * const html = markdownToHtml(markdown);
  * console.log(html); // Outputs the HTML representation of the Markdown
  */
-export const markdownToHtml = (markdown: string): string => {
+export const markdownToHtml = (markdown: string, addCopyToClipboard: boolean = true): string => {
   const elements = parseMarkdown(markdown);
-  let html = elements.map(elementToHtml).join("");
-  html += globalScript();
+  let html = elements.map((el) => elementToHtml(el, addCopyToClipboard)).join("");
+
+  if (addCopyToClipboard) {
+    html += globalScript();
+  }
+
   return html;
 };
 
