@@ -25,7 +25,7 @@ export const highlightJavaScript = (code: string): string => {
 
     // Otherwise, highlight the string
     const stringLine = `<span class="md-string">${p1}${p2}${p3}</span>`;
-    console.dir({ stringLine });
+    // console.dir({ stringLine });
     return stringLine;
   });
 

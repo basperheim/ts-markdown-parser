@@ -36,7 +36,7 @@ try {
 }
 
 // Convert Markdown to HTML
-const htmlContent = markdownToHtml(markdown, false);
+const htmlContent = markdownToHtml(markdown, true);
 // console.log(htmlContent);
 // process.exit();
 
@@ -55,7 +55,7 @@ const htmlTemplate = `
     margin-left: 1rem;
     line-height: 1.6;
     color: #333;
-    background-color: white;
+    background-color: #f9f9f9;;
   }
 
   img {
@@ -104,7 +104,7 @@ const htmlTemplate = `
 
   pre {
     background: #2d2d2d;
-    padding: 0.2rem;
+    padding: 1rem;
     border-radius: 8px;
     color: #f8f8f2;
     overflow-x: auto;
@@ -171,6 +171,12 @@ const htmlTemplate = `
 
   .md-table tbody tr:hover {
     background-color: #f1f1f1;
+  }
+
+  .md-line {
+    /* For the '---' markdown horizontal decorative lines */
+    border-top: 2px #909090 solid ;
+    margin: 1em 0;
   }
 
   /* Syntax highlighting */

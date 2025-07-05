@@ -12,7 +12,7 @@
     margin-left: 1rem;
     line-height: 1.6;
     color: #333;
-    background-color: white;
+    background-color: #f9f9f9;;
   }
 
   img {
@@ -61,7 +61,7 @@
 
   pre {
     background: #2d2d2d;
-    padding: 0.2rem;
+    padding: 1rem;
     border-radius: 8px;
     color: #f8f8f2;
     overflow-x: auto;
@@ -130,6 +130,12 @@
     background-color: #f1f1f1;
   }
 
+  .md-line {
+    /* For the '---' markdown horizontal decorative lines */
+    border-top: 2px #909090 solid ;
+    margin: 1em 0;
+  }
+
   /* Syntax highlighting */
   .md-keyword { color: #66d9ef; font-weight: bold; }
   .md-string { color: #a6e22e; }
@@ -143,81 +149,72 @@
 </style>
 </head>
 <body>
-  <h1>Test</h1>
-<p><b>The Proto-Germanic Masculine Nominative Singular Suffix *-az: A Reconstruction and its Reflexes</b></p>
-<p><img src="https://learnprogramming.us/cdn/angular-website-builder.gif" alt="AI Website Builder Screenshot of Web Page Builder" /></p>
-<h5> Decorators for Relations</h5>
+  <h3>Code Block without Language Specification</h3>
+<h4>My Article</h4>
+<p>Markdown refs can be used like <span class="md-inline-code">&#91;n&#93;: https://example.com "Some Title"</span>, and then you annotate that to <span class="md-inline-code">&#91;Some reference&#93;&#91;n&#93;</span></p>
 
           <div class="md-code-container">
-            
-            <pre><code class="md-code-ts"><span class="md-keyword">import</span> { Entity, PrimaryGeneratedColumn, Column, ManyToOne } <span class="md-keyword">from</span> <span class="md-string">"typeorm"</span>;
-<span class="md-keyword">import</span> { User } <span class="md-keyword">from</span> <span class="md-string">"./User"</span>;
-
-<span class="md-decorator">@Entity</span>()
-<span class="md-keyword">export</span> <span class="md-keyword">class</span> <span class="md-class">Post</span> {
- <span class="md-decorator"> @PrimaryGeneratedColumn</span>()
-  id: number;
-
- <span class="md-decorator"> @Column</span>()
-  title: string;
-
- <span class="md-decorator"> @Column</span>()
-  content: string;
-
- <span class="md-decorator"> @ManyToOne</span>(() =＞ User, (user) =＞ user.posts)
-  author: User;
-}</code></pre>
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">This is a code block without a language specification.
+It should be treated as a txt code block.</code></pre>
           </div>
-        <h2>More Tests</h2>
-<h1>Customize FFprobe Metadata Output as JSON</h1>
-<p>If you've worked with media files on the command line, you're probably familiar with <a href="https://ffmpeg.org/">FFmpeg</a>. But not everyone knows about its quieter, metadata-loving sibling: <span class="md-inline-code">ffprobe</span>.</p>
-<p>In this article, you'll learn how to:</p>
-<ul>
-<li>Use <span class="md-inline-code">ffprobe</span> to extract structured metadata from video and image files</li><li>Suppress the noisy banner output</li><li>Format the output as JSON</li><li>Use <span class="md-inline-code">jq</span> to extract just the fields you care about</li><li>Wrap all of this in a Bash function for clean, reusable scripting</li>
-</ul>
-<h2>What Is 'ffprobe' (and How Is It Different from 'ffmpeg')?</h2>
-<p>While <span class="md-inline-code">ffmpeg</span> is designed for <b>media processing</b> — transcoding, muxing, filtering, and converting — <span class="md-inline-code">ffprobe</span> is designed purely for <b>analyzing</b> media files. It gives you detailed information about formats, streams, codecs, resolution, colorspace, framerate, and embedded metadata.</p>
-<table class="md-table">
-<thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
-<tbody><tr><td><span class="md-inline-code">ffmpeg</span></td><td>Edit, convert, stream, and encode media</td></tr><tr><td><span class="md-inline-code">ffprobe</span></td><td>Inspect media metadata only</td></tr></tbody>
-</table>
-<p>Think of <span class="md-inline-code">ffprobe</span> as the <span class="md-inline-code">ffmpeg</span> version of <span class="md-inline-code">exiftool</span> for video, audio, and image containers.</p>
-<h2>Key <span class="md-inline-code">ffprobe</span> Flags You Should Know</h2>
-<p>Here are a few of the most essential <span class="md-inline-code">ffprobe</span> flags:</p>
-<table class="md-table">
-<thead><tr><th>Flag</th><th>Purpose</th></tr></thead>
-<tbody><tr><td><span class="md-inline-code">-v quiet</span></td><td>Suppresses log output (like progress info)</td></tr><tr><td><span class="md-inline-code">-hide&#95;banner</span></td><td>Hides the FFmpeg build/version info</td></tr><tr><td><span class="md-inline-code">-print&#95;format json</span></td><td>Outputs the metadata in JSON format</td></tr><tr><td><span class="md-inline-code">-show&#95;format</span></td><td>Displays container-level metadata (like format name, tags, etc.)</td></tr><tr><td><span class="md-inline-code">-show&#95;streams</span></td><td>Displays stream-level metadata (video/audio/image details)</td></tr></tbody>
-</table>
-<p>You can combine these like so:</p>
+        <p>This discusses dopamine circuits (<a href="https://dopamine.org">Dopamine Info</a>) and neuroplasticity (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1234567">Neuroplasticity Study</a>).</p>
+<h3>Example Code Block With Annotations</h3>
 
           <div class="md-code-container">
-            
-            <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json -show_format -show_streams myfile.avif</code></pre>
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-js"><span class="md-comment">// This should NOT be processed as a real annotation</span>
+console.<span class="md-call-method">log</span>(<span class="md-string">"[test link][1]"</span>);
+console.<span class="md-call-method">log</span>(<span class="md-string">"[2]: https://fakeurl.com &#039;Should stay literal&#039;"</span>);</span></code></pre>
           </div>
-        <h2>Why JSON? Why <span class="md-inline-code">jq</span>?</h2>
-<p>JSON is machine- and human-readable, and using tools like <a href="https://jqlang.org/"><span class="md-inline-code">jq</span></a> you can programmatically filter or extract exactly the data you need — no regex hacks, no fragile greps.</p>
-<p>Here's how you can extract just the video codec and resolution of the first stream:</p>
+        <p>Further reading (<a href="https://en.wikipedia.org/wiki/Brain">Wikipedia Brain</a>).</p>
+<h3>Internal Reference Links</h3>
+<p><a href="https://www.example.com">Example</a></p>
+<p>This should be replaced with a link to https://www.example.com</p>
+<h3>Triple Hyphen Line</h3>
+<div class="md-line"></div>
+<p>This should be replaced with a div element and a horizontal line.</p>
+<h3>More Markdown</h3>
+<p>This is a <a href="https://www.example.com/test">test link ref</a>.</p>
+<h3>Code Block with Language Specification</h3>
 
           <div class="md-code-container">
-            
-            <pre><code class="md-code-bash">ffprobe -v quiet -hide_banner -print_format json \
-  -show_streams myfile.avif | jq '.streams[0] | {codec_name, width, height}'</code></pre>
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-javascript">console.<span class="md-call-method">log</span>(<span class="md-string">"Hello World!"</span>);</code></pre>
           </div>
-        <p>It should output something like this JSON:</p>
+        <h3>Another Code Block</h3>
 
           <div class="md-code-container">
-            
-            <pre><code class="md-code-json">{
-  "codec_name": "av1",
-  "width": 1170,
-  "height": 659
-}</code></pre>
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">This is another code block.</code></pre>
           </div>
-        <h2>Example: Extract Useful AVIF Metadata</h2>
-<p>Let's say you're working with <span class="md-inline-code">.avif</span> images and just want:</p>
-<ul>
-<li>The container format</li><li>The <span class="md-inline-code">"compatible&#95;brands"</span> tag</li><li>Key per-stream info like <span class="md-inline-code">codec&#95;name</span>, <span class="md-inline-code">pix&#95;fmt</span>, and resolution</li>
-</ul>
+        <h3>Internal Reference Link with Number</h3>
+<p>This is a <a href="https://www.example.com/test">test link reference</a>.</p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">
+This markdown example covers:
+
+* A code block without a language specification
+* An internal reference link with a numeric annotation
+* A triple hyphen line
+* A code block with a language specification
+* Another code block without a language specification
+* Another internal reference link with a numeric annotation
+</code></pre>
+          </div>
+        
+  <script>
+    function copyToClipboard(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = 'Copy', 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>

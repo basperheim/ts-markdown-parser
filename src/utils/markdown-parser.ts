@@ -2,6 +2,97 @@ import { MarkdownElement } from "../models";
 import { highlightCode, stripLeadingWhitespace, countOccurrences, getMultilineCommentRegex, MultilineCommentRegex } from "../libs";
 
 /**
+ * Replaces reference links in markdown text with their corresponding titles and URLs.
+ *
+ * This function performs two passes over the markdown text:
+ * 1. It captures reference definitions and stores them in a map.
+ * 2. It replaces inline references with their corresponding titles and URLs.
+ *
+ * @param {string} markdown - The markdown text to process.
+ * @returns {string} The processed markdown text with reference links replaced.
+ */
+export const replaceReferenceLinks = (markdown: string): string => {
+  const lines = markdown.split("\n");
+  const map: Record<string, { title: string; link: string }> = {};
+  const newLines: string[] = [];
+
+  const refDefRegex = /^\[(\d+)]\:\s*(\S+)\s*"(.+)"$/;
+  const inlineRefRegex = /\[([^\]]+)]\[(\d+)]/g;
+  const inlineCodeRegex = /`([^`]+)`/g;
+
+  let isCodeBlock = false;
+
+  // First pass: Capture reference defs, skip them from newLines
+  for (const line of lines) {
+    const trimmed = line.trimStart();
+
+    if (trimmed.startsWith("```")) {
+      isCodeBlock = !isCodeBlock;
+      newLines.push(line);
+      continue;
+    }
+
+    if (isCodeBlock) {
+      newLines.push(line);
+      continue;
+    }
+
+    const refMatch = line.match(refDefRegex);
+    if (refMatch) {
+      const [, refNum, url, title] = refMatch;
+      map[refNum] = { title, link: url };
+      continue; // Don't include ref def lines
+    }
+
+    newLines.push(line);
+  }
+
+  // Second pass: Replace annotations outside code blocks & inline code
+  const finalLines: string[] = [];
+  isCodeBlock = false;
+
+  for (const line of newLines) {
+    const trimmed = line.trimStart();
+
+    if (trimmed.startsWith("```")) {
+      isCodeBlock = !isCodeBlock;
+      finalLines.push(line);
+      continue;
+    }
+
+    if (isCodeBlock) {
+      finalLines.push(line);
+      continue;
+    }
+
+    // Mask inline code blocks
+    const inlineCodeMatches: string[] = [];
+    let maskedLine = line.replace(inlineCodeRegex, (match, code) => {
+      inlineCodeMatches.push(match);
+      return `{{INLINE_CODE_${inlineCodeMatches.length - 1}}}`;
+    });
+
+    // Replace [label][n] annotations
+    maskedLine = maskedLine.replace(inlineRefRegex, (match, label, refNum) => {
+      const ref = map[refNum];
+      if (ref) {
+        return `[${ref.title}](${ref.link})`;
+      }
+      return match;
+    });
+
+    // Restore inline code blocks
+    maskedLine = maskedLine.replace(/\{\{INLINE_CODE_(\d+)}}/g, (match, index) => {
+      return inlineCodeMatches[parseInt(index, 10)];
+    });
+
+    finalLines.push(maskedLine);
+  }
+
+  return finalLines.join("\n");
+};
+
+/**
  * Escapes HTML special characters inside quotes or backticks to prevent HTML injection.
  * - Converts special characters to their HTML entity equivalents.
  *
@@ -140,7 +231,7 @@ const parseInlineStyles = (text: string): string => {
   for (let i = 0; i < links.length; i++) {
     const link = links[i];
     text = text.replace(new RegExp(link.placeholder, "g"), link.html);
-    console.dir({ placeholder: link.placeholder, html: link.html });
+    // console.dir({ placeholder: link.placeholder, html: link.html });
   }
 
   // Remove backslash escape for * and _ outside of code
@@ -161,35 +252,56 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
     throw new Error(`Markdown string is invalid: ${typeof markdown}`);
   }
 
+  markdown = replaceReferenceLinks(markdown);
   const lines = stripLeadingWhitespace(markdown).split("\n");
+  const totalYamlFrontLines = lines.filter((line) => line.trim() === "---").length;
+  let yamlEndLine = -1;
+
+  // Find closing YAML marker if it exists
+  if (totalYamlFrontLines >= 2 && lines[0].trim() === "---") {
+    for (let j = 1; j < lines.length; j++) {
+      if (lines[j].trim() === "---") {
+        yamlEndLine = j;
+        break;
+      }
+    }
+  }
+
   const processedLines: number[] = [];
   const elements: MarkdownElement[] = [];
-  let i = 0;
 
-  const totalYamlFrontLines = countOccurrences(lines, "---");
+  let i = 0;
   let inMetadata = false;
   while (i < lines.length) {
     const line = replaceSpecialQuotes(lines[i]).trim();
 
-    if (totalYamlFrontLines >= 2) {
-      // Detect start of YAML front matter
-      if (line === "---" && i === 0) {
-        inMetadata = true;
-        i++;
-        continue;
-      }
+    // Skip YAML metadata block
+    if (i === 0 && line === "---") {
+      inMetadata = true;
+      i++;
+      continue;
+    }
 
-      // Detect end of YAML front matter
-      if (line === "---" && inMetadata) {
+    // Detect end of YAML front matter
+    if (line === "---" && inMetadata) {
+      inMetadata = false;
+      i++;
+      continue;
+    }
+
+    if (inMetadata) {
+      if (i === yamlEndLine) {
         inMetadata = false;
-        i++;
-        continue;
       }
+      i++;
+      continue;
+    }
 
-      if (inMetadata) {
-        i++;
-        continue; // Skip processing of lines inside metadata block
-      }
+    // Decorative line: triple hyphen
+    if (line.trim() === "---") {
+      elements.push({ type: "line", content: "" });
+      i++;
+      continue;
     }
 
     // Handle Headers
@@ -205,8 +317,9 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
       elements.push({ type: "h1", content: parseInlineStyles(line.slice(2)) });
 
       // Handle Code Blocks
-    } else if (line.startsWith("```")) {
-      const language = line.slice(3).toLowerCase();
+    } else if (line.trimStart().startsWith("```")) {
+      const cleanLine = line.trimStart();
+      const language = cleanLine.slice(3).trim().toLowerCase() || "txt";
       const codeLines: string[] = [];
 
       i++;
@@ -257,6 +370,7 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
     } else if (line.trim().length > 0) {
       const fixedLine = parseInlineStyles(line);
       // console.dir({ fixedLine });
+
       elements.push({ type: "p", content: fixedLine });
     }
 
@@ -293,6 +407,8 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
       return `<h5>${element.content}</h5>\n`;
     case "table":
       return `${element.content}\n`;
+    case "line":
+      return `<div class="md-line"></div>\n`; // i.e. `---` decorative lines
     case "code":
       let highlightedCode: string = "";
       if (element.language && typeof element.language === "string") {

@@ -1,109 +1,73 @@
+### Code Block without Language Specification
+
+#### My Article
+
+Markdown refs can be used like `[n]: https://example.com "Some Title"`, and then you annotate that to `[Some reference][n]`
+
+```
+This is a code block without a language specification.
+It should be treated as a txt code block.
+```
+
+This discusses dopamine circuits ([Dopamine Info](https://dopamine.org)) and neuroplasticity ([Neuroplasticity Study](https://pmc.ncbi.nlm.nih.gov/articles/PMC1234567)).
+
+### Example Code Block With Annotations
+
+```js
+// This should NOT be processed as a real annotation
+console.log("[test link][1]");
+console.log("[2]: https://fakeurl.com 'Should stay literal'");
+```
+
+Further reading ([Wikipedia Brain](https://en.wikipedia.org/wiki/Brain)).
+
+### Internal Reference Links
+
+[Test][1]
+
+[1]: https://www.example.com "Example"
+
+This should be replaced with a link to https://www.example.com
+
+### Triple Hyphen Line
+
 ---
-title: "Why LLMs Cannot Replace Good Coders"
-author: "ChatGPT & Benji Asperheim"
-date: 2025-02-20
-keywords: microsoft copilot, microsoft github copilot, github copilot, ai coding, ai to code, ai for coding, llm programming, code llm, ai that can code, op-ed, oped
-slug: microsoft-copilot-ai-coding
-thumbnail: github-copilot-ai-coding-ai-for-coding-512px.jpeg
-description: "LLM programming, and tools like Microsoft Copilot, are not a replacement for foundational coding skills, but rather a means to enhance and augment them."
----
 
-# Test
+This should be replaced with a div element and a horizontal line.
 
-**The Proto-Germanic Masculine Nominative Singular Suffix \*-az: A Reconstruction and its Reflexes**
+### More Markdown
 
-![AI Website Builder Screenshot of Web Page Builder](https://learnprogramming.us/cdn/angular-website-builder.gif)
+This is a [test link][2].
 
-##### Decorators for Relations
+[2]: https://www.example.com/test "test link ref"
 
-```ts
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+### Code Block with Language Specification
 
-@Entity()
-export class Post {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  title: string;
-
-  @Column()
-  content: string;
-
-  @ManyToOne(() => User, (user) => user.posts)
-  author: User;
-}
+```javascript
+console.log("Hello World!");
 ```
 
-## More Tests
+### Another Code Block
 
-# Customize FFprobe Metadata Output as JSON
-
-If you've worked with media files on the command line, you're probably familiar with [FFmpeg](https://ffmpeg.org/). But not everyone knows about its quieter, metadata-loving sibling: `ffprobe`.
-
-In this article, you'll learn how to:
-
-- Use `ffprobe` to extract structured metadata from video and image files
-- Suppress the noisy banner output
-- Format the output as JSON
-- Use `jq` to extract just the fields you care about
-- Wrap all of this in a Bash function for clean, reusable scripting
-
-## What Is 'ffprobe' (and How Is It Different from 'ffmpeg')?
-
-While `ffmpeg` is designed for **media processing** — transcoding, muxing, filtering, and converting — `ffprobe` is designed purely for **analyzing** media files. It gives you detailed information about formats, streams, codecs, resolution, colorspace, framerate, and embedded metadata.
-
-| Tool      | Purpose                                 |
-| --------- | --------------------------------------- |
-| `ffmpeg`  | Edit, convert, stream, and encode media |
-| `ffprobe` | Inspect media metadata only             |
-
-Think of `ffprobe` as the `ffmpeg` version of `exiftool` for video, audio, and image containers.
-
-## Key `ffprobe` Flags You Should Know
-
-Here are a few of the most essential `ffprobe` flags:
-
-| Flag                 | Purpose                                                          |
-| -------------------- | ---------------------------------------------------------------- |
-| `-v quiet`           | Suppresses log output (like progress info)                       |
-| `-hide_banner`       | Hides the FFmpeg build/version info                              |
-| `-print_format json` | Outputs the metadata in JSON format                              |
-| `-show_format`       | Displays container-level metadata (like format name, tags, etc.) |
-| `-show_streams`      | Displays stream-level metadata (video/audio/image details)       |
-
-You can combine these like so:
-
-```bash
-ffprobe -v quiet -hide_banner -print_format json -show_format -show_streams myfile.avif
+```
+This is another code block.
 ```
 
-## Why JSON? Why `jq`?
+### Internal Reference Link with Number
 
-JSON is machine- and human-readable, and using tools like [`jq`](https://jqlang.org/) you can programmatically filter or extract exactly the data you need — no regex hacks, no fragile greps.
+This is a [test link][3].
 
-Here's how you can extract just the video codec and resolution of the first stream:
+[3]: https://www.example.com/test "test link reference"
 
-```bash
-ffprobe -v quiet -hide_banner -print_format json \
-  -show_streams myfile.avif | jq '.streams[0] | {codec_name, width, height}'
 ```
 
-It should output something like this JSON:
+This markdown example covers:
 
-```json
-{
-  "codec_name": "av1",
-  "width": 1170,
-  "height": 659
-}
+* A code block without a language specification
+* An internal reference link with a numeric annotation
+* A triple hyphen line
+* A code block with a language specification
+* Another code block without a language specification
+* Another internal reference link with a numeric annotation
+
 ```
-
-## Example: Extract Useful AVIF Metadata
-
-Let's say you're working with `.avif` images and just want:
-
-- The container format
-- The `"compatible_brands"` tag
-- Key per-stream info like `codec_name`, `pix_fmt`, and resolution
