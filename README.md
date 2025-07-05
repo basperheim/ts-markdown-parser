@@ -318,6 +318,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - Images (`![Alt text](url)`)
   - Links (`[Link text](url)`)
   - Tables
+  - Markdown reference links (i.e. `[Link Reference][n]`)
 
 - **Code Highlighting Supported For:**
 
@@ -340,7 +341,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
 
 Markdown reference links are now supported as well. They are a way to define links in markdown using a short annotation. They consist of two parts:
 
-\*_link definition_: Defined at the bottom of the document using the syntax `[number]: some-url.com "title"` (e.g. `[3]: https://www.example.com/test "test link reference"`).
+**link definition**: Defined at the bottom of the document using the syntax `[number]: some-url.com "title"` (e.g. `[3]: https://www.example.com/test "test link reference"`).
 
 **link reference**: Used to reference the link definition elsewhere in the document using the syntax `[text][number]`.
 
