@@ -18,7 +18,12 @@ import { parseMetadata } from "./utils/metadata-parser";
  */
 export const markdownToHtml = (markdown: string, addCopyToClipboard: boolean = true): string => {
   const elements = parseMarkdown(markdown);
-  let html = elements.map((el) => elementToHtml(el, addCopyToClipboard)).join("");
+  let html = "";
+
+  const totalEles = elements.length;
+  for (let i = 0; i < totalEles; i++) {
+    html += elementToHtml(elements[i], addCopyToClipboard);
+  }
 
   if (addCopyToClipboard) {
     html += globalScript();
