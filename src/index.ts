@@ -1,31 +1,52 @@
-import { parseMarkdown, elementToHtml, globalScript } from "./utils/markdown-parser";
+import { parseMarkdown, elementToHtml, globalScript, checkboxScript } from "./utils/markdown-parser";
 import { parseMetadata } from "./utils/metadata-parser";
+let warnedDeprecatedBoolean = false;
+
+type MarkdownToHtmlOptions = {
+  addCopyToClipboard?: boolean;
+  interactiveCheckboxes?: boolean;
+  // ...future options
+};
 
 /**
  * Converts a Markdown string into an HTML string.
  *
- * This function parses the Markdown content to generate HTML. Optionally appends
- * a global script for copy-to-clipboard functionality used by code blocks.
- *
  * @param {string} markdown - The Markdown content to be converted to HTML.
- * @param {boolean} addCopyToClipboard - Adds "Copy" button to HTML `<code>` blocks.
+ * @param {boolean|MarkdownToHtmlOptions} opts - Adds "Copy" button to HTML `<code>` blocks (legacy) or options object.
  * @returns {string} The resulting HTML content.
- *
- * @example
- * const markdown = "# Hello World\nThis is a test.";
- * const html = markdownToHtml(markdown);
- * console.log(html); // Outputs the HTML representation of the Markdown
  */
-export const markdownToHtml = (markdown: string, addCopyToClipboard: boolean = true): string => {
+export const markdownToHtml = (markdown: string, opts: boolean | MarkdownToHtmlOptions = true): string => {
+  // Backward compatibility: support old boolean param for addCopyToClipboard
+
+  //! Parse as boolean or object key, but default to `true` in either case (THIS BOOLEAN IS DEPRECATED)
+  const addCopyToClipboard = opts === false || (typeof opts === "object" && opts.addCopyToClipboard === false) ? false : true;
+
+  // Only parse as `opts` object key, but have false by default, therefore `opts.interactiveCheckboxes` must be an explicitly `true` opts key-value
+  const interactiveCheckboxes = typeof opts === "object" ? !!opts?.interactiveCheckboxes : false;
+
+  // Pass interactiveCheckboxes to parseMarkdown/elementToHtml as needed
   const elements = parseMarkdown(markdown);
   let html = "";
 
-  const totalEles = elements.length;
-  for (let i = 0; i < totalEles; i++) {
-    html += elementToHtml(elements[i], addCopyToClipboard);
+  // 🔥 Deprecation Warning
+  if (typeof opts === "boolean" && !warnedDeprecatedBoolean) {
+    console.warn("\x1b[33m[markdownToHtml] Passing a boolean as the 2nd arg is deprecated. Please use an options object.\x1b[37m");
+    warnedDeprecatedBoolean = true;
   }
 
-  if (addCopyToClipboard) {
+  const totalEles = elements.length;
+  for (let i = 0; i < totalEles; i++) {
+    const opts = { addCopyToClipboard };
+    html += elementToHtml(elements[i], opts);
+  }
+
+  if (interactiveCheckboxes && html.includes(`<li class="md-checkbox">`) && html.includes(`type="checkbox" disabled`)) {
+    const disabledCheckboxRe = /<input type="checkbox" disabled/gm;
+    html = html.replace(disabledCheckboxRe, `<input type="checkbox"`);
+    html += checkboxScript();
+  }
+
+  if (addCopyToClipboard && html.includes(`<div class="md-code-container"`)) {
     html += globalScript();
   }
 

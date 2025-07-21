@@ -136,6 +136,22 @@
     margin: 1em 0;
   }
 
+  .md-checkbox {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+  }
+  .md-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #39FF14;
+  }
+  .md-checkbox input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #888;
+  }
+
   /* Syntax highlighting */
   .md-keyword { color: #66d9ef; font-weight: bold; }
   .md-string { color: #a6e22e; }
@@ -149,370 +165,21 @@
 </style>
 </head>
 <body>
-  <p>Here are some basic Rust examples:</p>
-<h3>Multiline and Regular Comments in Rust</h3>
-<p>Here's an example of using both multiline and regular comments in Rust:</p>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-comment">// This is a regular comment</span>
-
-<span class="md-comment">/*
-This is a
-multiline comment
-that spans multiple lines
-*/</span>
-
-<span class="md-keyword">fn</span> main() {
-<span class="md-comment">    // This is another regular comment</span>
-    <span class="md-keyword">let</span> x = <span class="md-number">5</span>; <span class="md-comment">// This is an inline comment</span>
-
-<span class="md-comment">    /*
-    This is a multiline comment
-    inside a function
-    */</span>
-
-    <span class="md-macro">println!</span>(<span class="md-string">"Hello, &lt;span class="md-macro"&gt;world!&lt;/span&gt;"</span>); <span class="md-comment">// This is a comment at the end of a line</span>
-}</code></pre>
-          </div>
-        <p>In Rust, you can use:</p>
+  <h3>Code Block without Language Specification</h3>
 <ul>
-<li><span class="md-inline-code">//</span> for regular comments that continue until the end of the line.</li><li><span class="md-inline-code">/&#42; &#42;/</span> for multiline comments that can span multiple lines.</li>
+<li>List</li><li>Another Item</li>
 </ul>
-<p>Both types of comments are ignored by the compiler and are used to add notes or explanations to your code.</p>
-<h3>Logical Operators in Rust</h3>
-<p>Rust supports the following logical operators:</p>
+<h3><b>Day 1: Repo Setup & Boilerplate</b></h3>
 <ul>
-<li><b>Logical AND</b>: <span class="md-inline-code">&&</span> - Returns <span class="md-inline-code">true</span> if both operands are <span class="md-inline-code">true</span>.</li><li><b>Logical OR</b>: <span class="md-inline-code">||</span> - Returns <span class="md-inline-code">true</span> if at least one operand is <span class="md-inline-code">true</span>.</li><li><b>Logical NOT</b>: <span class="md-inline-code">!</span> - Returns the opposite of the operand.</li>
+<li class="md-checkbox"><input type="checkbox" disabled><span>Fork/clone your Astro boilerplate</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add <span class="md-inline-code">/src/const/tool.config.ts</span> with tool name, keywords, meta, subdomain, etc.</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Update <span class="md-inline-code">astro.config.mjs</span> and README</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>(Optional) Add placeholder Vue component for result rendering</span></li>
 </ul>
-<h3>Examples</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">let</span> a = <span class="md-special">true</span>;
-<span class="md-keyword">let</span> b = <span class="md-special">false</span>;
-
-<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, a &amp;&amp; b); <span class="md-comment">// false</span>
-<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, a || b); <span class="md-comment">// true</span>
-<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, !a);     <span class="md-comment">// false</span>
-<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, !b);     <span class="md-comment">// true</span></code></pre>
-          </div>
-        <h3>Short-Circuiting Behavior</h3>
-<p>Like many programming languages, Rust's logical operators exhibit short-circuiting behavior:</p>
-<ul>
-<li><span class="md-inline-code">&&</span> will not evaluate the second operand if the first operand is <span class="md-inline-code">false</span>.</li><li><span class="md-inline-code">||</span> will not evaluate the second operand if the first operand is <span class="md-inline-code">true</span>.</li>
-</ul>
-<p>This behavior can be useful for constructing conditional statements where evaluating the second operand might have side effects or be expensive.</p>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> expensive_operation() -&gt; <span class="md-special">bool</span> {
-    <span class="md-macro">println!</span>(<span class="md-string">"Expensive operation performed"</span>);
-    <span class="md-special">true</span>
-}
-
-<span class="md-keyword">let</span> a = <span class="md-special">false</span>;
-
-<span class="md-keyword">if</span> a &amp;&amp; expensive_operation() {
-    <span class="md-macro">println!</span>(<span class="md-string">"This will not be reached"</span>);
-}
-
-<span class="md-keyword">if</span> a || expensive_operation() {
-    <span class="md-macro">println!</span>(<span class="md-string">"Expensive operation will be performed"</span>);
-}</code></pre>
-          </div>
-        <p>In the example above, <span class="md-inline-code">expensive&#95;operation&#40;&#41;</span> will not be called when <span class="md-inline-code">a</span> is <span class="md-inline-code">false</span> and <span class="md-inline-code">&&</span> is used, but it will be called when <span class="md-inline-code">a</span> is <span class="md-inline-code">false</span> and <span class="md-inline-code">||</span> is used.</p>
-<h3>Variables and Data Types</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> x: <span class="md-special">i32</span> = <span class="md-number">10</span>; <span class="md-comment">// declare a variable x of type i32 and assign it the value 10</span>
-    <span class="md-keyword">let</span> y: <span class="md-special">f64</span> = <span class="md-number">20.5</span>; <span class="md-comment">// declare a variable y of type f64 and assign it the value 20.5</span>
-    <span class="md-keyword">let</span> z: <span class="md-special">bool</span> = <span class="md-special">true</span>; <span class="md-comment">// declare a variable z of type bool and assign it the value true</span>
-    <span class="md-keyword">let</span> name: &amp;<span class="md-special">str</span> = <span class="md-string">"John"</span>; <span class="md-comment">// declare a variable name of type &amp;amp;str and assign it the value "John"</span>
-
-    <span class="md-macro">println!</span>(<span class="md-string">"x: {}"</span>, x);
-    <span class="md-macro">println!</span>(<span class="md-string">"y: {}"</span>, y);
-    <span class="md-macro">println!</span>(<span class="md-string">"z: {}"</span>, z);
-    <span class="md-macro">println!</span>(<span class="md-string">"name: {}"</span>, name);
-}</code></pre>
-          </div>
-        <h3>Control Flow</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> x: <span class="md-special">i32</span> = <span class="md-number">10</span>;
-
-    <span class="md-keyword">if</span> x &gt; <span class="md-number">5</span> {
-        <span class="md-macro">println!</span>(<span class="md-string">"x is greater than &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
-    } <span class="md-keyword">else</span> {
-        <span class="md-macro">println!</span>(<span class="md-string">"x is less than or equal to &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
-    }
-
-    <span class="md-keyword">let</span> y: <span class="md-special">i32</span> = <span class="md-number">20</span>;
-
-    <span class="md-keyword">match</span> y {
-        <span class="md-number">10</span> =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is &lt;span class="md-number"&gt;10&lt;/span&gt;"</span>),
-        <span class="md-number">20</span> =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is &lt;span class="md-number"&gt;20&lt;/span&gt;"</span>),
-        _ =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is something else"</span>),
-    }
-
-    <span class="md-keyword">for</span> i <span class="md-keyword">in</span> <span class="md-number">1</span>..<span class="md-number">5</span> {
-        <span class="md-macro">println!</span>(<span class="md-string">"i: {}"</span>, i);
-    }
-
-    <span class="md-keyword">let</span> <span class="md-keyword">mut</span> j: <span class="md-special">i32</span> = <span class="md-number">0</span>;
-    <span class="md-keyword">while</span> j &lt; <span class="md-number">5</span> {
-        <span class="md-macro">println!</span>(<span class="md-string">"j: {}"</span>, j);
-        j += <span class="md-number">1</span>;
-    }
-}</code></pre>
-          </div>
-        <h3>Functions</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> add(x: <span class="md-special">i32</span>, y: <span class="md-special">i32</span>) -&gt; <span class="md-special">i32</span> {
-    x + y
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> result: <span class="md-special">i32</span> = add(<span class="md-number">10</span>, <span class="md-number">20</span>);
-    <span class="md-macro">println!</span>(<span class="md-string">"result: {}"</span>, result);
-}</code></pre>
-          </div>
-        <h3>Structs and Enums</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">struct</span> Person {
-    name: <span class="md-special">String</span>,
-    age: <span class="md-special">i32</span>,
-}
-
-<span class="md-keyword">enum</span> Color {
-    Red,
-    Green,
-    Blue,
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> person: Person = Person {
-        name: <span class="md-special">String</span>::from(<span class="md-string">"John"</span>),
-        age: <span class="md-number">30</span>,
-    };
-
-    <span class="md-macro">println!</span>(<span class="md-string">"name: {}"</span>, person.name);
-    <span class="md-macro">println!</span>(<span class="md-string">"age: {}"</span>, person.age);
-
-    <span class="md-keyword">let</span> color: Color = Color::Green;
-
-    <span class="md-keyword">match</span> color {
-        Color::Red =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is red"</span>),
-        Color::Green =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is green"</span>),
-        Color::Blue =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is blue"</span>),
-    }
-}</code></pre>
-          </div>
-        <h3>Ownership and Borrowing</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> s: <span class="md-special">String</span> = <span class="md-special">String</span>::from(<span class="md-string">"hello"</span>);
-
-    <span class="md-keyword">let</span> len: <span class="md-special">usize</span> = calculate_length(&amp;s);
-
-    <span class="md-macro">println!</span>(<span class="md-string">"The length of &#039;{}&#039; is {}."</span>, s, len);
-}
-
-<span class="md-keyword">fn</span> calculate_length(s: &amp;<span class="md-special">String</span>) -&gt; <span class="md-special">usize</span> {
-    s.len()
-}</code></pre>
-          </div>
-        <h3>Error Handling</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">use</span> std::fs::File;
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> f: <span class="md-special">Result</span>&lt;File, std::io::Error&gt; = File::open(<span class="md-string">"hello.txt"</span>);
-
-    <span class="md-keyword">match</span> f {
-        <span class="md-special">Ok</span>(file) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"File opened successfully"</span>),
-        <span class="md-special">Err</span>(error) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Error opening file: {}"</span>, error),
-    }
-}</code></pre>
-          </div>
-        <p>These examples cover some of the basic concepts in Rust, including variables, control flow, functions, structs, enums, ownership, borrowing, and error handling. You can test these examples in a Rust environment to see how they work.</p>
-<p>Here are <b>additional Rust examples</b> that test <b>less common or previously uncovered constructs</b>, useful for exercising your markdown-to-HTML converter:</p>
 <div class="md-line"></div>
-<h3>Macros</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-decorator"><span class="md-macro">macro_rules!</span></span> say_hello {
-    () =&gt; {
-        <span class="md-macro">println!</span>(<span class="md-string">"Hello from a &lt;span class="md-macro"&gt;macro!&lt;/span&gt;"</span>);
-    };
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-macro">say_hello!</span>();
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Generics and Traits</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> largest&lt;T: PartialOrd + Copy&gt;(list: &amp;[T]) -&gt; T {
-    <span class="md-keyword">let</span> <span class="md-keyword">mut</span> largest = list[<span class="md-number">0</span>];
-    <span class="md-keyword">for</span> &amp;item <span class="md-keyword">in</span> list {
-        <span class="md-keyword">if</span> item &gt; largest {
-            largest = item;
-        }
-    }
-    largest
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> numbers = <span class="md-macro">vec!</span>[<span class="md-number">10</span>, <span class="md-number">20</span>, <span class="md-number">30</span>, <span class="md-number">5</span>];
-    <span class="md-macro">println!</span>(<span class="md-string">"The largest is {}"</span>, largest(&amp;numbers));
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Lifetimes</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> longest&lt;<span class=<span class="md-string">"md-special"</span>>'a&lt;/span&gt;&amp;gt;(x: &amp;amp;&lt;span class=&lt;span class=&quot;md-string&quot;&gt;&quot;md-special&quot;&lt;/span&gt;&gt;'a</span> <span class="md-special">str</span>, y: &amp;<span class=<span class="md-string">"md-special"</span>>'a&lt;/span&gt; &lt;span class=&quot;md-special&quot;&gt;str&lt;/span&gt;) -&amp;gt; &amp;amp;&lt;span class=&lt;span class=&quot;md-string&quot;&gt;&quot;md-special&quot;&lt;/span&gt;&gt;'a</span> <span class="md-special">str</span> {
-    <span class="md-keyword">if</span> x.len() &gt; y.len() {
-        x
-    } <span class="md-keyword">else</span> {
-        y
-    }
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> s1 = <span class="md-special">String</span>::from(<span class="md-string">"long string"</span>);
-    <span class="md-keyword">let</span> s2 = <span class="md-string">"short"</span>;
-    <span class="md-keyword">let</span> result = longest(&amp;s1, s2);
-    <span class="md-macro">println!</span>(<span class="md-string">"The longest string is {}"</span>, result);
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Pattern Matching with Structs and Enums</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">enum</span> Message {
-    Quit,
-    Move { x: <span class="md-special">i32</span>, y: <span class="md-special">i32</span> },
-    Write(<span class="md-special">String</span>),
-}
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> msg = Message::Move { x: <span class="md-number">10</span>, y: <span class="md-number">20</span> };
-
-    <span class="md-keyword">match</span> msg {
-        Message::Quit =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Quit"</span>),
-        Message::Move { x, y } =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Move to ({}, {})"</span>, x, y),
-        Message::Write(text) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Write &#039;{}&#039;"</span>, text),
-    }
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Closures and Functional Style</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> add = |a: <span class="md-special">i32</span>, b: <span class="md-special">i32</span>| a + b;
-
-    <span class="md-macro">println!</span>(<span class="md-string">"&lt;span class="md-number"&gt;5&lt;/span&gt; + &lt;span class="md-number"&gt;3&lt;/span&gt; = {}"</span>, add(<span class="md-number">5</span>, <span class="md-number">3</span>));
-
-    <span class="md-keyword">let</span> nums = <span class="md-macro">vec!</span>[<span class="md-number">1</span>, <span class="md-number">2</span>, <span class="md-number">3</span>, <span class="md-number">4</span>];
-    <span class="md-keyword">let</span> squares: <span class="md-special">Vec</span>&lt;<span class="md-special">i32</span>&gt; = nums.iter().map(|x| x * x).collect();
-    <span class="md-macro">println!</span>(<span class="md-string">"Squares: {:?}"</span>, squares);
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Unsafe Code</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> a: <span class="md-special">i32</span> = <span class="md-number">42</span>;
-    <span class="md-keyword">let</span> r: *<span class="md-keyword">const</span> <span class="md-special">i32</span> = &amp;a;
-
-    <span class="md-keyword">unsafe</span> {
-        <span class="md-macro">println!</span>(<span class="md-string">"r points to: {}"</span>, *r);
-    }
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Modules</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">mod</span> greetings {
-    <span class="md-keyword">pub</span> <span class="md-keyword">fn</span> hello() {
-        <span class="md-macro">println!</span>(<span class="md-string">"Hello from the &lt;span class="md-macro"&gt;module!&lt;/span&gt;"</span>);
-    }
-}
-
-<span class="md-keyword">fn</span> main() {
-    greetings::hello();
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Result with <span class="md-inline-code">?</span> Operator</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">use</span> std::fs::File;
-<span class="md-keyword">use</span> std::io::{<span class="md-keyword">self</span>, Read};
-
-<span class="md-keyword">fn</span> read_file() -&gt; <span class="md-special">Result</span>&lt;<span class="md-special">String</span>, io::Error&gt; {
-    <span class="md-keyword">let</span> <span class="md-keyword">mut</span> f = File::open(<span class="md-string">"foo.txt"</span>)?;
-    <span class="md-keyword">let</span> <span class="md-keyword">mut</span> contents = <span class="md-special">String</span>::new();
-    f.<span class="md-keyword">read_to_string</span>(&amp;<span class="md-keyword">mut</span> contents)?;
-    <span class="md-special">Ok</span>(contents)
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<h3>Const and Static</h3>
-
-          <div class="md-code-container">
-            <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-keyword">const</span> PI: <span class="md-special">f64</span> = <span class="md-number">3.14159</span>;
-<span class="md-keyword">static</span> <span class="md-keyword">mut</span> COUNTER: <span class="md-special">i32</span> = <span class="md-number">0</span>;
-
-<span class="md-keyword">fn</span> main() {
-    <span class="md-macro">println!</span>(<span class="md-string">"PI = {}"</span>, PI);
-    <span class="md-keyword">unsafe</span> {
-        COUNTER += <span class="md-number">1</span>;
-        <span class="md-macro">println!</span>(<span class="md-string">"COUNTER = {}"</span>, COUNTER);
-    }
-}</code></pre>
-          </div>
-        <div class="md-line"></div>
-<p>Let me know if you want edge cases for markdown like inline code inside lists, nested code blocks, escaped tags, or malformed markdown—those are great for testing your converter's robustness.</p>
-
-  <script>
-    function copyToClipboard(button) {
-      const codeBlock = button.parentElement.querySelector('code');
-      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
-      navigator.clipboard.writeText(text).then(() => {
-        button.innerText = 'Copied!';
-        setTimeout(() => button.innerText = 'Copy', 2000);
-      });
-    }
-  </script>
+<h3><b>Day 2: MVP Coding</b></h3>
+<ul>
+<li class="md-checkbox"><input type="checkbox" disabled><span>Build MVP: Textarea input, “Validate” button, result output (valid/invalid, error highlight)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add JSON pretty-print, tree-view if easy (can use <a href="https://github.com/leezng/vue-json-pretty">vue-json-pretty</a> or similar)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add example JSON (auto-insert button)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add “Copy Result” button</span></li>
+</ul>
+<h2>H2 Example!</h2>
+<p>Some paragraph</p>
 
 </body>
 </html>

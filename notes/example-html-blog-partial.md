@@ -1,73 +1,24 @@
 ### Code Block without Language Specification
 
-#### My Article
+- List
+- Another Item
 
-Markdown refs can be used like `[n]: https://example.com "Some Title"`, and then you annotate that to `[Some reference][n]`
+### **Day 1: Repo Setup & Boilerplate**
 
-```
-This is a code block without a language specification.
-It should be treated as a txt code block.
-```
-
-This discusses dopamine circuits ([Dopamine Info](https://dopamine.org)) and neuroplasticity ([Neuroplasticity Study](https://pmc.ncbi.nlm.nih.gov/articles/PMC1234567)).
-
-### Example Code Block With Annotations
-
-```js
-// This should NOT be processed as a real annotation
-console.log("[test link][1]");
-console.log("[2]: https://fakeurl.com 'Should stay literal'");
-```
-
-Further reading ([Wikipedia Brain](https://en.wikipedia.org/wiki/Brain)).
-
-### Internal Reference Links
-
-[Test][1]
-
-[1]: https://www.example.com "Example"
-
-This should be replaced with a link to https://www.example.com
-
-### Triple Hyphen Line
+- [ ] Fork/clone your Astro boilerplate
+- [ ] Add `/src/const/tool.config.ts` with tool name, keywords, meta, subdomain, etc.
+- [ ] Update `astro.config.mjs` and README
+- [ ] (Optional) Add placeholder Vue component for result rendering
 
 ---
 
-This should be replaced with a div element and a horizontal line.
+### **Day 2: MVP Coding**
 
-### More Markdown
+- [ ] Build MVP: Textarea input, “Validate” button, result output (valid/invalid, error highlight)
+- [ ] Add JSON pretty-print, tree-view if easy (can use [vue-json-pretty](https://github.com/leezng/vue-json-pretty) or similar)
+- [ ] Add example JSON (auto-insert button)
+- [ ] Add “Copy Result” button
 
-This is a [test link][2].
+## H2 Example!
 
-[2]: https://www.example.com/test "test link ref"
-
-### Code Block with Language Specification
-
-```javascript
-console.log("Hello World!");
-```
-
-### Another Code Block
-
-```
-This is another code block.
-```
-
-### Internal Reference Link with Number
-
-This is a [test link][3].
-
-[3]: https://www.example.com/test "test link reference"
-
-```
-
-This markdown example covers:
-
-* A code block without a language specification
-* An internal reference link with a numeric annotation
-* A triple hyphen line
-* A code block with a language specification
-* Another code block without a language specification
-* Another internal reference link with a numeric annotation
-
-```
+Some paragraph

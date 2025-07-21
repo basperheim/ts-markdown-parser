@@ -6,7 +6,7 @@ import { join } from "path";
 // npx ts-node test.ts
 
 // Define the paths for the Markdown file and the HTML output file
-// const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/used-car-questions.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
@@ -16,7 +16,7 @@ import { join } from "path";
 // const markdownFilePath = join(__dirname, "notes/regex-in-python.md");
 // const markdownFilePath = join(__dirname, "notes/example-meta-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-py-blog.md");
-const markdownFilePath = join(__dirname, "notes/rust-markdown-test.md");
+// const markdownFilePath = join(__dirname, "notes/rust-markdown-test.md");
 
 const htmlFilePath = join(__dirname, "test.html");
 
@@ -36,8 +36,12 @@ try {
   console.error("Error processing markdown metadata:", err);
 }
 
+const opts = { addCopyToClipboard: true, interactiveCheckboxes: false };
+
 // Convert Markdown to HTML
-const htmlContent = markdownToHtml(markdown, true);
+const htmlContent = markdownToHtml(markdown, opts);
+// const htmlContent = markdownToHtml(markdown, true);
+
 // console.log(htmlContent);
 // process.exit();
 
@@ -178,6 +182,22 @@ const htmlTemplate = `
     /* For the '---' markdown horizontal decorative lines */
     border-top: 2px #909090 solid ;
     margin: 1em 0;
+  }
+
+  .md-checkbox {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+  }
+  .md-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #39FF14;
+  }
+  .md-checkbox input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #888;
   }
 
   /* Syntax highlighting */

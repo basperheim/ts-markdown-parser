@@ -299,6 +299,9 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
     }
   }
 
+  // Regex for unordered list items (handles -, *, +, optional checkbox [ ] or [x])
+  const ulItemRegex = /^(\s*)[-*+]\s+(\[([ xX])\]\s*)?(.*)$/;
+
   const processedLines: number[] = [];
   const elements: MarkdownElement[] = [];
 
@@ -363,18 +366,26 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
 
       const finalCode = codeLines.join("\n");
       elements.push({ type: "code", content: finalCode, language });
-
-      // Handle Unordered Lists
-    } else if (line.startsWith("- ") || line.startsWith("* ") || line.startsWith("+ ")) {
+    } else if (ulItemRegex.test(line)) {
       const listItems: string[] = [];
+      while (i < lines.length && ulItemRegex.test(lines[i])) {
+        // Match: [indent, list char, [ ] or [x], rest]
+        const [, indent, , checkboxStatus, content] = lines[i].match(ulItemRegex)!;
 
-      while (i < lines.length && (lines[i].trim().startsWith("- ") || lines[i].trim().startsWith("* ") || lines[i].trim().startsWith("+ "))) {
-        const parsedItem = parseInlineStyles(lines[i].trim().slice(2));
-        listItems.push(`<li>${parsedItem}</li>`);
+        if (typeof checkboxStatus !== "undefined") {
+          // Checkbox
+          const checked = checkboxStatus && checkboxStatus.toLowerCase() === "x";
+          const label = parseInlineStyles(content.trim());
+          const checkbox = `<input type="checkbox" disabled${checked ? " checked" : ""}>`;
+          listItems.push(`<li class="md-checkbox">${checkbox}<span>${label}</span></li>`);
+        } else {
+          // Normal list item
+          listItems.push(`<li>${parseInlineStyles(content.trim())}</li>`);
+        }
         i++;
       }
       elements.push({ type: "ul", content: listItems.join("") });
-      continue; // Skip to next iteration to avoid re-processing the same line
+      continue;
 
       // Handle Paragraphs
     }
@@ -425,7 +436,9 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
  * @param {MarkdownElement} element MarkdownElement object to be converted.
  * @returns {string} HTML representation of the MarkdownElement.
  */
-export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: boolean = true): string => {
+export const elementToHtml = (element: MarkdownElement, opts: Record<string, any>): string => {
+  const addCopyToClipboard = !!opts.addCopyToClipboard;
+
   switch (element.type) {
     case "h1":
       return `<h1>${element.content}</h1>\n`;
@@ -602,5 +615,21 @@ export const globalScript = (): string => `
         setTimeout(() => button.innerText = 'Copy', 2000);
       });
     }
+  </script>
+`;
+
+export const checkboxScript = (): string => `
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.md-checkbox input[type="checkbox"]').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+          if (cb.checked) {
+            cb.nextElementSibling && cb.nextElementSibling.classList.add('md-checked');
+          } else {
+            cb.nextElementSibling && cb.nextElementSibling.classList.remove('md-checked');
+          }
+        });
+      });
+    });
   </script>
 `;
