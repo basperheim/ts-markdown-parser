@@ -10,6 +10,24 @@ To install the package, run:
 npm install ts-markdown-parser
 ```
 
+## New Features (v1.5.0)
+
+- **HTML, JS, CSS inside `<script>` and `<style>` blocks:** proper highlighting, even inside HTML code blocks.
+- **Python and Rust comment handling:** no more broken `<span>` tags; comments are now robustly highlighted.
+- **Rust code highlighting:** Basic Rust support, including lifetimes, macros, keywords, and types.
+- **Checkboxes:** Markdown task lists (`- [ ]`, `* [x]`, `+ [ ]`) are now rendered as HTML checkboxes with optional interactivity.
+- **Unordered Lists:** All three list syntaxes now supported: `-`, `*`, and `+`.
+- **Copy-to-clipboard script and checkbox script:** Are _only_ injected if relevant HTML is present.
+- **New `.md-checkbox` CSS class** for easy styling of checklist items.
+- **Options object for output config:** Use `{ addCopyToClipboard, interactiveCheckboxes }`; the **old boolean parameter is deprecated**.
+
+### Breaking Changes?
+
+None!
+
+- Old code using `true` or `false` for the second param still works.
+- Just update your code to use an options object when you want to use the new `interactiveCheckboxes` feature.
+
 ## Usage
 
 Here's a basic example of how to use `ts-markdown-parser` to convert Markdown to HTML:
@@ -35,7 +53,8 @@ Some text.
 `;
 
 // Convert Markdown to HTML
-const htmlContent = markdownToHtml(markdown, false); // Pass 'true' as the 2nd arg to inject <code> block generic "Copy" buttons
+const opts = { addCopyToClipboard: true, interactiveCheckboxes: false };
+const htmlContent = markdownToHtml(md, opts);
 
 // Basic HTML template
 const htmlTemplate = `
@@ -174,6 +193,22 @@ const htmlTemplate = `
     /* For the '---' markdown horizontal decorative lines */
     border-top: 2px #909090 solid ;
     margin: 1em 0;
+  }
+
+  .md-checkbox {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+  }
+  .md-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #39FF14;
+  }
+  .md-checkbox input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    color: #888;
   }
 
   /* Syntax highlighting */
@@ -319,6 +354,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - Links (`[Link text](url)`)
   - Tables
   - Markdown reference links (i.e. `[Link Reference][n]`)
+  - Interactive Checkboxes (`- [ ]` or `* [x]`)
 
 - **Code Highlighting Supported For:**
 
@@ -331,6 +367,7 @@ Given the YAML front matter above, `getMarkdownMetadata` would return:
   - SQL
   - TSX/JSX
   - Lua
+  - Rust (added since [v1.5.0](https://www.npmjs.com/package/ts-markdown-parser))
 
 - **Metadata Parsing:**
 
