@@ -166,20 +166,71 @@
 </head>
 <body>
   <h3>Code Block without Language Specification</h3>
-<ul>
-<li>List</li><li>Another Item</li>
-</ul>
-<h3><b>Day 1: Repo Setup & Boilerplate</b></h3>
-<ul>
-<li class="md-checkbox"><input type="checkbox" disabled><span>Fork/clone your Astro boilerplate</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add <span class="md-inline-code">/src/const/tool.config.ts</span> with tool name, keywords, meta, subdomain, etc.</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Update <span class="md-inline-code">astro.config.mjs</span> and README</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>(Optional) Add placeholder Vue component for result rendering</span></li>
-</ul>
+<h4>My Article</h4>
+<p>Markdown refs can be used like <span class="md-inline-code">&#91;n&#93;: https://example.com "Some Title"</span>, and then you annotate that to <span class="md-inline-code">&#91;Some reference&#93;&#91;n&#93;</span></p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">This is a code block without a language specification.
+It should be treated as a txt code block.</code></pre>
+          </div>
+        <p>This discusses dopamine circuits (<a href="https://dopamine.org">Dopamine Info</a>) and neuroplasticity (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1234567">Neuroplasticity Study</a>).</p>
+<h3>Example Code Block With Annotations</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-js"><span class="md-comment">// This should NOT be processed as a real annotation</span>
+console.<span class="md-call-method">log</span>(<span class="md-string">"[test link][1]"</span>);
+console.<span class="md-call-method">log</span>(<span class="md-string">"[2]: https://fakeurl.com &#039;Should stay literal&#039;"</span>);</span></code></pre>
+          </div>
+        <p>Further reading (<a href="https://en.wikipedia.org/wiki/Brain">Wikipedia Brain</a>).</p>
+<h3>Internal Reference Links</h3>
+<p><a href="https://www.example.com">Example</a></p>
+<p>This should be replaced with a link to https://www.example.com</p>
+<h3>Triple Hyphen Line</h3>
 <div class="md-line"></div>
-<h3><b>Day 2: MVP Coding</b></h3>
-<ul>
-<li class="md-checkbox"><input type="checkbox" disabled><span>Build MVP: Textarea input, “Validate” button, result output (valid/invalid, error highlight)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add JSON pretty-print, tree-view if easy (can use <a href="https://github.com/leezng/vue-json-pretty">vue-json-pretty</a> or similar)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add example JSON (auto-insert button)</span></li><li class="md-checkbox"><input type="checkbox" disabled><span>Add “Copy Result” button</span></li>
-</ul>
-<h2>H2 Example!</h2>
-<p>Some paragraph</p>
+<p>This should be replaced with a div element and a horizontal line.</p>
+<h3>More Markdown</h3>
+<p>This is a <a href="https://www.example.com/test">test link ref</a>.</p>
+<h3>Code Block with Language Specification</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-javascript">console.<span class="md-call-method">log</span>(<span class="md-string">"Hello World!"</span>);</code></pre>
+          </div>
+        <h3>Another Code Block</h3>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">This is another code block.</code></pre>
+          </div>
+        <h3>Internal Reference Link with Number</h3>
+<p>This is a <a href="https://www.example.com/test">test link reference</a>.</p>
+
+          <div class="md-code-container">
+            <button onclick="copyToClipboard(this)">Copy</button>
+            <pre><code class="md-code-txt">
+This markdown example covers:
+
+* A code block without a language specification
+* An internal reference link with a numeric annotation
+* A triple hyphen line
+* A code block with a language specification
+* Another code block without a language specification
+* Another internal reference link with a numeric annotation
+</code></pre>
+          </div>
+        
+  <script>
+    function copyToClipboard(button) {
+      const codeBlock = button.parentElement.querySelector('code');
+      const text = codeBlock.innerText.replace(/＜/g, '<').replace(/＞/g, '>');
+      navigator.clipboard.writeText(text).then(() => {
+        button.innerText = 'Copied!';
+        setTimeout(() => button.innerText = 'Copy', 2000);
+      });
+    }
+  </script>
 
 </body>
 </html>
