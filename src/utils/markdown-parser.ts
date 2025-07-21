@@ -365,10 +365,10 @@ export const parseMarkdown = (markdown: string): MarkdownElement[] => {
       elements.push({ type: "code", content: finalCode, language });
 
       // Handle Unordered Lists
-    } else if (line.startsWith("- ") || line.startsWith("* ")) {
+    } else if (line.startsWith("- ") || line.startsWith("* ") || line.startsWith("+ ")) {
       const listItems: string[] = [];
 
-      while (i < lines.length && (lines[i].trim().startsWith("- ") || lines[i].trim().startsWith("* "))) {
+      while (i < lines.length && (lines[i].trim().startsWith("- ") || lines[i].trim().startsWith("* ") || lines[i].trim().startsWith("+ "))) {
         const parsedItem = parseInlineStyles(lines[i].trim().slice(2));
         listItems.push(`<li>${parsedItem}</li>`);
         i++;
