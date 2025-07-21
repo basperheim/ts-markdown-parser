@@ -419,7 +419,8 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
 
         let inBlockComment: boolean = false,
           pythonCommentIsOpen: boolean = false,
-          isPython: boolean = !!(element.language === "py" || element.language === "python");
+          isPython: boolean = !!(element.language === "py" || element.language === "python"),
+          htmlCommentOpen = false;
 
         for (let i = 0; i < lines.length; i++) {
           let line = lines[i];
@@ -464,8 +465,35 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
 
           // All other languages
           else {
+            if (element.language === "html") {
+              if (line.trim() === "<!--") {
+                line = line.replace(/<!--/g, `&lt;!--`);
+                line = '<span class="md-comment">' + line; // Open md-comment <span>
+                htmlCommentOpen = true;
+              }
+
+              console.log(`\n${line}`);
+              console.dir({ htmlCommentOpen });
+
+              if (!htmlCommentOpen) {
+                highlightedCode = highlightCode("html", line);
+              } else {
+                // Close md-comment <span>
+                highlightedCode = escapeHtml(line);
+
+                if (htmlCommentOpen === true && line.includes("-->")) {
+                  highlightedCode = escapeHtml(line);
+                  htmlCommentOpen = false;
+                  highlightedCode = highlightedCode + "</span>";
+                }
+              }
+
+              console.dir({ highlightedCode });
+              finalLines.push(highlightedCode);
+            }
+
             // Handle opening the block comment
-            if (isBlockStart && !inBlockComment) {
+            else if (isBlockStart && !inBlockComment) {
               finalLines.push(`<span class="md-comment">${line}`);
               inBlockComment = true;
             }
