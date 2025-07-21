@@ -165,14 +165,14 @@ that spans multiple lines
 
 <span class="md-keyword">fn</span> main() {
 <span class="md-comment">    // This is another regular comment</span>
-    <span class="md-keyword">let</span> x = <span class="md-number">5</span>; // This is an inline comment
+    <span class="md-keyword">let</span> x = <span class="md-number">5</span>; <span class="md-comment">// This is an inline comment</span>
 
 <span class="md-comment">    /*
     This is a multiline comment
     inside a function
     */</span>
 
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Hello, &lt;span class="md-macro"&gt;&lt;span class="md-decorator"&gt;world!&lt;/span&gt;&lt;/span&gt;"</span>); // This is a comment at the end of a line
+    <span class="md-macro">println!</span>(<span class="md-string">"Hello, &lt;span class="md-macro"&gt;world!&lt;/span&gt;"</span>); <span class="md-comment">// This is a comment at the end of a line</span>
 }</code></pre>
           </div>
         <p>In Rust, you can use:</p>
@@ -192,10 +192,10 @@ that spans multiple lines
             <pre><code class="md-code-rust"><span class="md-keyword">let</span> a = <span class="md-special">true</span>;
 <span class="md-keyword">let</span> b = <span class="md-special">false</span>;
 
-<span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"{}"</span>, a &amp;&amp; b); // <span class="md-special">false</span>
-<span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"{}"</span>, a || b); // <span class="md-special">true</span>
-<span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"{}"</span>, !a);     // <span class="md-special">false</span>
-<span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"{}"</span>, !b);     // <span class="md-special">true</span></code></pre>
+<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, a &amp;&amp; b); <span class="md-comment">// false</span>
+<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, a || b); <span class="md-comment">// true</span>
+<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, !a);     <span class="md-comment">// false</span>
+<span class="md-macro">println!</span>(<span class="md-string">"{}"</span>, !b);     <span class="md-comment">// true</span></code></pre>
           </div>
         <h3>Short-Circuiting Behavior</h3>
 <p>Like many programming languages, Rust's logical operators exhibit short-circuiting behavior:</p>
@@ -207,18 +207,18 @@ that spans multiple lines
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code-rust"><span class="md-keyword">fn</span> expensive_operation() -&gt; <span class="md-special">bool</span> {
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Expensive operation performed"</span>);
+    <span class="md-macro">println!</span>(<span class="md-string">"Expensive operation performed"</span>);
     <span class="md-special">true</span>
 }
 
 <span class="md-keyword">let</span> a = <span class="md-special">false</span>;
 
 <span class="md-keyword">if</span> a &amp;&amp; expensive_operation() {
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"This will not be reached"</span>);
+    <span class="md-macro">println!</span>(<span class="md-string">"This will not be reached"</span>);
 }
 
 <span class="md-keyword">if</span> a || expensive_operation() {
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Expensive operation will be performed"</span>);
+    <span class="md-macro">println!</span>(<span class="md-string">"Expensive operation will be performed"</span>);
 }</code></pre>
           </div>
         <p>In the example above, <span class="md-inline-code">expensive&#95;operation&#40;&#41;</span> will not be called when <span class="md-inline-code">a</span> is <span class="md-inline-code">false</span> and <span class="md-inline-code">&&</span> is used, but it will be called when <span class="md-inline-code">a</span> is <span class="md-inline-code">false</span> and <span class="md-inline-code">||</span> is used.</p>
@@ -227,15 +227,15 @@ that spans multiple lines
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> x: <span class="md-special">i32</span> = <span class="md-number">10</span>; // declare a variable x of <span class="md-keyword">type</span> <span class="md-special">i32</span> and assign it the value <span class="md-number">10</span>
-    <span class="md-keyword">let</span> y: <span class="md-special">f64</span> = <span class="md-number">20.5</span>; // declare a variable y of <span class="md-keyword">type</span> <span class="md-special">f64</span> and assign it the value <span class="md-number">20.5</span>
-    <span class="md-keyword">let</span> z: <span class="md-special">bool</span> = <span class="md-special">true</span>; // declare a variable z of <span class="md-keyword">type</span> <span class="md-special">bool</span> and assign it the value <span class="md-special">true</span>
-    <span class="md-keyword">let</span> name: &amp;<span class="md-special">str</span> = <span class="md-string">"John"</span>; // declare a variable name of <span class="md-keyword">type</span> &amp;<span class="md-special">str</span> and assign it the value <span class="md-string">"John"</span>
+    <span class="md-keyword">let</span> x: <span class="md-special">i32</span> = <span class="md-number">10</span>; <span class="md-comment">// declare a variable x of type i32 and assign it the value 10</span>
+    <span class="md-keyword">let</span> y: <span class="md-special">f64</span> = <span class="md-number">20.5</span>; <span class="md-comment">// declare a variable y of type f64 and assign it the value 20.5</span>
+    <span class="md-keyword">let</span> z: <span class="md-special">bool</span> = <span class="md-special">true</span>; <span class="md-comment">// declare a variable z of type bool and assign it the value true</span>
+    <span class="md-keyword">let</span> name: &amp;<span class="md-special">str</span> = <span class="md-string">"John"</span>; <span class="md-comment">// declare a variable name of type &amp;amp;str and assign it the value "John"</span>
 
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"x: {}"</span>, x);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"y: {}"</span>, y);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"z: {}"</span>, z);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"name: {}"</span>, name);
+    <span class="md-macro">println!</span>(<span class="md-string">"x: {}"</span>, x);
+    <span class="md-macro">println!</span>(<span class="md-string">"y: {}"</span>, y);
+    <span class="md-macro">println!</span>(<span class="md-string">"z: {}"</span>, z);
+    <span class="md-macro">println!</span>(<span class="md-string">"name: {}"</span>, name);
 }</code></pre>
           </div>
         <h3>Control Flow</h3>
@@ -246,26 +246,26 @@ that spans multiple lines
     <span class="md-keyword">let</span> x: <span class="md-special">i32</span> = <span class="md-number">10</span>;
 
     <span class="md-keyword">if</span> x &gt; <span class="md-number">5</span> {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"x is greater than &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
+        <span class="md-macro">println!</span>(<span class="md-string">"x is greater than &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
     } <span class="md-keyword">else</span> {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"x is less than or equal to &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
+        <span class="md-macro">println!</span>(<span class="md-string">"x is less than or equal to &lt;span class="md-number"&gt;5&lt;/span&gt;"</span>);
     }
 
     <span class="md-keyword">let</span> y: <span class="md-special">i32</span> = <span class="md-number">20</span>;
 
     <span class="md-keyword">match</span> y {
-        <span class="md-number">10</span> =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"y is &lt;span class="md-number"&gt;10&lt;/span&gt;"</span>),
-        <span class="md-number">20</span> =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"y is &lt;span class="md-number"&gt;20&lt;/span&gt;"</span>),
-        _ =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"y is something else"</span>),
+        <span class="md-number">10</span> =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is &lt;span class="md-number"&gt;10&lt;/span&gt;"</span>),
+        <span class="md-number">20</span> =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is &lt;span class="md-number"&gt;20&lt;/span&gt;"</span>),
+        _ =&gt; <span class="md-macro">println!</span>(<span class="md-string">"y is something else"</span>),
     }
 
     <span class="md-keyword">for</span> i <span class="md-keyword">in</span> <span class="md-number">1</span>..<span class="md-number">5</span> {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"i: {}"</span>, i);
+        <span class="md-macro">println!</span>(<span class="md-string">"i: {}"</span>, i);
     }
 
     <span class="md-keyword">let</span> <span class="md-keyword">mut</span> j: <span class="md-special">i32</span> = <span class="md-number">0</span>;
     <span class="md-keyword">while</span> j &lt; <span class="md-number">5</span> {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"j: {}"</span>, j);
+        <span class="md-macro">println!</span>(<span class="md-string">"j: {}"</span>, j);
         j += <span class="md-number">1</span>;
     }
 }</code></pre>
@@ -280,7 +280,7 @@ that spans multiple lines
 
 <span class="md-keyword">fn</span> main() {
     <span class="md-keyword">let</span> result: <span class="md-special">i32</span> = add(<span class="md-number">10</span>, <span class="md-number">20</span>);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"result: {}"</span>, result);
+    <span class="md-macro">println!</span>(<span class="md-string">"result: {}"</span>, result);
 }</code></pre>
           </div>
         <h3>Structs and Enums</h3>
@@ -304,15 +304,15 @@ that spans multiple lines
         age: <span class="md-number">30</span>,
     };
 
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"name: {}"</span>, person.name);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"age: {}"</span>, person.age);
+    <span class="md-macro">println!</span>(<span class="md-string">"name: {}"</span>, person.name);
+    <span class="md-macro">println!</span>(<span class="md-string">"age: {}"</span>, person.age);
 
     <span class="md-keyword">let</span> color: Color = Color::Green;
 
     <span class="md-keyword">match</span> color {
-        Color::Red =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The color is red"</span>),
-        Color::Green =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The color is green"</span>),
-        Color::Blue =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The color is blue"</span>),
+        Color::Red =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is red"</span>),
+        Color::Green =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is green"</span>),
+        Color::Blue =&gt; <span class="md-macro">println!</span>(<span class="md-string">"The color is blue"</span>),
     }
 }</code></pre>
           </div>
@@ -325,7 +325,7 @@ that spans multiple lines
 
     <span class="md-keyword">let</span> len: <span class="md-special">usize</span> = calculate_length(&amp;s);
 
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The length of &#039;{}&#039; is {}."</span>, s, len);
+    <span class="md-macro">println!</span>(<span class="md-string">"The length of &#039;{}&#039; is {}."</span>, s, len);
 }
 
 <span class="md-keyword">fn</span> calculate_length(s: &amp;<span class="md-special">String</span>) -&gt; <span class="md-special">usize</span> {
@@ -342,8 +342,8 @@ that spans multiple lines
     <span class="md-keyword">let</span> f: <span class="md-special">Result</span>&lt;File, std::io::Error&gt; = File::open(<span class="md-string">"hello.txt"</span>);
 
     <span class="md-keyword">match</span> f {
-        <span class="md-special">Ok</span>(file) =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"File opened successfully"</span>),
-        <span class="md-special">Err</span>(error) =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Error opening file: {}"</span>, error),
+        <span class="md-special">Ok</span>(file) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"File opened successfully"</span>),
+        <span class="md-special">Err</span>(error) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Error opening file: {}"</span>, error),
     }
 }</code></pre>
           </div>
@@ -354,14 +354,14 @@ that spans multiple lines
 
           <div class="md-code-container">
             <button onclick="copyToClipboard(this)">Copy</button>
-            <pre><code class="md-code-rust"><span class="md-macro"><span class="md-decorator"><span class="md-decorator">macro_rules!</span></span></span> say_hello {
+            <pre><code class="md-code-rust"><span class="md-decorator"><span class="md-macro">macro_rules!</span></span> say_hello {
     () =&gt; {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Hello from a &lt;span class="md-macro"&gt;&lt;span class="md-decorator"&gt;macro!&lt;/span&gt;&lt;/span&gt;"</span>);
+        <span class="md-macro">println!</span>(<span class="md-string">"Hello from a &lt;span class="md-macro"&gt;macro!&lt;/span&gt;"</span>);
     };
 }
 
 <span class="md-keyword">fn</span> main() {
-    <span class="md-macro"><span class="md-decorator">say_hello!</span></span>();
+    <span class="md-macro">say_hello!</span>();
 }</code></pre>
           </div>
         <div class="md-line"></div>
@@ -380,8 +380,8 @@ that spans multiple lines
 }
 
 <span class="md-keyword">fn</span> main() {
-    <span class="md-keyword">let</span> numbers = <span class="md-macro"><span class="md-decorator">vec!</span></span>[<span class="md-number">10</span>, <span class="md-number">20</span>, <span class="md-number">30</span>, <span class="md-number">5</span>];
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The largest is {}"</span>, largest(&amp;numbers));
+    <span class="md-keyword">let</span> numbers = <span class="md-macro">vec!</span>[<span class="md-number">10</span>, <span class="md-number">20</span>, <span class="md-number">30</span>, <span class="md-number">5</span>];
+    <span class="md-macro">println!</span>(<span class="md-string">"The largest is {}"</span>, largest(&amp;numbers));
 }</code></pre>
           </div>
         <div class="md-line"></div>
@@ -401,7 +401,7 @@ that spans multiple lines
     <span class="md-keyword">let</span> s1 = <span class="md-special">String</span>::from(<span class="md-string">"long string"</span>);
     <span class="md-keyword">let</span> s2 = <span class="md-string">"short"</span>;
     <span class="md-keyword">let</span> result = longest(&amp;s1, s2);
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"The longest string is {}"</span>, result);
+    <span class="md-macro">println!</span>(<span class="md-string">"The longest string is {}"</span>, result);
 }</code></pre>
           </div>
         <div class="md-line"></div>
@@ -419,9 +419,9 @@ that spans multiple lines
     <span class="md-keyword">let</span> msg = Message::Move { x: <span class="md-number">10</span>, y: <span class="md-number">20</span> };
 
     <span class="md-keyword">match</span> msg {
-        Message::Quit =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Quit"</span>),
-        Message::Move { x, y } =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Move to ({}, {})"</span>, x, y),
-        Message::Write(text) =&gt; <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Write &#039;{}&#039;"</span>, text),
+        Message::Quit =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Quit"</span>),
+        Message::Move { x, y } =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Move to ({}, {})"</span>, x, y),
+        Message::Write(text) =&gt; <span class="md-macro">println!</span>(<span class="md-string">"Write &#039;{}&#039;"</span>, text),
     }
 }</code></pre>
           </div>
@@ -433,11 +433,11 @@ that spans multiple lines
             <pre><code class="md-code-rust"><span class="md-keyword">fn</span> main() {
     <span class="md-keyword">let</span> add = |a: <span class="md-special">i32</span>, b: <span class="md-special">i32</span>| a + b;
 
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"&lt;span class="md-number"&gt;5&lt;/span&gt; + &lt;span class="md-number"&gt;3&lt;/span&gt; = {}"</span>, add(<span class="md-number">5</span>, <span class="md-number">3</span>));
+    <span class="md-macro">println!</span>(<span class="md-string">"&lt;span class="md-number"&gt;5&lt;/span&gt; + &lt;span class="md-number"&gt;3&lt;/span&gt; = {}"</span>, add(<span class="md-number">5</span>, <span class="md-number">3</span>));
 
-    <span class="md-keyword">let</span> nums = <span class="md-macro"><span class="md-decorator">vec!</span></span>[<span class="md-number">1</span>, <span class="md-number">2</span>, <span class="md-number">3</span>, <span class="md-number">4</span>];
+    <span class="md-keyword">let</span> nums = <span class="md-macro">vec!</span>[<span class="md-number">1</span>, <span class="md-number">2</span>, <span class="md-number">3</span>, <span class="md-number">4</span>];
     <span class="md-keyword">let</span> squares: <span class="md-special">Vec</span>&lt;<span class="md-special">i32</span>&gt; = nums.iter().map(|x| x * x).collect();
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Squares: {:?}"</span>, squares);
+    <span class="md-macro">println!</span>(<span class="md-string">"Squares: {:?}"</span>, squares);
 }</code></pre>
           </div>
         <div class="md-line"></div>
@@ -450,7 +450,7 @@ that spans multiple lines
     <span class="md-keyword">let</span> r: *<span class="md-keyword">const</span> <span class="md-special">i32</span> = &amp;a;
 
     <span class="md-keyword">unsafe</span> {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"r points to: {}"</span>, *r);
+        <span class="md-macro">println!</span>(<span class="md-string">"r points to: {}"</span>, *r);
     }
 }</code></pre>
           </div>
@@ -461,7 +461,7 @@ that spans multiple lines
             <button onclick="copyToClipboard(this)">Copy</button>
             <pre><code class="md-code-rust"><span class="md-keyword">mod</span> greetings {
     <span class="md-keyword">pub</span> <span class="md-keyword">fn</span> hello() {
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"Hello from the &lt;span class="md-macro"&gt;&lt;span class="md-decorator"&gt;module!&lt;/span&gt;&lt;/span&gt;"</span>);
+        <span class="md-macro">println!</span>(<span class="md-string">"Hello from the &lt;span class="md-macro"&gt;module!&lt;/span&gt;"</span>);
     }
 }
 
@@ -493,10 +493,10 @@ that spans multiple lines
 <span class="md-keyword">static</span> <span class="md-keyword">mut</span> COUNTER: <span class="md-special">i32</span> = <span class="md-number">0</span>;
 
 <span class="md-keyword">fn</span> main() {
-    <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"PI = {}"</span>, PI);
+    <span class="md-macro">println!</span>(<span class="md-string">"PI = {}"</span>, PI);
     <span class="md-keyword">unsafe</span> {
         COUNTER += <span class="md-number">1</span>;
-        <span class="md-macro"><span class="md-decorator">println!</span></span>(<span class="md-string">"COUNTER = {}"</span>, COUNTER);
+        <span class="md-macro">println!</span>(<span class="md-string">"COUNTER = {}"</span>, COUNTER);
     }
 }</code></pre>
           </div>
