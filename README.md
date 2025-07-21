@@ -54,7 +54,7 @@ Some text.
 
 // Convert Markdown to HTML
 const opts = { addCopyToClipboard: true, interactiveCheckboxes: false };
-const htmlContent = markdownToHtml(md, opts);
+const htmlContent = markdownToHtml(markdown, opts);
 
 // Basic HTML template
 const htmlTemplate = `
