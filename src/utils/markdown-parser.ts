@@ -1,6 +1,38 @@
 import { MarkdownElement } from "../models";
 import { highlightCode, stripLeadingWhitespace, countOccurrences, getMultilineCommentRegex, MultilineCommentRegex } from "../libs";
 
+interface NestedCodeModel {
+  action: "open" | "close" | "inside";
+  lang: string;
+}
+
+// Helper: detect open/close tags (with attributes), and if on the same line
+const detectNonHtmlCodeBlocks = (line: string, previous: string = "html"): NestedCodeModel | null => {
+  const openScriptMatch = line.match(/<script/i);
+  const closeScriptMatch = line.match(/<\/script>/i);
+  const openStyleMatch = line.match(/<style/i);
+  const closeStyleMatch = line.match(/<\/style>/i);
+
+  if (previous !== "html") {
+    if (closeScriptMatch || closeStyleMatch) {
+      return { action: "close", lang: "html" };
+    }
+  }
+
+  if (openScriptMatch) {
+    return { action: "open", lang: "js" };
+  } else if (closeScriptMatch) {
+    return { action: "close", lang: "js" };
+  } else if (openStyleMatch) {
+    return { action: "open", lang: "css" };
+  } else if (closeStyleMatch) {
+    return { action: "close", lang: "css" };
+  } else {
+    // If no specific open/close tag is detected, return null or "other" action
+    return { action: "inside", lang: typeof previous === "string" && previous ? previous : "html" };
+  }
+};
+
 /**
  * Replaces reference links in markdown text with their corresponding titles and URLs.
  *
@@ -420,7 +452,8 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
         let inBlockComment: boolean = false,
           pythonCommentIsOpen: boolean = false,
           isPython: boolean = !!(element.language === "py" || element.language === "python"),
-          htmlCommentOpen = false;
+          htmlCommentOpen = false,
+          previousHtmlLang = "html";
 
         for (let i = 0; i < lines.length; i++) {
           let line = lines[i];
@@ -472,10 +505,14 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
                 htmlCommentOpen = true;
               }
 
-              console.log(`\n${line}`);
-              console.dir({ htmlCommentOpen });
+              const otherCodeResult = detectNonHtmlCodeBlocks(line, previousHtmlLang);
 
-              if (!htmlCommentOpen) {
+              if (previousHtmlLang !== "html" && otherCodeResult?.action === "inside") {
+                console.log(`\n${line}`);
+                console.dir({ otherCodeResult });
+                console.dir({ htmlCommentOpen });
+                highlightedCode = highlightCode(previousHtmlLang, line);
+              } else if (!htmlCommentOpen) {
                 highlightedCode = highlightCode("html", line);
               } else {
                 // Close md-comment <span>
@@ -488,7 +525,8 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
                 }
               }
 
-              console.dir({ highlightedCode });
+              // console.dir({ highlightedCode });
+              previousHtmlLang = typeof otherCodeResult?.lang === "string" ? otherCodeResult.lang : "html";
               finalLines.push(highlightedCode);
             }
 
