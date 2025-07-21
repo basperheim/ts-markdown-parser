@@ -469,14 +469,10 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
             isBlockEnd = endRegex.test(line);
           }
 
-          // console.dir({ isBlockStart, isBlockEnd });
-
           // Handle Python as a special case since opening/closing are the same
           if (isPython) {
-            // Python `'''` and `"""` comments
+            // Regex for multi-line comment delimiters (''' or """)
             const regexPython = /('''|""")/;
-
-            // Matches the start of a Python multiline comment (''' or """)
             const isPythonMultiCommentMarker = regexPython.test(line);
 
             if (isPythonMultiCommentMarker) {
@@ -486,13 +482,12 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
               } else {
                 finalLines.push(`${line}</span>`);
               }
+            } else if (pythonCommentIsOpen) {
+              // Inside multi-line comment: do not highlight, just output line
+              finalLines.push(line);
             } else {
-              if (pythonCommentIsOpen) {
-                // Do not highlight anything if inside an open Python multi-line comment
-                finalLines.push(line);
-              } else {
-                finalLines.push(`</span>${highlightCode(element.language as string, line)}`);
-              }
+              // Not in multi-line comment: use highlighter for code & single-line comments
+              finalLines.push(highlightCode("py", line));
             }
           }
 
@@ -508,9 +503,9 @@ export const elementToHtml = (element: MarkdownElement, addCopyToClipboard: bool
               const otherCodeResult = detectNonHtmlCodeBlocks(line, previousHtmlLang);
 
               if (previousHtmlLang !== "html" && otherCodeResult?.action === "inside") {
-                console.log(`\n${line}`);
-                console.dir({ otherCodeResult });
-                console.dir({ htmlCommentOpen });
+                // console.log(`\n${line}`);
+                // console.dir({ otherCodeResult });
+                // console.dir({ htmlCommentOpen });
                 highlightedCode = highlightCode(previousHtmlLang, line);
               } else if (!htmlCommentOpen) {
                 highlightedCode = highlightCode("html", line);
