@@ -6,7 +6,7 @@ import { join } from "path";
 // npx ts-node test.ts
 
 // Define the paths for the Markdown file and the HTML output file
-const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
+// const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/used-car-questions.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-html-blog.md");
@@ -16,6 +16,7 @@ const markdownFilePath = join(__dirname, "notes/example-html-blog-partial.md");
 // const markdownFilePath = join(__dirname, "notes/regex-in-python.md");
 // const markdownFilePath = join(__dirname, "notes/example-meta-html-blog.md");
 // const markdownFilePath = join(__dirname, "notes/example-py-blog.md");
+const markdownFilePath = join(__dirname, "notes/rust-markdown-test.md");
 
 const htmlFilePath = join(__dirname, "test.html");
 

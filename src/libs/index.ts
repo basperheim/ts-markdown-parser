@@ -6,6 +6,7 @@ import { highlightGo } from "./golang/highlight";
 import { highlightJSX } from "./jsx/highlight";
 import { highlightSQL } from "./sql/highlight";
 import { highlightLua } from "./lua/highlight";
+import { highlightRust } from "./rust/highlight";
 
 // Mapping from aliases to full language names
 export const languageAliases: Record<string, string> = {
@@ -45,6 +46,7 @@ const highlightFunctions: Record<string, HighlightFunction> = {
   tsx: highlightJSX,
   sql: highlightSQL,
   lua: highlightLua,
+  rust: highlightRust,
 };
 
 const cssStart = /(^\/\*)/;
@@ -76,6 +78,7 @@ const multilineCommentMap: Record<string, MultilineCommentRegex> = {
   golang: { start: goRegexStart, end: goRegexEnd },
   sql: { start: /\/\*/, end: /\*\// },
   lua: { start: /(^--\[\[)/, end: /(^--\]\]|^]])/ }, // Lua block comments
+  rust: { start: /\/\*/, end: /\*\// },
 };
 
 export const getMultilineCommentRegex = (language: string): MultilineCommentRegex | null => {
