@@ -25,6 +25,8 @@ export const languageAliases: Record<string, string> = {
   tsx: "jsx",
   sql: "sql",
   lua: "lua",
+  rust: "rust",
+  rs: "rust",
 };
 
 // Ensure all Language types are covered in highlightFunctions
@@ -47,6 +49,7 @@ const highlightFunctions: Record<string, HighlightFunction> = {
   sql: highlightSQL,
   lua: highlightLua,
   rust: highlightRust,
+  rs: highlightRust,
 };
 
 const cssStart = /(^\/\*)/;
