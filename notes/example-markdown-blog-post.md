@@ -2,7 +2,7 @@
 
 ![Learn JavaScript Logo](https://i.pinimg.com/736x/13/40/7c/13407c12f50f08d328800c3caef43f61.jpg)
 
-Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It’s commonly used in writing for the web, including on platforms like GitHub, Reddit, and Stack Overflow. Here’s a guide on how to write proper Markdown.
+Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents. It's commonly used in writing for the web, including on platforms like GitHub, Reddit, and Stack Overflow. Here's a guide on how to write proper Markdown.
 
 ## 1. Basic Syntax
 
@@ -137,6 +137,6 @@ Here is a footnote reference[^1].
 
 ## Conclusion
 
-Writing proper Markdown is essential for creating well-structured documents that are easy to read and maintain. By mastering the basics and learning some advanced features, you can take full advantage of Markdown’s simplicity and flexibility.
+Writing proper Markdown is essential for creating well-structured documents that are easy to read and maintain. By mastering the basics and learning some advanced features, you can take full advantage of Markdown's simplicity and flexibility.
 
 Remember to use `&#x60;` to escape backticks and other special characters when necessary to ensure your Markdown renders correctly!

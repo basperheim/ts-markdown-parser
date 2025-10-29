@@ -39,7 +39,7 @@ print("Hello, World!")
 
 ### Example 2: Basic Calculator
 
-Here’s a basic calculator that performs addition, subtraction, multiplication, and division.
+Here's a basic calculator that performs addition, subtraction, multiplication, and division.
 
 ```python
 def add(a, b):
